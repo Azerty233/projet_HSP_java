@@ -1,6 +1,4 @@
-
-public class modification {
-	package appli;
+package appli;
 
 	import java.sql.Connection;
 	import java.sql.ResultSet;
@@ -22,8 +20,7 @@ public class modification {
 	import org.eclipse.wb.swt.SWTResourceManager;
 	import org.eclipse.swt.widgets.Combo;
 
-
-	public class modification.java extends Global
+	public class modification extends Global
 	{
 
 		protected Shell shelleleve;
@@ -71,70 +68,20 @@ public class modification {
 			lblPrenom.setBounds(165, 173, 81, 25);
 			lblPrenom.setText("Pr\u00E9nom");
 
-			Label lblClasse = new Label(shelleleve, SWT.NONE);
-			lblClasse.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-			lblClasse.setBounds(165, 226, 81, 25);
-			lblClasse.setText("Classe");
-
 			textNom = new Text(shelleleve, SWT.BORDER);
 			textNom.setBounds(277, 120, 147, 31);
 
 			textPrenom = new Text(shelleleve, SWT.BORDER);
 			textPrenom.setBounds(277, 170, 147, 31);
 
-			Combo comboClasse = new Combo(shelleleve, SWT.READ_ONLY);
-			comboClasse.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-			comboClasse.setBounds(277, 223, 147, 33);
-
 			Button btnValider = new Button(shelleleve, SWT.NONE);
 			btnValider.setBounds(298, 275, 105, 35);
 			btnValider.setText("Modifier");
 
-			Button btnRetour = new Button(shelleleve, SWT.NONE);
-			btnRetour.setBounds(10, 10, 105, 35);
-			btnRetour.setText("Retour");
-			btnRetour.addSelectionListener(new SelectionAdapter()
-			{
-				@Override
-				public void widgetSelected(SelectionEvent e)
-				{
-					shelleleve.close();
-					Globideleve = null;
-					try
-					{
-						Liste_Eleve window = new Liste_Eleve();
-						window.open();
-					}
-					catch (Exception e1)
-					{
-						e1.printStackTrace();
-					}
-				}
-			});
+			
 
 			Database db = new Database();
 			Connection cnx = db.DbConnexion();
-
-			String requete = "Select * from classe";
-			ResultSet resultat = db.Request(cnx, requete);
-			ArrayList<Integer> classeList = new  ArrayList<Integer>();
-			while(resultat.next()) {
-				
-				comboClasse.add(resultat.getString("libelle"));
-				classeList.add(resultat.getInt("id"));
-			}
-			requete = "Select nom, prenom, id_classe from eleve where id ='"+Globideleve+"'";
-			resultat = db.Request(cnx, requete);
-			while(resultat.next())
-			{
-				nom = resultat.getString("nom");
-				prenom = resultat.getString("prenom");
-				classe = resultat.getInt("id_classe");
-
-			}
-			textNom.setText(nom);
-			textPrenom.setText(prenom);
-			comboClasse.select(classeList.indexOf(classe));
 
 
 			Label lblErreur = new Label(shelleleve, SWT.NONE);
@@ -151,33 +98,8 @@ public class modification {
 			lblSucces.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
 			lblSucces.setBounds(227, 358, 253, 25);
 			lblSucces.setVisible(false);
-			
-			Label lblMenu = new Label(shelleleve, SWT.NONE);
-			lblMenu.setText("Ma Gestion");
-			lblMenu.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
-			lblMenu.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
-			lblMenu.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-			lblMenu.setAlignment(SWT.CENTER);
-			lblMenu.setBounds(273, 10, 151, 34);
-			
-			Label lblModifierSonProfil = new Label(shelleleve, SWT.NONE);
-			lblModifierSonProfil.setText("Modifier son profil");
-			lblModifierSonProfil.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-			lblModifierSonProfil.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-			lblModifierSonProfil.setBounds(295, 50, 121, 25);
 
-			btnValider.addSelectionListener(new SelectionAdapter()
-			{
-				@Override
-				public void widgetSelected(SelectionEvent e)
-				{
-					String requete = "Update eleve set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', id_classe ='"+classeList.get(comboClasse.getSelectionIndex())+"' where id = '"+Globideleve+"'";
-					boolean message = db.Prepare(cnx, requete);
-					lblErreur.setVisible(message);
-					lblSucces.setVisible(!message);
 
-				}
-			});
 
 			
 

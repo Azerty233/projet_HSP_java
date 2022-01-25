@@ -1,0 +1,7 @@
+ACCES ADMINISTRATEUR :
+Email : admin@admin.fr
+Mot de passe : 1234
+
+ACCES GESTIONNAIRE :
+Email : gestionnaire@gestionnaire.fr
+Mot de passe : 1234
