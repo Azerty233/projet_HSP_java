@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Text;
 import controller.Global;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-public class Admin_Menu extends Global
+public class Menu_Admin extends Global
 {
 
 	protected Shell shlMenuAdmin;
