@@ -27,7 +27,7 @@ public class Connexion
 		shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shell.setSize(494, 381);
-		shell.setText("Hôpital de Paris | Connexion");
+		shell.setText("Hpital de Paris | Connexion");
 		//Identifiant
 		textEmail = new Text(shell, SWT.BORDER);
 		textEmail.setBounds(133, 94, 215, 35);
