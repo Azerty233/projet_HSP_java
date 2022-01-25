@@ -87,7 +87,7 @@ public class Menu_Admin extends Global
 		btnDconnexion_1_1.setBounds(32, 73, 291, 35);
 		
 		Button btnDconnexion_1_2 = new Button(shlMenuAdmin, SWT.NONE);
-		btnDconnexion_1_2.setText("Fiche de toxicit\u00E9");
+		btnDconnexion_1_2.setText("Fiches de toxicit\u00E9");
 		btnDconnexion_1_2.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnDconnexion_1_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		btnDconnexion_1_2.setBounds(32, 121, 291, 35);
