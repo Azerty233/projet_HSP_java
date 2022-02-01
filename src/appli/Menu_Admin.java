@@ -87,7 +87,7 @@ public class Menu_Admin extends Global
 				shlMenuAdmin.close();
 				try
 				{
-					Comptes window = new Comptes();
+					Utilisateurs window = new Utilisateurs();
 					window.open();
 				}
 				catch (Exception e1)
@@ -102,6 +102,23 @@ public class Menu_Admin extends Global
 		btnDconnexion_1_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnDconnexion_1_1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		btnDconnexion_1_1.setBounds(32, 73, 291, 35);
+		btnDconnexion_1_1.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shlMenuAdmin.close();
+				try
+				{
+					Comptes window = new Comptes();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		Button btnDconnexion_1_2 = new Button(shlMenuAdmin, SWT.NONE);
 		btnDconnexion_1_2.setText("Fiches de toxicit\u00E9");
