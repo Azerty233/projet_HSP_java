@@ -1,111 +1,154 @@
 package appli;
-	import java.sql.Connection;
-	import java.sql.ResultSet;
-	import java.sql.SQLException;
-	import java.util.ArrayList;
 
-	import org.eclipse.swt.SWT;
-	import org.eclipse.swt.events.SelectionAdapter;
-	import org.eclipse.swt.events.SelectionEvent;
-	import org.eclipse.swt.widgets.Button;
-	import org.eclipse.swt.widgets.Display;
-	import org.eclipse.swt.widgets.Label;
-	import org.eclipse.swt.widgets.Shell;
-	import org.eclipse.swt.widgets.Text;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-	import com.dbconnexion.Database;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
-	import controller.Global;
-	import org.eclipse.wb.swt.SWTResourceManager;
-	import org.eclipse.swt.widgets.Combo;
+import com.dbconnexion.Database;
 
-	public class Modification extends Global
+import controller.Global;
+import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.widgets.Composite;
+
+public class Modification extends Global
+{
+
+	protected Shell shell;
+	private String nom;
+	private String prenom;
+	private String email;
+	private String mdp;
+	private Text txtMonCompte;
+	private Text textNom;
+	private Text textPrenom;
+	private Text textEmail;
+
+
+
+	public void open() throws SQLException
 	{
-
-		protected Shell shelleleve;
-		private Text textNom;
-		private Text textPrenom;
-		private String nom;
-		private String prenom;
-		private int classe;
-
-
-		public void open() throws SQLException
+		Display display = Display.getDefault();
+		createContents();
+		shell.open();
+		shell.layout();
+		while (!shell.isDisposed())
 		{
-			Display display = Display.getDefault();
-			createContents();
-			shelleleve.open();
-			shelleleve.layout();
-			while (!shelleleve.isDisposed())
+			if (!display.readAndDispatch())
 			{
-				if (!display.readAndDispatch())
-				{
-					display.sleep();
-				}
+				display.sleep();
 			}
 		}
-
-		/**
-		* Fondation du contenu de la fenetre
-		* @throws SQLException
-		* @wbp.parser.entryPoint
-		*/
-		protected void createContents() throws SQLException
-		{
-			shelleleve = new Shell();
-			shelleleve.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
-			shelleleve.setSize(765, 559);
-			shelleleve.setText("Modifier son profil");
-
-			Label lblNom = new Label(shelleleve, SWT.NONE);
-			lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-			lblNom.setBounds(165, 123, 81, 25);
-			lblNom.setText("Nom");
-
-			Label lblPrenom = new Label(shelleleve, SWT.NONE);
-			lblPrenom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-			lblPrenom.setBounds(165, 173, 81, 25);
-			lblPrenom.setText("Pr\u00E9nom");
-
-			textNom = new Text(shelleleve, SWT.BORDER);
-			textNom.setBounds(277, 120, 147, 31);
-
-			textPrenom = new Text(shelleleve, SWT.BORDER);
-			textPrenom.setBounds(277, 170, 147, 31);
-
-			Button btnValider = new Button(shelleleve, SWT.NONE);
-			btnValider.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-				}
-			});
-			btnValider.setBounds(298, 275, 105, 35);
-			btnValider.setText("Modifier");
-
-			
-
-			Database db = new Database();
-			Connection cnx = db.DbConnexion();
-
-
-			Label lblErreur = new Label(shelleleve, SWT.NONE);
-			lblErreur.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-			lblErreur.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-			lblErreur.setBounds(227, 327, 253, 25);
-			lblErreur.setText("Veuiller remplir tous les champs");
-			lblErreur.setVisible(false);
-
-			Label lblSucces = new Label(shelleleve, SWT.NONE);
-			lblSucces.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-			lblSucces.setVisible(false);
-			lblSucces.setText("Modifications enregistr\u00E9es");
-			lblSucces.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
-			lblSucces.setBounds(227, 358, 253, 25);
-			lblSucces.setVisible(false);
-
-
-
-			
-
-		}
 	}
+
+	/**
+	* Fondation du contenu de la fenetre
+	* @throws SQLException
+	* @wbp.parser.entryPoint
+	*/
+	protected void createContents() throws SQLException
+	{
+		shell = new Shell();
+		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		shell.setSize(765, 559);
+		shell.setText("Modifier mon compte");
+
+		
+		Composite composite_1 = new Composite(shell, SWT.NONE);
+		composite_1.setBackground(SWTResourceManager.getColor(100, 149, 237));
+		composite_1.setBounds(0, 0, 752, 77);
+		
+		txtMonCompte = new Text(composite_1, SWT.NONE);
+		txtMonCompte.setText("Modification de mon compte");
+		txtMonCompte.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		txtMonCompte.setFont(SWTResourceManager.getFont("Segoe UI Historic", 14, SWT.BOLD));
+		txtMonCompte.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		txtMonCompte.setBounds(162, 10, 401, 57);
+		
+		textNom = new Text(shell, SWT.BORDER);
+		textNom.setBounds(244, 129, 215, 35);
+		
+		Label lblNom = new Label(shell, SWT.NONE);
+		lblNom.setText("Nom");
+		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblNom.setBounds(244, 101, 68, 25);
+		
+		Text textPrenom = new Text(shell, SWT.BORDER);
+		textPrenom.setBounds(244, 221, 215, 35);
+		
+		Label lblPrenom = new Label(shell, SWT.NONE);
+		lblPrenom.setText("Pr\u00E9nom");
+		lblPrenom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblPrenom.setBounds(244, 193, 68, 25);
+		
+		textEmail = new Text(shell, SWT.BORDER);
+		textEmail.setBounds(244, 310, 215, 35);
+		
+		Label lblEmail = new Label(shell, SWT.NONE);
+		lblEmail.setText("Adresse email");
+		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblEmail.setBounds(244, 282, 146, 25);
+		
+		Button btnModifierMonProfil = new Button(shell, SWT.NONE);
+		btnModifierMonProfil.setText("Modifier mon profil");
+		btnModifierMonProfil.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		btnModifierMonProfil.setFont(SWTResourceManager.getFont("Rockwell", 9, SWT.BOLD));
+		btnModifierMonProfil.setBounds(244, 390, 215, 35);
+
+		Database db = new Database();
+		Connection cnx = db.DbConnexion();
+		String requete = "Select nom, prenom, email, mdp from utilisateurs";
+		ResultSet resultat = db.Request(cnx, requete);
+		while(resultat.next())
+		{
+			nom = resultat.getString("nom");
+			prenom = resultat.getString("prenom");
+			email = resultat.getString("email");
+			mdp = resultat.getString("mdp");
+	
+		}
+		textNom.setText(nom);
+		textPrenom.setText(prenom);
+		textEmail.setText(email);
+
+
+		
+		btnModifierMonProfil.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"', mdp ='"+textMDP.getText()+"'";
+				requete = "Select nom, prenom, email, mdp from utilisateurs";
+				ResultSet resultat = db.Request(cnx, requete);
+				try
+				{
+					while(resultat.next())
+					{
+						nom = resultat.getString("nom");
+						prenom = resultat.getString("prenom");
+						email = resultat.getString("email");
+						mdp = resultat.getString("mdp");
+					}
+				}
+				catch (SQLException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				textNom.setText(nom);
+				textPrenom.setText(prenom);
+				textEmail.setText(email);
+				textMDP.setText(mdp);
+			}
+		});
+	}
+}
