@@ -96,14 +96,6 @@ public class Utilisateurs extends Global
 		Label textEmail = new Label(composite, SWT.NONE);
 		textEmail.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		textEmail.setBounds(160, 120, 180, 35);
-		
-		Label lblRole = new Label(composite, SWT.NONE);
-		lblRole.setText("Role");
-		lblRole.setBounds(62, 182, 67, 35);
-		
-		Label textRole = new Label(composite, SWT.NONE);
-		textRole.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		textRole.setBounds(160, 178, 180, 35);
 
 		Label lblError = new Label(shlListeUtilisateurs, SWT.NONE);
 		lblError.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
@@ -198,7 +190,6 @@ public class Utilisateurs extends Global
 						String nom = res.getString("nom");
 						String prenom = res.getString("prenom");
 						String email = res.getString("email");
-						String role = res.getString("role");
 						TableItem item = new TableItem(table, SWT.NONE , i);
 					    item.setText(0, nom);
 					    item.setText(1, prenom);
@@ -242,7 +233,8 @@ public class Utilisateurs extends Global
 						TableItem item = new TableItem(table, SWT.NONE , i);
 					    item.setText(0, nom);
 					    item.setText(1, prenom);
-					    item.setText(2, id);
+					    item.setText(2, email);
+					    item.setText(4, id);
 					    i++;
 
 					}
@@ -265,7 +257,6 @@ public class Utilisateurs extends Global
 			        textNom.setText(selection[i].getText(0));
 			        textPrenom.setText(selection[i].getText(1));
 			        textEmail.setText(selection[i].getText(2));
-			        textRole.setText(selection[i].getText(3));
 			        btnModifUtilisateur.setEnabled(true);
 			        btnSupprimer.setEnabled(true);
 		        }
@@ -296,7 +287,6 @@ public class Utilisateurs extends Global
 						String nom = res.getString("nom");
 						String prenom = res.getString("prenom");
 						String email = res.getString("email");
-						String role = res.getString("role");
 						TableItem item = new TableItem(table, SWT.NONE , i);
 					    item.setText(0, nom);
 					    item.setText(1, prenom);
