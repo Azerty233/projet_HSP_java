@@ -58,7 +58,7 @@ public class Admin_AjouterPlanning {
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
 		shlPlanning = new Shell();
-		shlPlanning.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		shlPlanning.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shlPlanning.setSize(375, 563);
 		shlPlanning.setText("Planning");
 
@@ -74,27 +74,27 @@ public class Admin_AjouterPlanning {
 		lblAjoutSucces.setText("Ajout r\u00E9ussi");
 		lblAjoutSucces.setVisible(false);
 
-		Label lblClasse = new Label(shlPlanning, SWT.NONE);
-		lblClasse.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblClasse.setBounds(16, 84, 81, 25);
-		lblClasse.setText("Classe :");
+		Label lblType = new Label(shlPlanning, SWT.NONE);
+		lblType.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblType.setBounds(16, 84, 81, 25);
+		lblType.setText("Classe :");
 
-		Combo comboClasse = new Combo(shlPlanning, SWT.READ_ONLY);
-		comboClasse.setBackground(SWTResourceManager.getColor(255, 255, 255));
-		comboClasse.setBounds(16, 115, 211, 33);
-		comboClasse.select(0);
+		Combo comboType = new Combo(shlPlanning, SWT.READ_ONLY);
+		comboType.setBackground(SWTResourceManager.getColor(255, 255, 255));
+		comboType.setBounds(16, 115, 211, 33);
+		comboType.select(0);
 
-		String requete = "Select * from classe where undeletable = 0";
+		String requete = "Select * from type_rdv";
 		ResultSet resultat = db.Request(cnx, requete);
 		ArrayList<Integer> classeList = new  ArrayList<Integer>();
 		try {
 			while(resultat.next())
 			{
 
-				comboClasse.add(resultat.getString("libelle"));
+				comboType.add(resultat.getString("libelle"));
 				classeList.add(resultat.getInt("id"));
 			}
-			comboClasse.select(0);
+			comboType.select(0);
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -104,24 +104,24 @@ public class Admin_AjouterPlanning {
 		comboHeure.setBackground(SWTResourceManager.getColor(255, 255, 255));
 		comboHeure.setBounds(16, 298, 104, 33);
 
-		Label lblProf = new Label(shlPlanning, SWT.NONE);
-		lblProf.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblProf.setBounds(16, 141, 105, 25);
-		lblProf.setText("Professeur :");
+		Label lblMed = new Label(shlPlanning, SWT.NONE);
+		lblMed.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblMed.setBounds(16, 141, 105, 25);
+		lblMed.setText("Medecin :");
 		
-		Combo comboProf = new Combo(shlPlanning, SWT.READ_ONLY);
-		comboProf.setBackground(SWTResourceManager.getColor(255, 255, 255));
-		comboProf.setBounds(16, 172, 211, 33);
-		requete = "Select * from utilisateur where role = 'professeur'";
+		Combo comboMed = new Combo(shlPlanning, SWT.READ_ONLY);
+		comboMed.setBackground(SWTResourceManager.getColor(255, 255, 255));
+		comboMed.setBounds(16, 172, 211, 33);
+		requete = "Select * from utilisateurs where role = 'MED'";
 		resultat = db.Request(cnx, requete);
 		ArrayList<Integer> profList = new  ArrayList<Integer>();
 		try {
 			while(resultat.next())
 			{
-				comboProf.add(resultat.getString("nom"));
+				comboMed.add(resultat.getString("nom"));
 				profList.add(resultat.getInt("id"));
 			}
-			comboProf.select(0);
+			comboMed.select(0);
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -139,202 +139,37 @@ public class Admin_AjouterPlanning {
 		Button btnLundi = new Button(shlPlanning, SWT.RADIO);
 		btnLundi.setBounds(16, 214, 81, 25);
 		btnLundi.setText("Lundi");
-		btnLundi.addSelectionListener(new SelectionAdapter()  {
-			 
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                Button source=  (Button) e.getSource();
-                 
-                if(source.getSelection())  {
-                    comboHeure.removeAll();
-                    heureList.clear();
-                    int jour = 1;
-                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_professeur = "+profList.get(comboProf.getSelectionIndex())+" AND id_jour = "+jour+" or id_classe = "+classeList.get(comboClasse.getSelectionIndex())+" AND id_jour = "+jour+")";
-            		ResultSet resultat = db.Request(cnx, requete);
-            		try {
-						while(resultat.next())
-						{
-							comboHeure.add(resultat.getString("libelle"));
-							heureList.add(resultat.getInt("id"));
-						}
-						comboHeure.select(0);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-                }
-            }
-             
-        });
+
 		
 		Button btnMardi = new Button(shlPlanning, SWT.RADIO);
 		btnMardi.setBounds(103, 214, 81, 25);
 		btnMardi.setText("Mardi");
-		btnMardi.addSelectionListener(new SelectionAdapter()  {
-			 
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                Button source=  (Button) e.getSource();
-                 
-                if(source.getSelection())  {
-                    comboHeure.removeAll();
-                    heureList.clear();
-                    int jour = 2;
-                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_professeur = "+profList.get(comboProf.getSelectionIndex())+" AND id_jour = "+jour+" or id_classe = "+classeList.get(comboClasse.getSelectionIndex())+" AND id_jour = "+jour+")";
-            		ResultSet resultat = db.Request(cnx, requete);
-            		try {
-						while(resultat.next())
-						{
-							comboHeure.add(resultat.getString("libelle"));
-							heureList.add(resultat.getInt("id"));
-						}
-						comboHeure.select(0);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-                }
-            }
-             
-        });
+		
 		
 		Button btnMercredi = new Button(shlPlanning, SWT.RADIO);
 		btnMercredi.setBounds(190, 214, 105, 25);
 		btnMercredi.setText("Mercredi");
-		btnMercredi.addSelectionListener(new SelectionAdapter()  {
-			 
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                Button source=  (Button) e.getSource();
-                 
-                if(source.getSelection())  {
-                    comboHeure.removeAll();
-                    heureList.clear();
-                    int jour = 3;
-                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_professeur = "+profList.get(comboProf.getSelectionIndex())+" AND id_jour = "+jour+" or id_classe = "+classeList.get(comboClasse.getSelectionIndex())+" AND id_jour = "+jour+")";
-            		ResultSet resultat = db.Request(cnx, requete);
-            		try {
-						while(resultat.next())
-						{
-							comboHeure.add(resultat.getString("libelle"));
-							heureList.add(resultat.getInt("id"));
-						}
-						comboHeure.select(0);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-                }
-            }
-             
-        });
+		
 		
 		Button btnJeudi = new Button(shlPlanning, SWT.RADIO);
 		btnJeudi.setBounds(16, 260, 76, 25);
 		btnJeudi.setText("Jeudi");
-		btnJeudi.addSelectionListener(new SelectionAdapter()  {
-			 
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                Button source=  (Button) e.getSource();
-                 
-                if(source.getSelection())  {
-                    comboHeure.removeAll();
-                    heureList.clear();
-                    int jour = 4;
-                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_professeur = "+profList.get(comboProf.getSelectionIndex())+" AND id_jour = "+jour+" or id_classe = "+classeList.get(comboClasse.getSelectionIndex())+" AND id_jour = "+jour+")";
-            		ResultSet resultat = db.Request(cnx, requete);
-            		try {
-						while(resultat.next())
-						{
-							comboHeure.add(resultat.getString("libelle"));
-							heureList.add(resultat.getInt("id"));
-						}
-						comboHeure.select(0);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-                }
-            }
-             
-        });
+		
 		
 		Button btnVendredi = new Button(shlPlanning, SWT.RADIO);
 		btnVendredi.setBounds(103, 260, 105, 25);
 		btnVendredi.setText("Vendredi");
 		
-				Button AjouterPlanning = new Button(shlPlanning, SWT.NONE);
-				AjouterPlanning.setBounds(16, 408, 174, 35);
-				AjouterPlanning.setText("Ajouter un planning");
+				Button AjouterRDV = new Button(shlPlanning, SWT.NONE);
+				AjouterRDV.setBounds(10, 437, 174, 35);
+				AjouterRDV.setText("Ajouter un RDV");
 				
 				Label lblAjouterUnPlanning = new Label(shlPlanning, SWT.NONE);
-				lblAjouterUnPlanning.setText("Ajouter un \u00E9l\u00E9ment");
+				lblAjouterUnPlanning.setText("Ajouter un RDV");
 				lblAjouterUnPlanning.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 				lblAjouterUnPlanning.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-				lblAjouterUnPlanning.setBounds(114, 47, 121, 25);
-				
-				Label lblMenu = new Label(shlPlanning, SWT.NONE);
-				lblMenu.setText("Ma Gestion");
-				lblMenu.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
-				lblMenu.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
-				lblMenu.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-				lblMenu.setAlignment(SWT.CENTER);
-				lblMenu.setBounds(92, 7, 151, 34);
-				
-						AjouterPlanning.addSelectionListener(new SelectionAdapter()
-						{
-							@Override
-							public void widgetSelected(SelectionEvent e)
-							{
-									classeList.clear();
-									String requete = "INSERT into classe (libelle) Values('')";
-									boolean message = db.Prepare(cnx, requete);
-				
-									requete = "Select * from classe where undeletable = 0";
-									ResultSet resultat = db.Request(cnx, requete);
-									try {
-										while(resultat.next()) {
-											comboClasse.add(resultat.getString("libelle"));
-											classeList.add(resultat.getInt("id"));
-										}
-										lblAjoutSucces.setVisible(true);
-									} catch (SQLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-								}
-				
-				
-				
-						});
-		btnVendredi.addSelectionListener(new SelectionAdapter()  {
-			 
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                Button source=  (Button) e.getSource();
-                 
-                if(source.getSelection())  {
-                    comboHeure.removeAll();
-                    heureList.clear();
-                    int jour = 5;
-                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_professeur = "+profList.get(comboProf.getSelectionIndex())+" AND id_jour = "+jour+" or id_classe = "+classeList.get(comboClasse.getSelectionIndex())+" AND id_jour = "+jour+")";
-            		ResultSet resultat = db.Request(cnx, requete);
-            		try {
-						while(resultat.next())
-						{
-							comboHeure.add(resultat.getString("libelle"));
-							heureList.add(resultat.getInt("id"));
-						}
-						comboHeure.select(0);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-                }
-            }
-             
-        });
+				lblAjouterUnPlanning.setBounds(114, 23, 121, 25);
+
 
 
 	}
