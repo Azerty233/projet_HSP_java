@@ -149,7 +149,7 @@ public class Planning extends Global
 		Combo comboMed = new Combo(shell, SWT.NONE);
 		comboMed.setBounds(564, 24, 178, 20);
 		ArrayList<Integer> profList = new  ArrayList<Integer>();
-		String requete = "Select * from utilisateurs where role = 'ADMIN'";
+		String requete = "Select * from utilisateurs where role = 'MED'";
 		ResultSet resultat = db.Request(cnx, requete);
 		while(resultat.next()) {
 			comboMed.add(resultat.getString("nom"));

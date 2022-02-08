@@ -99,10 +99,6 @@ public class Admin_AjouterPlanning {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		
-		Combo comboHeure = new Combo(shlPlanning, SWT.READ_ONLY);
-		comboHeure.setBackground(SWTResourceManager.getColor(255, 255, 255));
-		comboHeure.setBounds(16, 298, 104, 33);
 
 		Label lblMed = new Label(shlPlanning, SWT.NONE);
 		lblMed.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
@@ -128,14 +124,6 @@ public class Admin_AjouterPlanning {
 		}
 		
 		ArrayList<Integer> heureList = new  ArrayList<Integer>();
-		
-		Label lblAjout = new Label(shlPlanning, SWT.NONE);
-		lblAjout.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblAjout.setText("Ajout :");
-		lblAjout.setBounds(16, 346, 81, 25);
-		
-		Label lblVue = new Label(shlPlanning, SWT.NONE);
-		lblVue.setBounds(10, 377, 327, 25);
 		Button btnLundi = new Button(shlPlanning, SWT.RADIO);
 		btnLundi.setBounds(16, 214, 81, 25);
 		btnLundi.setText("Lundi");
@@ -161,7 +149,7 @@ public class Admin_AjouterPlanning {
 		btnVendredi.setText("Vendredi");
 		
 				Button AjouterRDV = new Button(shlPlanning, SWT.NONE);
-				AjouterRDV.setBounds(10, 437, 174, 35);
+				AjouterRDV.setBounds(16, 312, 174, 35);
 				AjouterRDV.setText("Ajouter un RDV");
 				
 				Label lblAjouterUnPlanning = new Label(shlPlanning, SWT.NONE);

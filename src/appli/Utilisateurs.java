@@ -70,16 +70,16 @@ public class Utilisateurs extends Global
 		shlListeUtilisateurs.setText("Liste des utilisateurs");
 
 		Composite composite = new Composite(shlListeUtilisateurs, SWT.BORDER);
-		composite.setBounds(357, 167, 361, 266);
+		composite.setBounds(333, 167, 385, 266);
 
 
 		Label textNom = new Label(composite, SWT.NONE);
 		textNom.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		textNom.setBounds(160, 29, 180, 35);
+		textNom.setBounds(160, 26, 180, 35);
 
 		Label textPrenom = new Label(composite, SWT.NONE);
 		textPrenom.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		textPrenom.setBounds(160, 77, 180, 35);
+		textPrenom.setBounds(160, 72, 180, 35);
 
 		Label lblNom = new Label(composite, SWT.NONE);
 		lblNom.setText("Nom");
@@ -99,14 +99,14 @@ public class Utilisateurs extends Global
 
 		Label lblError = new Label(shlListeUtilisateurs, SWT.NONE);
 		lblError.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		lblError.setBounds(257, 446, 385, 25);
+		lblError.setBounds(20, 529, 385, 25);
 		lblError.setText("Veuillez selectionner un utilisateur en faisant un double clic ");
 		lblError.setVisible(false);
 
 		Label listeUtilisateur = new Label(shlListeUtilisateurs, SWT.NONE);
 		listeUtilisateur.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		listeUtilisateur.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.BOLD));
-		listeUtilisateur.setBounds(40, 127, 191, 29);
+		listeUtilisateur.setBounds(20, 86, 191, 29);
 		listeUtilisateur.setText("Liste des utilisateurs");
 
 		table = new Table(shlListeUtilisateurs, SWT.BORDER | SWT.FULL_SELECTION);
@@ -130,7 +130,7 @@ public class Utilisateurs extends Global
 
 
 		Button btnModifUtilisateur = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnModifUtilisateur.setBounds(208, 477, 186, 35);
+		btnModifUtilisateur.setBounds(470, 439, 125, 35);
 		btnModifUtilisateur.setText("Modifier un utilisateur");
 		btnModifUtilisateur.setVisible(true);
 		btnModifUtilisateur.setEnabled(false);
@@ -155,16 +155,16 @@ public class Utilisateurs extends Global
 
 
 		Button btnValider = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnValider.setBounds(20, 86, 211, 35);
+		btnValider.setBounds(20, 121, 211, 35);
 		btnValider.setText("Afficher les utilisateurs");
 
 		Button btnAjouterUtilisateur = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnAjouterUtilisateur.setBounds(532, 86, 186, 35);
+		btnAjouterUtilisateur.setBounds(333, 439, 119, 35);
 		btnAjouterUtilisateur.setText("Ajouter un utilisateur");
 		
 		Button btnSupprimer = new Button(shlListeUtilisateurs, SWT.NONE);
 		btnSupprimer.setText("Supprimer");
-		btnSupprimer.setBounds(407, 86, 105, 35);
+		btnSupprimer.setBounds(613, 439, 105, 35);
 
 		btnSupprimer.addSelectionListener(new SelectionAdapter()
 		{
