@@ -88,6 +88,14 @@ public class Utilisateurs extends Global
 		Label lblPrenom = new Label(composite, SWT.NONE);
 		lblPrenom.setText("Prenom");
 		lblPrenom.setBounds(62, 77, 67, 35);
+		
+		Label lblEmail = new Label(composite, SWT.NONE);
+		lblEmail.setText("Email");
+		lblEmail.setBounds(62, 129, 67, 35);
+		
+		Label textEmail = new Label(composite, SWT.NONE);
+		textEmail.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		textEmail.setBounds(160, 120, 180, 35);
 
 		Label lblError = new Label(shlListeUtilisateurs, SWT.NONE);
 		lblError.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
@@ -181,6 +189,7 @@ public class Utilisateurs extends Global
 						String id = Integer.toString(res.getInt("id"));
 						String nom = res.getString("nom");
 						String prenom = res.getString("prenom");
+						String email = res.getString("email");
 						TableItem item = new TableItem(table, SWT.NONE , i);
 					    item.setText(0, nom);
 					    item.setText(1, prenom);
@@ -219,10 +228,13 @@ public class Utilisateurs extends Global
 						String id = Integer.toString(res.getInt("id"));
 						String nom = res.getString("nom");
 						String prenom = res.getString("prenom");
+						String email = res.getString("email");
+						String role = res.getString("role");
 						TableItem item = new TableItem(table, SWT.NONE , i);
 					    item.setText(0, nom);
 					    item.setText(1, prenom);
-					    item.setText(2, id);
+					    item.setText(2, email);
+					    item.setText(4, id);
 					    i++;
 
 					}
@@ -244,6 +256,7 @@ public class Utilisateurs extends Global
 		        	Globidselection = selection[i].getText(2);
 			        textNom.setText(selection[i].getText(0));
 			        textPrenom.setText(selection[i].getText(1));
+			        textEmail.setText(selection[i].getText(2));
 			        btnModifUtilisateur.setEnabled(true);
 			        btnSupprimer.setEnabled(true);
 		        }
@@ -273,6 +286,7 @@ public class Utilisateurs extends Global
 						String id = Integer.toString(res.getInt("id"));
 						String nom = res.getString("nom");
 						String prenom = res.getString("prenom");
+						String email = res.getString("email");
 						TableItem item = new TableItem(table, SWT.NONE , i);
 					    item.setText(0, nom);
 					    item.setText(1, prenom);
@@ -296,7 +310,7 @@ public class Utilisateurs extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					Comptes window = new Comptes();
+					AjoutCompte window = new AjoutCompte();
 					window.open();
 				}
 				catch (Exception e1)
