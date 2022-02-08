@@ -26,7 +26,6 @@ public class Modification extends Global
 	private String nom;
 	private String prenom;
 	private String email;
-	private String mdp;
 	private Text txtMonCompte;
 	private Text textNom;
 	private Text textPrenom;
