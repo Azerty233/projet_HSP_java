@@ -1,4 +1,4 @@
-package com.dbconnexion;
+package appli;
 	import java.sql.Connection;
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
@@ -74,6 +74,11 @@ package com.dbconnexion;
 			textPrenom.setBounds(277, 170, 147, 31);
 
 			Button btnValider = new Button(shelleleve, SWT.NONE);
+			btnValider.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+				}
+			});
 			btnValider.setBounds(298, 275, 105, 35);
 			btnValider.setText("Modifier");
 
