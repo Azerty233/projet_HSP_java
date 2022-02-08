@@ -58,7 +58,7 @@ public class Menu_Admin extends Global
 		shlMenuAdmin.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		shlMenuAdmin.setSize(366, 401);
 
-		shlMenuAdmin.setText("Hopital de Paris | Menu");
+		shlMenuAdmin.setText("Hopital de Paris | Espace Administrateur");
 
 		Button btnDconnexion = new Button(shlMenuAdmin, SWT.NONE);
 		btnDconnexion.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
@@ -106,12 +106,12 @@ public class Menu_Admin extends Global
 			}
 		});
 		
-		Button btnComptes = new Button(shlMenuAdmin, SWT.NONE);
-		btnComptes.setText("Comptes");
-		btnComptes.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		btnComptes.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		btnComptes.setBounds(32, 73, 291, 35);
-		btnComptes.addSelectionListener(new SelectionAdapter()
+		Button btnRDV = new Button(shlMenuAdmin, SWT.NONE);
+		btnRDV.setText("Rendez-vous");
+		btnRDV.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		btnRDV.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		btnRDV.setBounds(32, 73, 291, 35);
+		btnRDV.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
@@ -119,7 +119,7 @@ public class Menu_Admin extends Global
 				shlMenuAdmin.close();
 				try
 				{
-					Utilisateurs window = new Utilisateurs();
+					Planning window = new Planning();
 					window.open();
 				}
 				catch (Exception e1)
