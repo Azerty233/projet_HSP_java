@@ -27,12 +27,14 @@ public class Comptes extends Global
 	protected Shell shell;
 	private Text textNom;
 	private Text textPrenom;
+	private Text textEmail;
+	private Text textIdentifiant;
 	private String nom;
 	private String prenom;
 	private String email;
-	private Text textEmail;
-	private Text txtAjouterUnUtilisateur;
-	private Text textMDP;
+	private String identifiant;
+	private String mdp;
+	private Text textMotdePasse;
 
 
 
@@ -59,9 +61,9 @@ public class Comptes extends Global
 	protected void createContents() throws SQLException
 	{
 		shell = new Shell();
-		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		shell.setSize(765, 559);
-		shell.setText("Ajouter un utilisateur");
+		shell.setText("Modifier professeur");
 
 		Label lblNom = new Label(shell, SWT.NONE);
 		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
@@ -70,8 +72,18 @@ public class Comptes extends Global
 
 		Label lblPrnom = new Label(shell, SWT.NONE);
 		lblPrnom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblPrnom.setBounds(165, 173, 81, 25);
+		lblPrnom.setBounds(165, 178, 81, 25);
 		lblPrnom.setText("Pr\u00E9nom");
+
+		Label lblEmail = new Label(shell, SWT.NONE);
+		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblEmail.setBounds(165, 231, 81, 25);
+		lblEmail.setText("Email");
+
+		Label lblIdentifiant = new Label(shell, SWT.NONE);
+		lblIdentifiant.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblIdentifiant.setBounds(165, 284, 81, 25);
+		lblIdentifiant.setText("Identifiant");
 
 		textNom = new Text(shell, SWT.BORDER);
 		textNom.setBounds(277, 121, 147, 31);
@@ -79,88 +91,127 @@ public class Comptes extends Global
 		textPrenom = new Text(shell, SWT.BORDER);
 		textPrenom.setBounds(277, 176, 147, 31);
 
+		textEmail = new Text(shell, SWT.BORDER);
+		textEmail.setBounds(277, 231, 147, 31);
+
+		textIdentifiant = new Text(shell, SWT.BORDER);
+		textIdentifiant.setBounds(277, 287, 147, 31);
+		
+		textMotdePasse = new Text(shell, SWT.BORDER | SWT.PASSWORD);
+		textMotdePasse.setBounds(277, 348, 147, 31);
+
 		Button btnValider = new Button(shell, SWT.NONE);
-		btnValider.setBounds(277, 352, 105, 35);
+		btnValider.setBounds(297, 406, 105, 35);
 		btnValider.setText("Valider");
 
+		Button btnRetour = new Button(shell, SWT.NONE);
+		btnRetour.setBounds(10, 10, 105, 35);
+		btnRetour.setText("Retour");
+
+		Database db = new Database();
+		Connection cnx = db.DbConnexion();
+		String requete = "Select nom, prenom, email, identifiant, mdp from utilisateur  where id ='"+Globidselection+"'";
+		ResultSet resultat = db.Request(cnx, requete);
+		while(resultat.next())
+		{
+			nom = resultat.getString("nom");
+			prenom = resultat.getString("prenom");
+			email = resultat.getString("email");
+			identifiant = resultat.getString("identifiant");
+			mdp = resultat.getString("mdp");
+	
+		}
+		textNom.setText(nom);
+		textPrenom.setText(prenom);
+		textEmail.setText(email);
+		textIdentifiant.setText(identifiant);
+		textMotdePasse.setText(mdp);
+
 		Label lblErreur = new Label(shell, SWT.NONE);
-		lblErreur.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		lblErreur.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		lblErreur.setBounds(277, 450, 253, 25);
+		lblErreur.setBounds(297, 458, 253, 25);
 		lblErreur.setText("Veuiller remplir tous les champs");
 		lblErreur.setVisible(false);
 
 		Label lblSucces = new Label(shell, SWT.NONE);
-		lblSucces.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblSucces.setText("Ajout r\u00E9ussi !\r\nUn email contenant les acc\u00E8s vient d'\u00EAtre envoy\u00E9 \u00E0 l'utilisateur");
-		lblSucces.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
-		lblSucces.setBounds(277, 402, 348, 42);
 		lblSucces.setVisible(false);
-
-		Label lblClasse = new Label(shell, SWT.NONE);
-		lblClasse.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblClasse.setBounds(165, 321, 81, 25);
-		lblClasse.setText("Role");
-
-		Combo comboRole = new Combo(shell, SWT.READ_ONLY);
-		comboRole.setItems(new String[] {"ADMIN", "GEST"});
-		comboRole.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		comboRole.setBounds(277, 320, 147, 33);
-
-		Database db = new Database();
-		Connection cnx = db.DbConnexion();
-		String requete = "Select * from utilisateurs";
-		ResultSet resultat = db.Request(cnx, requete);
-		ArrayList<Integer> roleList = new  ArrayList<Integer>();
-		while(resultat.next())
-		{
-
-			comboRole.add(resultat.getString("nom"));
-			roleList.add(resultat.getInt("id"));
-		}
-		comboRole.select(0);
-		
-		Label lblEmail = new Label(shell, SWT.NONE);
-		lblEmail.setText("Email");
-		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblEmail.setBounds(165, 230, 81, 25);
-		
-		textEmail = new Text(shell, SWT.BORDER);
-		textEmail.setBounds(277, 233, 147, 31);
-		
-		Composite composite_1 = new Composite(shell, SWT.NONE);
-		composite_1.setBackground(SWTResourceManager.getColor(100, 149, 237));
-		composite_1.setBounds(0, 0, 752, 45);
-		
-		txtAjouterUnUtilisateur = new Text(composite_1, SWT.NONE);
-		txtAjouterUnUtilisateur.setText("Ajouter un utilisateur");
-		txtAjouterUnUtilisateur.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		txtAjouterUnUtilisateur.setFont(SWTResourceManager.getFont("Segoe UI Historic", 14, SWT.BOLD));
-		txtAjouterUnUtilisateur.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		txtAjouterUnUtilisateur.setBounds(262, 10, 249, 25);
-		
-		textMDP = new Text(shell, SWT.BORDER);
-		textMDP.setBounds(277, 281, 147, 31);
-		
+		lblSucces.setText("Modifications enregistr\u00E9es");
+		lblSucces.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
+		lblSucces.setBounds(297, 489, 253, 25);
+		lblSucces.setVisible(false);
+				
 		Label lblMotDePasse = new Label(shell, SWT.NONE);
-		lblMotDePasse.setText("Mot de passe");
 		lblMotDePasse.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblMotDePasse.setBounds(165, 278, 81, 25);
+		lblMotDePasse.setText("Mot de passe");
+		lblMotDePasse.setBounds(165, 345, 81, 25);
+		
+		Label lblModifierUnProfesseur = new Label(shell, SWT.NONE);
+		lblModifierUnProfesseur.setText("Modifier un professeur");
+		lblModifierUnProfesseur.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblModifierUnProfesseur.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblModifierUnProfesseur.setBounds(283, 50, 151, 25);
+		
+		Label lblMenu = new Label(shell, SWT.NONE);
+		lblMenu.setText("Ma Gestion");
+		lblMenu.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		lblMenu.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
+		lblMenu.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblMenu.setAlignment(SWT.CENTER);
+		lblMenu.setBounds(273, 10, 151, 34);
 
 		btnValider.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "INSERT into utilisateurs (nom, prenom, email, mdp, role) Values('"+textNom.getText()+"','"+textPrenom.getText()+"','"+textEmail.getText()+"', '"+textMDP.getText()+"',"+roleList.get(comboRole.getSelectionIndex())+")";
+				String requete = "Update utilisateur set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"', identifiant ='"+textIdentifiant.getText()+"', mdp ='"+textMotdePasse.getText()+"' where id = '"+Globidselection+"'";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
 				lblSucces.setVisible(!message);
+				requete = "Select nom, prenom, email, identifiant, mdp from utilisateur where id = '"+Globidselection+"'";
+				ResultSet resultat = db.Request(cnx, requete);
+				try
+				{
+					while(resultat.next())
+					{
+						nom = resultat.getString("nom");
+						prenom = resultat.getString("prenom");
+						email = resultat.getString("email");
+						identifiant = resultat.getString("identifiant");
+						mdp = resultat.getString("mdp");
+					}
+				}
+				catch (SQLException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				textNom.setText(nom);
+				textPrenom.setText(prenom);
+				textEmail.setText(email);
+				textIdentifiant.setText(identifiant);
+				textMotdePasse.setText(mdp);
 			}
 		});
 
-		
+		btnRetour.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shell.close();
+				try
+				{
+					Globnom = nom;
+					Menu_Admin window = new Menu_Admin();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
 
 	}
 }
-
