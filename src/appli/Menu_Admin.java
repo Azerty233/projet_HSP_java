@@ -146,6 +146,23 @@ public class Menu_Admin extends Global
 		btnDconnexion_1_4.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnDconnexion_1_4.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		btnDconnexion_1_4.setBounds(32, 224, 291, 35);
+		btnDconnexion_1_4.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shlMenuAdmin.close();
+				try
+				{
+					Connexion window = new Connexion();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		Button btnMonCompte = new Button(shlMenuAdmin, SWT.NONE);
 		btnMonCompte.setText("Mon compte");
@@ -161,7 +178,7 @@ public class Menu_Admin extends Global
 				shlMenuAdmin.close();
 				try
 				{
-					MonCompte window = new MonCompte();
+					Modification window = new Modification();
 					window.open();
 				}
 				catch (Exception e1)

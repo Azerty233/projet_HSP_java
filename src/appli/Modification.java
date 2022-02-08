@@ -34,6 +34,7 @@ public class Modification extends Global
 
 
 
+
 	public void open() throws SQLException
 	{
 		Display display = Display.getDefault();
@@ -112,21 +113,23 @@ public class Modification extends Global
 			nom = resultat.getString("nom");
 			prenom = resultat.getString("prenom");
 			email = resultat.getString("email");
-			mdp = resultat.getString("mdp");
+			
 	
 		}
 		textNom.setText(nom);
 		textPrenom.setText(prenom);
 		textEmail.setText(email);
-
+       
 
 		
 		btnModifierMonProfil.addSelectionListener(new SelectionAdapter()
 		{
+			
+
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"', mdp ='"+textMDP.getText()+"'";
+				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText();
 				requete = "Select nom, prenom, email, mdp from utilisateurs";
 				ResultSet resultat = db.Request(cnx, requete);
 				try
@@ -136,7 +139,7 @@ public class Modification extends Global
 						nom = resultat.getString("nom");
 						prenom = resultat.getString("prenom");
 						email = resultat.getString("email");
-						mdp = resultat.getString("mdp");
+						
 					}
 				}
 				catch (SQLException e1)
@@ -147,7 +150,7 @@ public class Modification extends Global
 				textNom.setText(nom);
 				textPrenom.setText(prenom);
 				textEmail.setText(email);
-				textMDP.setText(mdp);
+			
 			}
 		});
 	}
