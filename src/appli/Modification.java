@@ -123,6 +123,8 @@ public class Modification extends Global
 		
 		btnModifierMonProfil.addSelectionListener(new SelectionAdapter()
 		{
+			private Button textMDP;
+
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
