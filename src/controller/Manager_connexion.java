@@ -9,7 +9,6 @@ import org.eclipse.swt.widgets.Shell;
 import com.dbconnexion.*;
 
 import appli.Menu_Admin;
-import appli.Menu_Gest;
 
 
 public class Manager_connexion extends Global
@@ -52,7 +51,7 @@ public class Manager_connexion extends Global
 					try
 					{ //Connexion en tant qu'Administrateur
 					shell.close();
-					Menu_Gest window_Admin = new Menu_Gest();
+					Menu_Admin window_Admin = new Menu_Admin();
 					window_Admin.open();
 					return false;
 
