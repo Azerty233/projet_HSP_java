@@ -118,7 +118,8 @@ public class Modification extends Global
 		textNom.setText(nom);
 		textPrenom.setText(prenom);
 		textEmail.setText(email);
-       
+		
+
 
 		
 		btnModifierMonProfil.addSelectionListener(new SelectionAdapter()
@@ -146,6 +147,10 @@ public class Modification extends Global
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				Label lblModif = new Label(shell, SWT.NONE);
+				lblModif.setBounds(200, 431, 300, 25);
+				lblModif.setText("Vous avez effectuer une modification");
+		       
 				textNom.setText(nom);
 				textPrenom.setText(prenom);
 				textEmail.setText(email);
