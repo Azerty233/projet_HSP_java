@@ -80,7 +80,7 @@ public class Modification extends Global
 		
 		textNom = new Text(shell, SWT.BORDER);
 		textNom.setBounds(244, 129, 215, 35);
-		textNom.setText(nom);
+		
 		
 		Text textPrenom = new Text(shell, SWT.BORDER);
 		textPrenom.setBounds(244, 221, 215, 35);
@@ -113,7 +113,7 @@ public class Modification extends Global
 			nom = resultat.getString("nom");
 			prenom = resultat.getString("prenom");
 			email = resultat.getString("email");
-			
+			textNom.setText(nom);
 	
 		}
 		textPrenom.setText(prenom);
