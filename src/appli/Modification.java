@@ -73,13 +73,14 @@ public class Modification extends Global
 		txtMonCompte.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		txtMonCompte.setBounds(162, 10, 401, 57);
 		
-		textNom = new Text(shell, SWT.BORDER);
-		textNom.setBounds(244, 129, 215, 35);
-		
 		Label lblNom = new Label(shell, SWT.NONE);
 		lblNom.setText("Nom");
 		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		lblNom.setBounds(244, 93, 68, 25);
+		
+		textNom = new Text(shell, SWT.BORDER);
+		textNom.setBounds(244, 129, 215, 35);
+		textNom.setText(nom);
 		
 		Text textPrenom = new Text(shell, SWT.BORDER);
 		textPrenom.setBounds(244, 221, 215, 35);
@@ -101,7 +102,7 @@ public class Modification extends Global
 		btnModifierMonProfil.setText("Modifier mon profil");
 		btnModifierMonProfil.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnModifierMonProfil.setFont(SWTResourceManager.getFont("Rockwell", 9, SWT.BOLD));
-		btnModifierMonProfil.setBounds(244, 382, 215, 35);
+		btnModifierMonProfil.setBounds(244, 390, 215, 35);
 
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
@@ -115,7 +116,6 @@ public class Modification extends Global
 			
 	
 		}
-		textNom.setText(nom);
 		textPrenom.setText(prenom);
 		textEmail.setText(email);
 		
@@ -141,7 +141,7 @@ public class Modification extends Global
 			}
 			
 		});
-		btnRetour.setBounds(301, 458, 105, 35);
+		btnRetour.setBounds(303, 458, 105, 35);
 		btnRetour.setText("Retour");
 		
 
