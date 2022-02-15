@@ -101,7 +101,7 @@ public class Modification extends Global
 		btnModifierMonProfil.setText("Modifier mon profil");
 		btnModifierMonProfil.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnModifierMonProfil.setFont(SWTResourceManager.getFont("Rockwell", 9, SWT.BOLD));
-		btnModifierMonProfil.setBounds(244, 382, 215, 35);
+		btnModifierMonProfil.setBounds(244, 390, 215, 35);
 
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
@@ -141,7 +141,7 @@ public class Modification extends Global
 			}
 			
 		});
-		btnRetour.setBounds(301, 458, 105, 35);
+		btnRetour.setBounds(303, 458, 105, 35);
 		btnRetour.setText("Retour");
 		
 
