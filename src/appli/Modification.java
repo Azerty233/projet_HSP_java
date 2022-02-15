@@ -155,7 +155,10 @@ public class Modification extends Global
 			public void widgetSelected(SelectionEvent e)
 			{
 				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText();
+				boolean estCorrect = db.Prepare(cnx, requete);
+				requete = "Select nom, prenom, email, mdp from utilisateurs";
 				ResultSet resultat = db.Request(cnx, requete);
+				
 				try
 				{
 					while(resultat.next())
