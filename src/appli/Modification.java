@@ -63,7 +63,7 @@ public class Modification extends Global
 
 		
 		Composite composite_1 = new Composite(shell, SWT.NONE);
-		composite_1.setBackground(SWTResourceManager.getColor(100, 149, 237));
+		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
 		composite_1.setBounds(0, 0, 752, 77);
 		
 		txtMonCompte = new Text(composite_1, SWT.NONE);
@@ -79,7 +79,7 @@ public class Modification extends Global
 		Label lblNom = new Label(shell, SWT.NONE);
 		lblNom.setText("Nom");
 		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblNom.setBounds(244, 101, 68, 25);
+		lblNom.setBounds(244, 93, 68, 25);
 		
 		Text textPrenom = new Text(shell, SWT.BORDER);
 		textPrenom.setBounds(244, 221, 215, 35);
@@ -87,7 +87,7 @@ public class Modification extends Global
 		Label lblPrenom = new Label(shell, SWT.NONE);
 		lblPrenom.setText("Pr\u00E9nom");
 		lblPrenom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblPrenom.setBounds(244, 193, 68, 25);
+		lblPrenom.setBounds(244, 185, 68, 25);
 		
 		textEmail = new Text(shell, SWT.BORDER);
 		textEmail.setBounds(244, 310, 215, 35);
@@ -101,7 +101,7 @@ public class Modification extends Global
 		btnModifierMonProfil.setText("Modifier mon profil");
 		btnModifierMonProfil.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnModifierMonProfil.setFont(SWTResourceManager.getFont("Rockwell", 9, SWT.BOLD));
-		btnModifierMonProfil.setBounds(244, 390, 215, 35);
+		btnModifierMonProfil.setBounds(244, 382, 215, 35);
 
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
@@ -119,6 +119,31 @@ public class Modification extends Global
 		textPrenom.setText(prenom);
 		textEmail.setText(email);
 		
+		Button btnRetour = new Button(shell, SWT.NONE);
+		btnRetour.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btnRetour.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				{
+					shell.close();
+					try
+					{
+						Menu_Admin window = new Menu_Admin();
+						window.open();
+					}
+					catch (Exception e1)
+					{
+						e1.printStackTrace();
+					}
+				}
+			
+			}
+			
+		});
+		btnRetour.setBounds(301, 458, 105, 35);
+		btnRetour.setText("Retour");
+		
 
 
 		
@@ -130,7 +155,6 @@ public class Modification extends Global
 			public void widgetSelected(SelectionEvent e)
 			{
 				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText();
-				requete = "Select nom, prenom, email, mdp from utilisateurs";
 				ResultSet resultat = db.Request(cnx, requete);
 				try
 				{
