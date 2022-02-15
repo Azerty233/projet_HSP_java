@@ -154,7 +154,7 @@ public class Modification extends Global
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText();
+				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"';
 				ResultSet resultat = db.Request(cnx, requete);
 				try
 				{
