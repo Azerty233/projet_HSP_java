@@ -135,7 +135,7 @@ public class AjoutDossier extends Global
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "INSERT into patient (patient, adresse_postale, numero_secu, mutuelle) Values('"+PatientList.get(comboPatient.getSelectionIndex())+",'"+textAdresse.getText()+"','"+textSecu.getText()+"','"+textMutuelle.getText()+"')";
+				String requete = "INSERT into patient (patient, adresse_postale, numero_secu, mutuelle) Values('"+PatientList.get(comboPatient.getSelectionIndex())+"','"+textAdresse.getText()+"','"+textSecu.getText()+"','"+textMutuelle.getText()+"')";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
 				lblSucces.setVisible(!message);
