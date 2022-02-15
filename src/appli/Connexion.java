@@ -55,20 +55,20 @@ public class Connexion
 		lblErreur.setVisible(false);
 		
 			Label Identifiant = new Label(shell, SWT.NONE);
-			Identifiant.setBounds(133, 66, 68, 25);
+			Identifiant.setBounds(133, 66, 92, 25);
 			Identifiant.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 			Identifiant.setText("Identifiant");
 			
 			Composite composite_1 = new Composite(shell, SWT.NONE);
 			composite_1.setBackground(SWTResourceManager.getColor(100, 149, 237));
-			composite_1.setBounds(0, 0, 486, 45);
+			composite_1.setBounds(0, 0, 486, 60);
 			
 			txtEspaceHpitalDe = new Text(composite_1, SWT.NONE);
 			txtEspaceHpitalDe.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 			txtEspaceHpitalDe.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 			txtEspaceHpitalDe.setFont(SWTResourceManager.getFont("Segoe UI Historic", 14, SWT.BOLD));
 			txtEspaceHpitalDe.setText("Espace H\u00F4pital de Paris");
-			txtEspaceHpitalDe.setBounds(130, 10, 249, 25);
+			txtEspaceHpitalDe.setBounds(83, 10, 351, 50);
 			
 			Composite composite_1_1 = new Composite(shell, SWT.NONE);
 			composite_1_1.setBackground(SWTResourceManager.getColor(100, 149, 237));
@@ -79,7 +79,7 @@ public class Connexion
 			txtApplication.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 			txtApplication.setFont(SWTResourceManager.getFont("Segoe UI Historic", 7, SWT.NORMAL));
 			txtApplication.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-			txtApplication.setBounds(10, 10, 449, 25);
+			txtApplication.setBounds(10, 0, 449, 35);
 	
 		btnJeMinscris.addSelectionListener(new SelectionAdapter()
 		{
