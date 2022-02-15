@@ -60,7 +60,7 @@ public class Planning extends Global
 	protected void createContents() throws SQLException
 	{
 		shell = new Shell();
-		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		shell.setSize(765, 559);
 		shell.setText("Planning");
 

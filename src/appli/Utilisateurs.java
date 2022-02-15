@@ -352,7 +352,11 @@ public class Utilisateurs extends Global
 		Button btnRetour = new Button(shlListeUtilisateurs, SWT.NONE);
 		btnRetour.setBounds(10, 520, 105, 35);
 		btnRetour.setText("Retour");
-		btnRetour.addSelectionListener(new SelectionAdapter()
+		
+		Button btnAjouterUnDossier = new Button(shlListeUtilisateurs, SWT.NONE);
+		btnAjouterUnDossier.setText("Ajouter un dossier patient");
+		btnAjouterUnDossier.setBounds(332, 442, 178, 35);
+		btnAjouterUnDossier.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
@@ -360,7 +364,7 @@ public class Utilisateurs extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					Menu_Admin window = new Menu_Admin();
+					AjoutDossier window = new AjoutDossier();
 					window.open();
 				}
 				catch (Exception e1)
