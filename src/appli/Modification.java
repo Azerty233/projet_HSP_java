@@ -178,7 +178,7 @@ public class Modification extends Global
 				textNom.setText(nom);
 				textPrenom.setText(prenom);
 				textEmail.setText(email);
-			
+			    
 			}
 		});
 	}
