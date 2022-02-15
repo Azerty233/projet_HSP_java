@@ -338,7 +338,7 @@ public class Utilisateurs extends Global
 					shlListeUtilisateurs.close();
 					try
 					{
-						Comptes window = new Comptes();
+						Modification window = new Modification();
 						window.open();
 					}
 					catch (Exception e1)
