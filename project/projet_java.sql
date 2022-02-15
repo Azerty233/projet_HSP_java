@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 25 jan. 2022 à 07:34
+-- Généré le : mar. 08 fév. 2022 à 10:51
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -105,8 +105,31 @@ CREATE TABLE IF NOT EXISTS `rdv` (
   `id_utilisateurs` int(11) NOT NULL,
   `id_patient` int(11) NOT NULL,
   `date` varchar(20) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
+  `type` varchar(20) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `type` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `type_rdv`
+--
+
+DROP TABLE IF EXISTS `type_rdv`;
+CREATE TABLE IF NOT EXISTS `type_rdv` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(20) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `type_rdv`
+--
+
+INSERT INTO `type_rdv` (`id`, `libelle`) VALUES
+(1, 'Generaliste'),
+(2, 'Dermatologue');
 
 -- --------------------------------------------------------
 
@@ -123,15 +146,15 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `mdp` varchar(20) COLLATE utf8_bin NOT NULL,
   `role` varchar(10) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `email`, `mdp`, `role`) VALUES
-(1, 'ADMIN', 'ADMIN', 'admin@admin.fr', '1234', 'ADMIN'),
-(2, 'GESTIONNAIRE', 'GESTIONNAIRE', 'gestionnaire@gestionnaire.fr', '1234', 'GEST');
+(1, 'LIGNANI', 'QUENTIN', 'admin@admin.fr', '1234', 'ADMIN'),
+(2, 'LIGNANI', 'QUENTIN', 'med@med.fr', '1234', 'MED');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

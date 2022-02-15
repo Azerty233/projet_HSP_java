@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
@@ -156,6 +157,7 @@ public class Planning extends Global
 			profList.add(resultat.getInt("id"));
 		}
 		comboMed.select(0);
+		
 		
 		Button btnAjouter = new Button(shell, SWT.NONE);
 		btnAjouter.setBounds(22, 24, 70, 21);

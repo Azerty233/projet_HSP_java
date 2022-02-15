@@ -65,35 +65,42 @@ public class Utilisateurs extends Global
 	{
 
 		shlListeUtilisateurs = new Shell();
-		shlListeUtilisateurs.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		shlListeUtilisateurs.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		shlListeUtilisateurs.setSize(802, 599);
 		shlListeUtilisateurs.setText("Liste des utilisateurs");
 
 		Composite composite = new Composite(shlListeUtilisateurs, SWT.BORDER);
-		composite.setBounds(333, 167, 385, 266);
+		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		composite.setBounds(332, 125, 385, 266);
 
 
 		Label textNom = new Label(composite, SWT.NONE);
+		textNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		textNom.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		textNom.setBounds(160, 26, 180, 35);
 
 		Label textPrenom = new Label(composite, SWT.NONE);
+		textPrenom.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		textPrenom.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		textPrenom.setBounds(160, 72, 180, 35);
 
 		Label lblNom = new Label(composite, SWT.NONE);
+		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNom.setText("Nom");
 		lblNom.setBounds(62, 29, 67, 35);
 
 		Label lblPrenom = new Label(composite, SWT.NONE);
+		lblPrenom.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblPrenom.setText("Prenom");
 		lblPrenom.setBounds(62, 77, 67, 35);
 		
 		Label lblEmail = new Label(composite, SWT.NONE);
+		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblEmail.setText("Email");
 		lblEmail.setBounds(62, 129, 67, 35);
 		
 		Label textEmail = new Label(composite, SWT.NONE);
+		textEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		textEmail.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		textEmail.setBounds(160, 120, 180, 35);
 
@@ -106,11 +113,11 @@ public class Utilisateurs extends Global
 		Label listeUtilisateur = new Label(shlListeUtilisateurs, SWT.NONE);
 		listeUtilisateur.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		listeUtilisateur.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.BOLD));
-		listeUtilisateur.setBounds(20, 86, 191, 29);
+		listeUtilisateur.setBounds(20, 116, 191, 25);
 		listeUtilisateur.setText("Liste des utilisateurs");
 
 		table = new Table(shlListeUtilisateurs, SWT.BORDER | SWT.FULL_SELECTION);
-		table.setBounds(20, 162, 218, 283);
+		table.setBounds(20, 175, 219, 216);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
@@ -130,7 +137,7 @@ public class Utilisateurs extends Global
 
 
 		Button btnModifUtilisateur = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnModifUtilisateur.setBounds(470, 439, 125, 35);
+		btnModifUtilisateur.setBounds(469, 397, 125, 35);
 		btnModifUtilisateur.setText("Modifier un utilisateur");
 		btnModifUtilisateur.setVisible(true);
 		btnModifUtilisateur.setEnabled(false);
@@ -155,16 +162,16 @@ public class Utilisateurs extends Global
 
 
 		Button btnValider = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnValider.setBounds(20, 121, 211, 35);
+		btnValider.setBounds(20, 147, 219, 25);
 		btnValider.setText("Afficher les utilisateurs");
 
 		Button btnAjouterUtilisateur = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnAjouterUtilisateur.setBounds(333, 439, 119, 35);
+		btnAjouterUtilisateur.setBounds(332, 397, 119, 35);
 		btnAjouterUtilisateur.setText("Ajouter un utilisateur");
 		
 		Button btnSupprimer = new Button(shlListeUtilisateurs, SWT.NONE);
 		btnSupprimer.setText("Supprimer");
-		btnSupprimer.setBounds(613, 439, 105, 35);
+		btnSupprimer.setBounds(612, 397, 105, 35);
 
 		btnSupprimer.addSelectionListener(new SelectionAdapter()
 		{
@@ -343,7 +350,7 @@ public class Utilisateurs extends Global
 		
 
 		Button btnRetour = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnRetour.setBounds(10, 10, 105, 35);
+		btnRetour.setBounds(10, 520, 105, 35);
 		btnRetour.setText("Retour");
 		btnRetour.addSelectionListener(new SelectionAdapter()
 		{
