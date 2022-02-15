@@ -352,6 +352,24 @@ public class Utilisateurs extends Global
 		Button btnRetour = new Button(shlListeUtilisateurs, SWT.NONE);
 		btnRetour.setBounds(10, 520, 105, 35);
 		btnRetour.setText("Retour");
+		btnRetour.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shlListeUtilisateurs.close();
+				try
+				{
+					Menu_Admin window = new Menu_Admin();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+
+		});
 		
 		Button btnAjouterUnDossier = new Button(shlListeUtilisateurs, SWT.NONE);
 		btnAjouterUnDossier.setText("Ajouter un dossier patient");
