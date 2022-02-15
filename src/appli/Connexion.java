@@ -20,7 +20,7 @@ public class Connexion
 {
 
 	/**
-	* fondation du contenu de la fen"etre
+	* fondation du contenu de la fenetre
 	*/
 	protected void createContents()
 	{
@@ -28,7 +28,7 @@ public class Connexion
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shell.setSize(494, 381);
 		shell.setText("Hopital de Paris | Connexion");
-		//Identifiant
+		//Identifiantw
 		textEmail = new Text(shell, SWT.BORDER);
 		textEmail.setBounds(133, 94, 215, 35);
 	
