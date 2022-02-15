@@ -69,4 +69,61 @@ public class Manager_connexion extends Global
 	return true;
 
 }
+	
+	public boolean mdpOublie(String email, Shell shell) throws SQLException
+	{
+
+		Database db = new Database();
+		Connection cnx = db.DbConnexion();
+		String requete = "Select * from utilisateurs where email = ''"+email+"'";
+		String role = "role";
+		ResultSet resultat = db.Request(cnx, requete);
+		while(resultat.next())
+		{
+			Globemail = resultat.getString("email");
+			Globnom = resultat.getString("nom");
+			if(resultat.getString(role).equals("ADMIN"))
+			{
+				Globadmin = true;
+				try
+				{ //Connexion en tant qu'Administrateur
+				shell.close();
+				Menu_Admin window_Admin = new Menu_Admin();
+				window_Admin.open();
+				return false;
+
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+			else {
+				Globemail = resultat.getString("email");
+				Globnom = resultat.getString("nom");
+				if(resultat.getString(role).equals("GEST"))
+				{
+					Globadmin = true;
+					try
+					{ //Connexion en tant qu'Administrateur
+					shell.close();
+					Menu_Admin window_Admin = new Menu_Admin();
+					window_Admin.open();
+					return false;
+
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+				
+			}
+
+
+	}
+	return true;
+
+}
+	
 }
