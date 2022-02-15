@@ -73,13 +73,14 @@ public class Modification extends Global
 		txtMonCompte.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		txtMonCompte.setBounds(162, 10, 401, 57);
 		
-		textNom = new Text(shell, SWT.BORDER);
-		textNom.setBounds(244, 129, 215, 35);
-		
 		Label lblNom = new Label(shell, SWT.NONE);
 		lblNom.setText("Nom");
 		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		lblNom.setBounds(244, 93, 68, 25);
+		
+		textNom = new Text(shell, SWT.BORDER);
+		textNom.setBounds(244, 129, 215, 35);
+		textNom.setText(nom);
 		
 		Text textPrenom = new Text(shell, SWT.BORDER);
 		textPrenom.setBounds(244, 221, 215, 35);
@@ -115,7 +116,6 @@ public class Modification extends Global
 			
 	
 		}
-		textNom.setText(nom);
 		textPrenom.setText(prenom);
 		textEmail.setText(email);
 		
