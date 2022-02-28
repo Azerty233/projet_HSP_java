@@ -18,7 +18,7 @@ import com.mindfusion.scheduling.model.*;
 import com.mindfusion.scheduling.standardforms.AppointmentForm;
 
 
-public class MainWindow extends JFrame
+public class RDV extends JFrame
 {
 	public static void main(String[] args)
 	{
@@ -28,7 +28,7 @@ public class MainWindow extends JFrame
 			{
 				try
 				{
-					new MainWindow().setVisible(true);
+					new RDV().setVisible(true);
 				}
 				catch (Exception exp)
 				{
@@ -37,7 +37,7 @@ public class MainWindow extends JFrame
 		});
 	}
 
-	protected MainWindow()
+	protected RDV()
 	{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(400, 400);
@@ -83,4 +83,9 @@ public class MainWindow extends JFrame
 	private static final long serialVersionUID = 1L;
 
 	private Calendar calendar;
+
+	public void open() {
+		// TODO Auto-generated method stub
+		
+	}
 }

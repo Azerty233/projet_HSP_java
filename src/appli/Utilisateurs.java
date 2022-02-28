@@ -374,7 +374,13 @@ public class Utilisateurs extends Global
 		Button btnAjouterUnDossier = new Button(shlListeUtilisateurs, SWT.NONE);
 		btnAjouterUnDossier.setText("Ajouter un dossier patient");
 		btnAjouterUnDossier.setBounds(332, 442, 178, 35);
-		btnAjouterUnDossier.addSelectionListener(new SelectionAdapter()
+		
+		Button btnHospitaliserUnPatient = new Button(shlListeUtilisateurs, SWT.NONE);
+		btnHospitaliserUnPatient.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btnHospitaliserUnPatient.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_RED));
+		btnHospitaliserUnPatient.setText("Hospitaliser un patient");
+		btnHospitaliserUnPatient.setBounds(207, 10, 346, 35);
+		btnHospitaliserUnPatient.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
@@ -382,7 +388,7 @@ public class Utilisateurs extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					AjoutDossier window = new AjoutDossier();
+					AjoutHospitalisation window = new AjoutHospitalisation();
 					window.open();
 				}
 				catch (Exception e1)

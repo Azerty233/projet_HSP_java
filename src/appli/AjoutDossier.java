@@ -33,6 +33,9 @@ public class AjoutDossier extends Global
 	private Text textMutuelle;
 	private Text textSecu;
 	private Text textPatient;
+	private Text textNom;
+	private Text text_Prenom;
+	private Text text_Email;
 
 
 
@@ -65,7 +68,7 @@ public class AjoutDossier extends Global
 
 		Label lblNom = new Label(Role, SWT.NONE);
 		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblNom.setBounds(165, 121, 81, 25);
+		lblNom.setBounds(165, 34, 81, 25);
 		lblNom.setText("Nom");
 
 		Button btnValider = new Button(Role, SWT.NONE);
@@ -94,20 +97,9 @@ public class AjoutDossier extends Global
 		lblRole.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		lblRole.setBounds(165, 212, 157, 25);
 		lblRole.setText("Num\u00E9ro de s\u00E9curit\u00E9 sociale");
-
-		Combo comboPatient = new Combo(Role, SWT.NONE);
-		comboPatient.setBounds(328, 120, 147, 20);
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
 		String requete = "Select * from utilisateurs";
-		ResultSet resultat = db.Request(cnx, requete);
-		ArrayList<Integer> PatientList = new  ArrayList<Integer>();
-		while(resultat.next())
-		{
-
-			comboPatient.add(resultat.getString("nom"));
-			PatientList.add(resultat.getInt("id"));
-		}
 		
 		Label lblAdd = new Label(Role, SWT.NONE);
 		lblAdd.setText("Adresse postale");
@@ -129,13 +121,32 @@ public class AjoutDossier extends Global
 		
 		textMutuelle = new Text(Role, SWT.BORDER);
 		textMutuelle.setBounds(328, 256, 202, 27);
+		
+		Label lblPrenom = new Label(Role, SWT.NONE);
+		lblPrenom.setText("Prenom");
+		lblPrenom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblPrenom.setBounds(165, 77, 81, 25);
+		
+		Label lblEmail = new Label(Role, SWT.NONE);
+		lblEmail.setText("Email");
+		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblEmail.setBounds(165, 119, 81, 25);
+		
+		textNom = new Text(Role, SWT.BORDER);
+		textNom.setBounds(328, 34, 253, 27);
+		
+		text_Prenom = new Text(Role, SWT.BORDER);
+		text_Prenom.setBounds(328, 75, 253, 27);
+		
+		text_Email = new Text(Role, SWT.BORDER);
+		text_Email.setBounds(328, 117, 253, 27);
 
 		btnValider.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "INSERT into patient (patient, adresse_postale, numero_secu, mutuelle) Values('"+PatientList.get(comboPatient.getSelectionIndex())+"','"+textAdresse.getText()+"','"+textSecu.getText()+"','"+textMutuelle.getText()+"')";
+				String requete = "INSERT into patient (nom, prenom, email, adresse_postale, numero_secu, mutuelle) Values('"+textNom.getText()+"','"+text_Prenom.getText()+"','"+text_Email.getText()+"','"+textAdresse.getText()+"','"+textSecu.getText()+"','"+textMutuelle.getText()+"')";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
 				lblSucces.setVisible(!message);

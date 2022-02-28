@@ -19,6 +19,7 @@ import com.dbconnexion.Database;
 
 import controller.Global;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.eclipse.swt.widgets.Composite;
 
 public class AjoutCompte extends Global
