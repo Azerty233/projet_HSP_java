@@ -119,7 +119,7 @@ public class Menu_Admin extends Global
 				shlMenuAdmin.close();
 				try
 				{
-					Planning window = new Planning();
+					MainWindow window = new MainWindow();
 					window.open();
 				}
 				catch (Exception e1)

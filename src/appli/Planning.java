@@ -158,6 +158,40 @@ public class Planning extends Global
 		}
 		comboMed.select(0);
 		
+		Button btnOkProf = new Button(shell, SWT.NONE);
+		FormData fd_btnOkProf = new FormData();
+		fd_btnOkProf.top = new FormAttachment(0, 58);
+		fd_btnOkProf.bottom = new FormAttachment(tableLundi, -16);
+		fd_btnOkProf.right = new FormAttachment(comboMed, 105, SWT.RIGHT);
+		fd_btnOkProf.left = new FormAttachment(comboMed, 19);
+		btnOkProf.setLayoutData(fd_btnOkProf);
+		btnOkProf.setText("Selectionner");
+		btnOkProf.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				for(ArrayList<TableItem> jour : planning) {
+					for(TableItem heure : jour) {
+						heure.setText("");
+					}
+				}
+				String requete = "Select * from planning inner join classe on id_classe = classe.id where id_professeur = '"+profList.get(comboProf.getSelectionIndex())+"'";
+				ResultSet resultat = db.Request(cnx, requete);
+				try {
+					while(resultat.next())
+					{
+						int jour = resultat.getInt("id_jour") - 1;
+						int heure = resultat.getInt("id_heure") - 1;
+						String classe = resultat.getString("libelle");
+						planning.get(jour).get(heure).setText(classe);
+
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		Button btnAjouter = new Button(shell, SWT.NONE);
 		btnAjouter.setBounds(22, 24, 70, 21);
