@@ -1,6 +1,8 @@
 package appli;
 
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.EnumSet;
 
 import javax.swing.JFrame;
@@ -16,6 +18,7 @@ import com.mindfusion.scheduling.ItemMouseEvent;
 import com.mindfusion.scheduling.WeekRangeHeaderStyle;
 import com.mindfusion.scheduling.model.*;
 import com.mindfusion.scheduling.standardforms.AppointmentForm;
+import com.mindfusion.scheduling.standardforms.DialogResult;
 
 
 public class RDV extends JFrame
@@ -58,10 +61,27 @@ public class RDV extends JFrame
 
 		calendar.addCalendarListener(new CalendarAdapter()
 		{
+			
 			private void showForm(Item item) {
 				AppointmentForm form = new AppointmentForm(calendar.getSchedule());
 				form.setAppointment((Appointment)item);
 				form.setVisible(true);
+				
+				form.addWindowListener(new WindowAdapter()
+						{
+					@Override
+					public void windowClosed(WindowEvent we)
+					{
+						if (form.getDialogResult() == DialogResult.Remove)
+						{
+							if (item.getRecurrenceState() == RecurrenceState.Occurrence ||
+								item.getRecurrenceState() == RecurrenceState.Exception)
+								item.getRecurrence().markException(item, true);
+							else
+								calendar.getSchedule().getItems().remove(item);
+						}
+						}
+						});
 			}
 			@Override
 			public void itemClick(ItemMouseEvent e)

@@ -82,7 +82,7 @@ public class Modification extends Global
 		textNom.setBounds(244, 129, 215, 35);
 		
 		
-		Text textPrenom = new Text(shell, SWT.BORDER);
+		textPrenom = new Text(shell, SWT.BORDER);
 		textPrenom.setBounds(244, 221, 215, 35);
 		
 		Label lblPrenom = new Label(shell, SWT.NONE);
@@ -106,16 +106,16 @@ public class Modification extends Global
 
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
-		String requete = "Select nom, prenom, email, mdp from utilisateurs";
+		String requete = "Select nom, prenom, email from utilisateurs";
 		ResultSet resultat = db.Request(cnx, requete);
 		while(resultat.next())
 		{
 			nom = resultat.getString("nom");
 			prenom = resultat.getString("prenom");
 			email = resultat.getString("email");
-			textNom.setText(nom);
 	
 		}
+		textNom.setText(nom);
 		textPrenom.setText(prenom);
 		textEmail.setText(email);
 		
@@ -154,9 +154,9 @@ public class Modification extends Global
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText();
+				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"' where id = ?";
 				boolean estCorrect = db.Prepare(cnx, requete);
-				requete = "Select nom, prenom, email, mdp from utilisateurs";
+				requete = "Select nom, prenom, email from utilisateurs WHERE id = ?";
 				ResultSet resultat = db.Request(cnx, requete);
 				
 				try

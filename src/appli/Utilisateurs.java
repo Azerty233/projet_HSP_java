@@ -281,8 +281,7 @@ public class Utilisateurs extends Global
 				Globidselection = null;
 		        btnModifUtilisateur.setEnabled(false);
 		        btnSupprimer.setEnabled(false);
-				table.removeAll();
-				String sql = "SELECT * FROM utilisateurs ";
+				String sql = "SELECT * FROM utilisateurs";
 				ResultSet res = db.Request(cnx, sql);
 
 				try
@@ -293,7 +292,6 @@ public class Utilisateurs extends Global
 						String id = Integer.toString(res.getInt("id"));
 						String nom = res.getString("nom");
 						String prenom = res.getString("prenom");
-						String email = res.getString("email");
 						TableItem item = new TableItem(table, SWT.NONE , i);
 					    item.setText(0, nom);
 					    item.setText(1, prenom);
@@ -374,12 +372,31 @@ public class Utilisateurs extends Global
 		Button btnAjouterUnDossier = new Button(shlListeUtilisateurs, SWT.NONE);
 		btnAjouterUnDossier.setText("Ajouter un dossier patient");
 		btnAjouterUnDossier.setBounds(332, 442, 178, 35);
+		btnAjouterUnDossier.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shlListeUtilisateurs.close();
+				try
+				{
+					AjoutDossier window = new AjoutDossier();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+
+		});
 		
-		Button btnHospitaliserUnPatient = new Button(shlListeUtilisateurs, SWT.NONE);
+		Button btnHospitaliserUnPatient = new Button(shlListeUtilisateurs, SWT.BORDER | SWT.FLAT | SWT.CHECK);
+		btnHospitaliserUnPatient.setSelection(true);
 		btnHospitaliserUnPatient.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		btnHospitaliserUnPatient.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_RED));
 		btnHospitaliserUnPatient.setText("Hospitaliser un patient");
-		btnHospitaliserUnPatient.setBounds(207, 10, 346, 35);
+		btnHospitaliserUnPatient.setBounds(292, 10, 191, 35);
 		btnHospitaliserUnPatient.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
