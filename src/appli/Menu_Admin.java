@@ -87,7 +87,7 @@ public class Menu_Admin extends Global
 		btnDconnexion_1.setText("Utilisateurs");
 		btnDconnexion_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnDconnexion_1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		btnDconnexion_1.setBounds(32, 23, 291, 35);
+		btnDconnexion_1.setBounds(32, 55, 291, 35);
 		btnDconnexion_1.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
@@ -111,6 +111,8 @@ public class Menu_Admin extends Global
 		btnMonCompte.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnMonCompte.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		btnMonCompte.setBounds(32, 308, 116, 35);
+		
+		
 		
 		btnMonCompte.addSelectionListener(new SelectionAdapter()
 		{

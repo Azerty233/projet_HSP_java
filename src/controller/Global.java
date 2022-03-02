@@ -2,6 +2,7 @@ package controller;
 
 public class Global
 {
+	public static String Globpatient = "";
 	public static String Globemail = "";
 	public static String Globidentifiant = "";
 	public static boolean Globadmin = false;

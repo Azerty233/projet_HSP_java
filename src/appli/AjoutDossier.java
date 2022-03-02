@@ -161,7 +161,7 @@ public class AjoutDossier extends Global
 				Role.close();
 				try
 				{
-					Menu_Admin window = new Menu_Admin();
+					Utilisateurs_Administratif window = new Utilisateurs_Administratif();
 					window.open();
 				}
 				catch (Exception e1)
