@@ -101,7 +101,7 @@ public class Modification extends Global
 
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
-		String requete = "Select nom, prenom, email from utilisateurs where id = '"+Globemail+"'";
+		String requete = "Select nom, prenom, email from utilisateurs where id = '"+Globidentifiant+"'";
 		ResultSet resultat = db.Request(cnx, requete);
 		while(resultat.next())
 		{
@@ -141,11 +141,11 @@ public class Modification extends Global
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"'";
+				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"' where id = '"+Globidentifiant+"'";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
 				lblSucces.setVisible(!message);
-				requete = "Select nom, prenom, email from utilisateurs where id = '"+Globemail+"'";
+				requete = "Select nom, prenom, email from utilisateurs where id = '"+Globidentifiant+"'";
 				ResultSet resultat = db.Request(cnx, requete);
 				try
 				{

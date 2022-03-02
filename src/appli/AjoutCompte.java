@@ -30,6 +30,9 @@ public class AjoutCompte extends Global
 	private Text textPrenom;
 	private String nom;
 	private String prenom;
+	private String email;
+	private String mdp;
+	private String role;
 	private Text textEmail;
 	private Text textMdp;
 
