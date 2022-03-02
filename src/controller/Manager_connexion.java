@@ -25,7 +25,7 @@ public class Manager_connexion extends Global
 		ResultSet resultat = db.Request(cnx, requete);
 		while(resultat.next())
 		{
-			Globemail = resultat.getString("email");
+			Globemail = resultat.getString("id");
 			Globnom = resultat.getString("nom");
 			if(resultat.getString(role).equals("ADMIN"))
 			{

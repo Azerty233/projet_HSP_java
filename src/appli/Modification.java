@@ -17,20 +17,17 @@ import com.dbconnexion.Database;
 
 import controller.Global;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.widgets.Composite;
 
 public class Modification extends Global
 {
 
 	protected Shell shell;
-	private String nom;
-	private String prenom;
-	private String email;
-	private Text txtMonCompte;
 	private Text textNom;
 	private Text textPrenom;
 	private Text textEmail;
-
+	private String nom;
+	private String prenom;
+	private String email;
 
 
 
@@ -38,6 +35,7 @@ public class Modification extends Global
 	{
 		Display display = Display.getDefault();
 		createContents();
+		
 		shell.open();
 		shell.layout();
 		while (!shell.isDisposed())
@@ -57,108 +55,98 @@ public class Modification extends Global
 	protected void createContents() throws SQLException
 	{
 		shell = new Shell();
-		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		shell.setSize(765, 559);
-		shell.setText("Modifier mon compte");
+		shell.setText("Modifier son profil");
 
-		
-		Composite composite_1 = new Composite(shell, SWT.NONE);
-		composite_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
-		composite_1.setBounds(0, 0, 752, 77);
-		
-		txtMonCompte = new Text(composite_1, SWT.NONE);
-		txtMonCompte.setText("Modification de mon compte");
-		txtMonCompte.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		txtMonCompte.setFont(SWTResourceManager.getFont("Segoe UI Historic", 14, SWT.BOLD));
-		txtMonCompte.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		txtMonCompte.setBounds(162, 10, 401, 57);
-		
 		Label lblNom = new Label(shell, SWT.NONE);
-		lblNom.setText("Nom");
 		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblNom.setBounds(244, 93, 68, 25);
-		
-		textNom = new Text(shell, SWT.BORDER);
-		textNom.setBounds(244, 129, 215, 35);
-		
-		
-		textPrenom = new Text(shell, SWT.BORDER);
-		textPrenom.setBounds(244, 221, 215, 35);
-		
-		Label lblPrenom = new Label(shell, SWT.NONE);
-		lblPrenom.setText("Pr\u00E9nom");
-		lblPrenom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblPrenom.setBounds(244, 185, 68, 25);
-		
-		textEmail = new Text(shell, SWT.BORDER);
-		textEmail.setBounds(244, 310, 215, 35);
-		
+		lblNom.setBounds(165, 121, 81, 25);
+		lblNom.setText("Nom");
+
+		Label lblPrnom = new Label(shell, SWT.NONE);
+		lblPrnom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblPrnom.setBounds(165, 173, 81, 25);
+		lblPrnom.setText("Pr\u00E9nom");
+
 		Label lblEmail = new Label(shell, SWT.NONE);
-		lblEmail.setText("Adresse email");
 		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblEmail.setBounds(244, 282, 146, 25);
-		
-		Button btnModifierMonProfil = new Button(shell, SWT.NONE);
-		btnModifierMonProfil.setText("Modifier mon profil");
-		btnModifierMonProfil.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		btnModifierMonProfil.setFont(SWTResourceManager.getFont("Rockwell", 9, SWT.BOLD));
-		btnModifierMonProfil.setBounds(244, 390, 215, 35);
+		lblEmail.setBounds(165, 231, 81, 25);
+		lblEmail.setText("Email");
+
+
+		Label lblTitre = new Label(shell, SWT.NONE);
+		lblTitre.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblTitre.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblTitre.setBounds(295, 65, 121, 25);
+		lblTitre.setText("Modifier son profil");
+
+		textNom = new Text(shell, SWT.BORDER);
+		textNom.setBounds(277, 121, 147, 31);
+
+		textPrenom = new Text(shell, SWT.BORDER);
+		textPrenom.setBounds(277, 176, 147, 31);
+
+		textEmail = new Text(shell, SWT.BORDER);
+		textEmail.setBounds(277, 231, 147, 31);
+
+
+		Button btnValider = new Button(shell, SWT.NONE);
+		btnValider.setBounds(306, 340, 105, 35);
+		btnValider.setText("Valider");
+
+		Button btnRetour = new Button(shell, SWT.NONE);
+		btnRetour.setBounds(10, 10, 105, 35);
+		btnRetour.setText("Retour");
 
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
-		String requete = "Select nom, prenom, email from utilisateurs";
+		String requete = "Select nom, prenom, email from utilisateurs where id = '"+Globemail+"'";
 		ResultSet resultat = db.Request(cnx, requete);
 		while(resultat.next())
 		{
 			nom = resultat.getString("nom");
 			prenom = resultat.getString("prenom");
 			email = resultat.getString("email");
-	
 		}
 		textNom.setText(nom);
 		textPrenom.setText(prenom);
 		textEmail.setText(email);
-		
-		Button btnRetour = new Button(shell, SWT.NONE);
-		btnRetour.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		btnRetour.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				
-				{
-					shell.close();
-					try
-					{
-						Menu_Admin window = new Menu_Admin();
-						window.open();
-					}
-					catch (Exception e1)
-					{
-						e1.printStackTrace();
-					}
-				}
-			
-			}
-			
-		});
-		btnRetour.setBounds(303, 458, 105, 35);
-		btnRetour.setText("Retour");
-		
 
+		Label lblErreur = new Label(shell, SWT.NONE);
+		lblErreur.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblErreur.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblErreur.setBounds(277, 436, 253, 25);
+		lblErreur.setText("Veuiller remplir tous les champs");
+		lblErreur.setVisible(false);
 
+		Label lblSucces = new Label(shell, SWT.NONE);
+		lblSucces.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblSucces.setVisible(false);
+		lblSucces.setText("Modifications enregistr\u00E9es");
+		lblSucces.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
+		lblSucces.setBounds(277, 403, 253, 25);
+		lblSucces.setVisible(false);
 		
-		btnModifierMonProfil.addSelectionListener(new SelectionAdapter()
+		Label lblMenu = new Label(shell, SWT.NONE);
+		lblMenu.setText("Ma Gestion");
+		lblMenu.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		lblMenu.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
+		lblMenu.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblMenu.setAlignment(SWT.CENTER);
+		lblMenu.setBounds(273, 25, 151, 34);
+
+		btnValider.addSelectionListener(new SelectionAdapter()
 		{
-			
-
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"' where id = ?";
-				boolean estCorrect = db.Prepare(cnx, requete);
-				requete = "Select nom, prenom, email from utilisateurs WHERE id = ?";
+				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"'";
+				boolean message = db.Prepare(cnx, requete);
+				lblErreur.setVisible(message);
+				lblSucces.setVisible(!message);
+				requete = "Select nom, prenom, email from utilisateurs where id = '"+Globemail+"'";
 				ResultSet resultat = db.Request(cnx, requete);
-				
 				try
 				{
 					while(resultat.next())
@@ -166,7 +154,6 @@ public class Modification extends Global
 						nom = resultat.getString("nom");
 						prenom = resultat.getString("prenom");
 						email = resultat.getString("email");
-						
 					}
 				}
 				catch (SQLException e1)
@@ -174,15 +161,30 @@ public class Modification extends Global
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				Label lblModif = new Label(shell, SWT.NONE);
-				lblModif.setBounds(200, 431, 300, 25);
-				lblModif.setText("Vous avez effectuer une modification");
-		       
 				textNom.setText(nom);
 				textPrenom.setText(prenom);
 				textEmail.setText(email);
-			    
 			}
 		});
+
+		btnRetour.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shell.close();
+				try
+				{
+					Globnom = nom;
+					Menu_Admin window = new Menu_Admin();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
+
 	}
 }
