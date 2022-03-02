@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.dbconnexion.*;
 
 import appli.Menu_Admin;
+import appli.Menu_Administratif;
 import appli.Menu_GEST;
 
 
@@ -43,6 +44,22 @@ public class Manager_connexion extends Global
 				e.printStackTrace();
 			}
 		}
+			if(resultat.getString(role).equals("TRATIF"))
+			{
+				Globadmin = true;
+				try
+				{ //Connexion en tant qu'Administrateur
+				shell.close();
+				Menu_Administratif window_Administratif = new Menu_Administratif();
+				window_Administratif.open();
+				return false;
+
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
 			else {
 				Globemail = resultat.getString("email");
 				Globnom = resultat.getString("nom");
@@ -52,7 +69,7 @@ public class Manager_connexion extends Global
 					try
 					{ //Connexion en tant qu'Administrateur
 					shell.close();
-					Menu_Admin window_Admin = new Menu_Admin();
+					Menu_GEST window_Admin = new Menu_GEST();
 					window_Admin.open();
 					return false;
 

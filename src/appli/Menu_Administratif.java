@@ -21,7 +21,7 @@ import controller.Global;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Composite;
 
-public class Menu_Admin extends Global
+public class Menu_Administratif extends Global
 {
 
 	protected Shell shlMenuAdmin;
@@ -97,6 +97,64 @@ public class Menu_Admin extends Global
 				try
 				{
 					Utilisateurs window = new Utilisateurs();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		Button btnRDV = new Button(shlMenuAdmin, SWT.NONE);
+		btnRDV.setText("Rendez-vous");
+		btnRDV.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		btnRDV.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		btnRDV.setBounds(32, 73, 291, 35);
+		btnRDV.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shlMenuAdmin.close();
+				try
+				{
+					RDV window = new RDV();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		Button btnDconnexion_1_2 = new Button(shlMenuAdmin, SWT.NONE);
+		btnDconnexion_1_2.setText("Fiches de toxicit\u00E9");
+		btnDconnexion_1_2.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		btnDconnexion_1_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		btnDconnexion_1_2.setBounds(32, 121, 291, 35);
+		
+		Button btnDconnexion_1_3 = new Button(shlMenuAdmin, SWT.NONE);
+		btnDconnexion_1_3.setText("Commandes des stocks");
+		btnDconnexion_1_3.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		btnDconnexion_1_3.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		btnDconnexion_1_3.setBounds(32, 173, 291, 35);
+		
+		Button btnDconnexion_1_4 = new Button(shlMenuAdmin, SWT.NONE);
+		btnDconnexion_1_4.setText("Produits");
+		btnDconnexion_1_4.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		btnDconnexion_1_4.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		btnDconnexion_1_4.setBounds(32, 224, 291, 35);
+		btnDconnexion_1_4.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shlMenuAdmin.close();
+				try
+				{
+					Connexion window = new Connexion();
 					window.open();
 				}
 				catch (Exception e1)
