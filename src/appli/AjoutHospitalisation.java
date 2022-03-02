@@ -188,7 +188,7 @@ public class AjoutHospitalisation extends Global
 				Role.close();
 				try
 				{
-					Menu_Admin window = new Menu_Admin();
+					Menu_Administratif window = new Menu_Administratif();
 					window.open();
 				}
 				catch (Exception e1)

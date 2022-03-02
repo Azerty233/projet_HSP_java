@@ -84,7 +84,7 @@ public class Menu_Administratif extends Global
 		btnDconnexion.setText("D\u00E9connexion");
 		
 		Button btnDconnexion_1 = new Button(shlMenuAdmin, SWT.NONE);
-		btnDconnexion_1.setText("Utilisateurs");
+		btnDconnexion_1.setText("Patients");
 		btnDconnexion_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnDconnexion_1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		btnDconnexion_1.setBounds(32, 23, 291, 35);
@@ -96,7 +96,7 @@ public class Menu_Administratif extends Global
 				shlMenuAdmin.close();
 				try
 				{
-					Utilisateurs window = new Utilisateurs();
+					Utilisateurs_Administratif window = new Utilisateurs_Administratif();
 					window.open();
 				}
 				catch (Exception e1)
@@ -119,7 +119,7 @@ public class Menu_Administratif extends Global
 				shlMenuAdmin.close();
 				try
 				{
-					RDV window = new RDV();
+					Admin_Planning window = new Admin_Planning();
 					window.open();
 				}
 				catch (Exception e1)

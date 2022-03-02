@@ -26,7 +26,7 @@ import com.dbconnexion.*;
 import controller.Global;
 import org.eclipse.swt.widgets.Combo;
 
-public class Utilisateurs extends Global
+public class Utilisateurs_Administratif extends Global
 {
 
 	protected Shell shlListeUtilisateurs;
@@ -91,7 +91,7 @@ public class Utilisateurs extends Global
 
 		Label lblError = new Label(shlListeUtilisateurs, SWT.NONE);
 		lblError.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		lblError.setBounds(257, 446, 385, 25);
+		lblError.setBounds(285, 494, 385, 25);
 		lblError.setText("Veuillez selectionner un \u00E9l\u00E8ve en double cliquant");
 		lblError.setVisible(false);
 
@@ -99,7 +99,7 @@ public class Utilisateurs extends Global
 		listeUtilisateur.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		listeUtilisateur.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.BOLD));
 		listeUtilisateur.setBounds(40, 127, 191, 29);
-		listeUtilisateur.setText("Liste des utilisateurs");
+		listeUtilisateur.setText("Liste des patients");
 
 		table = new Table(shlListeUtilisateurs, SWT.BORDER | SWT.FULL_SELECTION);
 		table.setBounds(20, 162, 218, 283);
@@ -122,7 +122,7 @@ public class Utilisateurs extends Global
 
 
 		Button btnModifUtilisateur = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnModifUtilisateur.setBounds(208, 477, 186, 35);
+		btnModifUtilisateur.setBounds(357, 126, 175, 35);
 		btnModifUtilisateur.setText("Modifier un utilisateur");
 		btnModifUtilisateur.setVisible(true);
 		btnModifUtilisateur.setEnabled(false);
@@ -134,7 +134,7 @@ public class Utilisateurs extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					Modification window = new Modification();
+					ModifierPatient window = new ModifierPatient();
 					window.open();
 				}
 				catch (Exception e1)
@@ -148,29 +148,46 @@ public class Utilisateurs extends Global
 
 		Button btnValider = new Button(shlListeUtilisateurs, SWT.NONE);
 		btnValider.setBounds(20, 86, 211, 35);
-		btnValider.setText("Afficher les utilisateurs");
+		btnValider.setText("Afficher les patients");
 
 		Button btnAjouterUtilisateur = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnAjouterUtilisateur.setBounds(532, 86, 186, 35);
-		btnAjouterUtilisateur.setText("Ajouter un utilisateur");
+		btnAjouterUtilisateur.setBounds(543, 126, 175, 35);
+		btnAjouterUtilisateur.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shlListeUtilisateurs.close();
+				try
+				{
+					AjoutDossier window = new AjoutDossier();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnAjouterUtilisateur.setText("Ajouter un dossier patient");
 		
 		Button btnSupprimer = new Button(shlListeUtilisateurs, SWT.NONE);
 		btnSupprimer.setText("Supprimer");
-		btnSupprimer.setBounds(407, 86, 105, 35);
+		btnSupprimer.setBounds(615, 439, 105, 35);
 
 		btnSupprimer.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Delete from utilisateurs where id ='"+Globidselection+"'";
+				String requete = "Delete from patient where id ='"+Globidselection+"'";
 				boolean message = db.Prepare(cnx, requete);
 				
 				Globidselection = Globidselection;
 			
 		        btnSupprimer.setEnabled(false);
 				table.removeAll();
-				String sql = "SELECT * FROM utilisateurs where id ";
+				String sql = "SELECT * FROM patient where id ";
 				ResultSet res = db.Request(cnx, sql);
 
 				try
@@ -208,7 +225,7 @@ public class Utilisateurs extends Global
 		        btnModifUtilisateur.setEnabled(false);
 		        btnSupprimer.setEnabled(false);
 				table.removeAll();
-				String sql = "SELECT * FROM utilisateurs";
+				String sql = "SELECT * FROM patient";
 				ResultSet res = db.Request(cnx, sql);
 
 				try
@@ -255,14 +272,14 @@ public class Utilisateurs extends Global
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Delete from utilisateurs where id ='"+Globidselection+"'";
+				String requete = "Delete from patient where id ='"+Globidselection+"'";
 				boolean message = db.Prepare(cnx, requete);
 
 				Globidselection = null;
 		        btnModifUtilisateur.setEnabled(false);
 		        btnSupprimer.setEnabled(false);
 				table.removeAll();
-				String sql = "SELECT * FROM utilisateurs ";
+				String sql = "SELECT * FROM patient ";
 				ResultSet res = db.Request(cnx, sql);
 
 				try
@@ -288,24 +305,6 @@ public class Utilisateurs extends Global
 			}
 		});
 
-		btnAjouterUtilisateur.addSelectionListener(new SelectionAdapter()
-		{
-			@Override
-			public void widgetSelected(SelectionEvent e)
-			{
-				shlListeUtilisateurs.close();
-				try
-				{
-					AjoutCompte window = new AjoutCompte();
-					window.open();
-				}
-				catch (Exception e1)
-				{
-					e1.printStackTrace();
-				}
-			}
-		});
-
 
 
 
@@ -317,7 +316,7 @@ public class Utilisateurs extends Global
 					shlListeUtilisateurs.close();
 					try
 					{
-						Menu_Admin window = new Menu_Admin();
+						ModifierPatient window = new ModifierPatient();
 						window.open();
 					}
 					catch (Exception e1)
@@ -329,9 +328,15 @@ public class Utilisateurs extends Global
 		
 
 		Button btnRetour = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnRetour.setBounds(10, 10, 105, 35);
+		btnRetour.setBounds(10, 519, 105, 35);
 		btnRetour.setText("Retour");
-		btnRetour.addSelectionListener(new SelectionAdapter()
+		
+		Button btnHospitaliserLePatient = new Button(shlListeUtilisateurs, SWT.NONE);
+		btnHospitaliserLePatient.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.BOLD));
+		btnHospitaliserLePatient.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		btnHospitaliserLePatient.setText("Hospitaliser le patient");
+		btnHospitaliserLePatient.setBounds(357, 439, 186, 35);
+		btnHospitaliserLePatient.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
@@ -339,7 +344,7 @@ public class Utilisateurs extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					Menu_Admin window = new Menu_Admin();
+					AjoutHospitalisation window = new AjoutHospitalisation();
 					window.open();
 				}
 				catch (Exception e1)
@@ -348,27 +353,21 @@ public class Utilisateurs extends Global
 				}
 			}
 		});
-		
-		Label lblMenu = new Label(shlListeUtilisateurs, SWT.NONE);
-		lblMenu.setText("Ma Gestion");
-		lblMenu.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
-		lblMenu.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
-		lblMenu.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblMenu.setAlignment(SWT.CENTER);
-		lblMenu.setBounds(302, 10, 151, 34);
-		
-		Label lblLesUtilisateurs = new Label(shlListeUtilisateurs, SWT.NONE);
-		lblLesUtilisateurs.setText("Les utilisateurs");
-		lblLesUtilisateurs.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblLesUtilisateurs.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblLesUtilisateurs.setBounds(332, 38, 121, 25);
 		btnRetour.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
 				shlListeUtilisateurs.close();
-				
+				try
+				{
+					Menu_Administratif window = new Menu_Administratif();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
 			}
 		});
 
