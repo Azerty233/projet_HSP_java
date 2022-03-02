@@ -30,9 +30,6 @@ public class AjoutCompte extends Global
 	private Text textPrenom;
 	private String nom;
 	private String prenom;
-	private String email;
-	private String mdp;
-	private String role;
 	private Text textEmail;
 	private Text textMdp;
 
@@ -108,7 +105,22 @@ public class AjoutCompte extends Global
 		lblRole.setBounds(165, 340, 81, 25);
 		lblRole.setText("Role");
 
+		Combo comboRole = new Combo(Role, SWT.READ_ONLY);
+		comboRole.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		comboRole.setBounds(277, 339, 147, 33);
 
+		Database db = new Database();
+		Connection cnx = db.DbConnexion();
+		String requete = "Select * from utilisateurs";
+		ResultSet resultat = db.Request(cnx, requete);
+		ArrayList<Integer> compteList = new  ArrayList<Integer>();
+		while(resultat.next())
+		{
+
+			comboRole.add(resultat.getString("role"));
+			compteList.add(resultat.getInt("id"));
+		}
+		comboRole.select(0);
 		
 		Label lblEmail = new Label(Role, SWT.NONE);
 		lblEmail.setText("Email");
@@ -125,29 +137,13 @@ public class AjoutCompte extends Global
 		
 		textMdp = new Text(Role, SWT.BORDER);
 		textMdp.setBounds(277, 280, 147, 31);
-	
-		Combo comboRole = new Combo(Role, SWT.NONE);
-		comboRole.setBounds(277, 339, 157, 20);
-		
-		Database db = new Database();
-		Connection cnx = db.DbConnexion();
-		String requete = "Select * from utilisateurs";
-		ResultSet resultat = db.Request(cnx, requete);
-		ArrayList<Integer> CommanditaireList = new  ArrayList<Integer>();
-		while(resultat.next())
-		{
 
-			comboRole.add(resultat.getString("role"));
-			CommanditaireList.add(resultat.getInt("id"));
-		}
-	
-		comboRole.select(0);
 		btnValider.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "INSERT into utilisateurs (nom, prenom, email, mdp, role) Values('"+textNom.getText()+"','"+textPrenom.getText()+"','"+textEmail.getText()+"','"+textMdp.getText()+"','"+CommanditaireList.get(comboRole.getSelectionIndex())+"')";
+				String requete = "INSERT into utilisateurs (nom, prenom, email, mdp, role) Values('"+textNom.getText()+"','"+textPrenom.getText()+"','"+textEmail.getText()+"','"+textMdp.getText()+"',"+compteList.get(comboRole.getSelectionIndex())+")";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
 				lblSucces.setVisible(!message);
