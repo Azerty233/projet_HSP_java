@@ -1,4 +1,4 @@
-package controller;
+package Manager;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

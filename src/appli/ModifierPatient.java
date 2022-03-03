@@ -16,7 +16,8 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dbconnexion.Database;
 
-import controller.Global;
+import Manager.Global;
+
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Combo;
 

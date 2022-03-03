@@ -17,7 +17,8 @@ import org.eclipse.swt.widgets.Combo;
 
 import com.dbconnexion.Database;
 
-import controller.Global;
+import Manager.Global;
+
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.eclipse.swt.widgets.Composite;

@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import Manager.Manager_connexion;
 
-import controller.Manager_connexion;
 import org.eclipse.swt.widgets.Composite;
 
 public class mdpOublie

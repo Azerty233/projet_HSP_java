@@ -20,7 +20,8 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 import com.dbconnexion.Database;
 
-import controller.Global;
+import Manager.Global;
+
 import org.eclipse.swt.widgets.Combo;
 
 public class Admin_Planning extends Global

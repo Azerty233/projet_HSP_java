@@ -65,6 +65,11 @@ public class Database
 
 	}
 
+	public static Connection getInstance() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

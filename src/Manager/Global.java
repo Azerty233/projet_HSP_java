@@ -1,4 +1,4 @@
-package controller;
+package Manager;
 
 public class Global
 {

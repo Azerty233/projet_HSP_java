@@ -23,7 +23,8 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Menu;
 import com.dbconnexion.*;
 
-import controller.Global;
+import Manager.Global;
+
 import org.eclipse.swt.widgets.Combo;
 
 public class Medicaments extends Global
