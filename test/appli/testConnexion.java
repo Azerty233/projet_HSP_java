@@ -35,8 +35,7 @@ public void before() throws Exception {
 coBdd = Database.getInstance();
 stm = coBdd.createStatement();
 stm.executeUpdate(
-"INSERT INTO Utilisateur VALUES (DEFAULT, 'JUnit', 'JUnit', DATE(NOW()), '1234567890', 'JUnit', 'JUnit', '"
-+ hash + "', 'junit@test.com', 1, 1, 0);");
+"INSERT INTO Utilisateur VALUES ('LIGNANI', 'QUENTIN', 'admin@admin.fr', '1234', 'ADMIN');");
 }
 
 @Test
@@ -44,7 +43,7 @@ stm.executeUpdate(
 public void seConnecter() throws Exception {
 	user = new Model.user(null, "JUnit");
 	Manager_connexion co = new Manager_connexion();
-	co.Connexion(null, null, null, user);
+	co.Connexion(user);
 	assertNull(user.getEmail(), "Email vide");
 	assertNotNull(user.getMdp(), "Mot de passe : " + user.getMdp());
 	user = new Model.user("", "JUnit");

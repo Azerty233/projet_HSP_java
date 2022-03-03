@@ -76,7 +76,7 @@ public class Manager_connexion extends Global
 	}
 
 
-	public boolean Connexion(String email, String mdp, Shell shell, user user) throws SQLException
+	public boolean Connexion(String email, String mdp, Shell shell) throws SQLException
 	{
 
 		Database db = new Database();
@@ -146,6 +146,12 @@ public class Manager_connexion extends Global
 		}
 		return true;
 
+	}
+
+
+	public void Connexion(user user) {
+		
+		
 	}
 
 }
