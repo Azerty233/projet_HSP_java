@@ -228,13 +228,12 @@ public class Medicaments extends Global
 					while(res.next())
 					{
 						String id = Integer.toString(res.getInt("id"));
-						String libelle = res.getString("nom");
-						String niveau_toxicite = res.getString("niveau toxicite");
-						String stock = res.getString("stock");
+						String libelle = res.getString("libelle");
+						String nvToxicite = res.getString("Niveau_toxicite");
 						TableItem item = new TableItem(table, SWT.NONE , i);
 					    item.setText(0, libelle);
-					    item.setText(1, niveau_toxicite);
-					    item.setText(4, stock);
+					    item.setText(1, nvToxicite);
+					    item.setText(2, id);
 					    i++;
 
 					}
