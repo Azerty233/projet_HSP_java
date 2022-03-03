@@ -68,23 +68,14 @@ public class ModifierPatient extends Global
 		lblPrenom.setBounds(165, 173, 81, 25);
 		lblPrenom.setText("Pr\u00E9nom");
 
-		Label lblClasse = new Label(shelleleve, SWT.NONE);
-		lblClasse.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblClasse.setBounds(165, 226, 81, 25);
-		lblClasse.setText("Classe");
-
 		textNom = new Text(shelleleve, SWT.BORDER);
 		textNom.setBounds(277, 120, 147, 31);
 
 		textPrenom = new Text(shelleleve, SWT.BORDER);
 		textPrenom.setBounds(277, 170, 147, 31);
 
-		Combo comboClasse = new Combo(shelleleve, SWT.READ_ONLY);
-		comboClasse.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		comboClasse.setBounds(277, 223, 147, 33);
-
 		Button btnValider = new Button(shelleleve, SWT.NONE);
-		btnValider.setBounds(298, 275, 105, 35);
+		btnValider.setBounds(295, 223, 105, 35);
 		btnValider.setText("Modifier");
 
 		Button btnRetour = new Button(shelleleve, SWT.NONE);
@@ -146,20 +137,6 @@ public class ModifierPatient extends Global
 		lblSucces.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
 		lblSucces.setBounds(227, 358, 253, 25);
 		lblSucces.setVisible(false);
-		
-		Label lblMenu = new Label(shelleleve, SWT.NONE);
-		lblMenu.setText("Ma Gestion");
-		lblMenu.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
-		lblMenu.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
-		lblMenu.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblMenu.setAlignment(SWT.CENTER);
-		lblMenu.setBounds(273, 10, 151, 34);
-		
-		Label lblModifierSonProfil = new Label(shelleleve, SWT.NONE);
-		lblModifierSonProfil.setText("Modifier son profil");
-		lblModifierSonProfil.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblModifierSonProfil.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblModifierSonProfil.setBounds(295, 50, 121, 25);
 
 		btnValider.addSelectionListener(new SelectionAdapter()
 		{
