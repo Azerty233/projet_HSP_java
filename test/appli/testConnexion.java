@@ -35,7 +35,7 @@ public void before() throws Exception {
 coBdd = Database.getInstance();
 stm = coBdd.createStatement();
 stm.executeUpdate(
-"INSERT INTO Utilisateur VALUES ('LIGNANI', 'QUENTIN', 'admin@admin.fr', '1234', 'ADMIN');");
+"INSERT INTO utilisateurs VALUES ('LIGNANI', 'QUENTIN', 'admin@admin.fr', '1234', 'ADMIN');");
 }
 
 @Test
@@ -47,7 +47,7 @@ public void seConnecter() throws Exception {
 	assertNull(user.getEmail(), "Email vide");
 	assertNotNull(user.getMdp(), "Mot de passe : " + user.getMdp());
 	user = new Model.user("", "JUnit");
-	co.Connexion(null, null, null, user);
+	co.Connexion(user);
 	assertNotEquals(user.getEmail(), "JUnit", "Email : ");
 	assertEquals(user.getMdp(), "JUnit", "Mot de passe vide");
 }
@@ -57,11 +57,11 @@ public void seConnecter() throws Exception {
 public void seConnecterSansLogin() throws Exception {
 user = new Model.user("JUnit", "JUnit");
 Manager_connexion co = new Manager_connexion();
-co.Connexion(null, null, null, user);
+co.Connexion(user);
 assertNull(user.getEmail(), "Email vide");
 assertNotNull(user.getMdp(), "Mot de passe : " + user.getMdp());
 user = new Model.user("", "JUnit");
-co.Connexion(null, null, null, user);
+co.Connexion(user);
 assertNotEquals(user.getEmail(), "JUnit", "Email : ");
 assertEquals(user.getMdp(), "JUnit", "Mot de passe vide");
 
@@ -72,11 +72,11 @@ assertEquals(user.getMdp(), "JUnit", "Mot de passe vide");
 public void seConnecterSansMdp() throws Exception {
 	user = new Model.user("JUnit", null);
 	Manager_connexion co = new Manager_connexion();
-	co.Connexion(null, null, null, user);
+	co.Connexion(user);
 	assertNull(user.getEmail(), "Email vide");
 	assertNotNull(user.getMdp(), "Mot de passe : " + user.getMdp());
 	user = new Model.user("", "JUnit");
-	co.Connexion(null, null, null, user);
+	co.Connexion(user);
 	assertNotEquals(user.getEmail(), "JUnit", "Email : ");
 	assertEquals(user.getMdp(), "JUnit", "Mot de passe vide");
 }
@@ -86,11 +86,11 @@ public void seConnecterSansMdp() throws Exception {
 public void seConnecterAvecRien() throws Exception {
 	user = new Model.user(null, null);
 	Manager_connexion co = new Manager_connexion();
-	co.Connexion(null, null, null, user);
+	co.Connexion(user);
 	assertNull(user.getEmail(), "Email vide");
 	assertNotNull(user.getMdp(), "Mot de passe : " + user.getMdp());
 	user = new Model.user("", "JUnit");
-	co.Connexion(null, null, null, user);
+	co.Connexion(user);
 	assertNotEquals(user.getEmail(), "JUnit", "Email : ");
 	assertEquals(user.getMdp(), "JUnit", "Mot de passe vide");
 }
@@ -100,7 +100,7 @@ public void seConnecterAvecRien() throws Exception {
 public void seConnecterAvecMauvaisLogin() throws Exception {
 user = new Model.user("JavaScript", "JUnit");
 Manager_connexion co = new Manager_connexion();
-co.Connexion(null, null, null, user);
+co.Connexion(user);
 assertNotEquals(user.getEmail(), "JUnit", "Email : " + user.getEmail());
 assertEquals(user.getMdp(), "JUnit", "Mot de passe : " + user.getMdp());
 }
@@ -110,7 +110,7 @@ assertEquals(user.getMdp(), "JUnit", "Mot de passe : " + user.getMdp());
 public void seConnecterAvecMauvaisMdp() throws Exception {
 user = new Model.user("JUnit", "JavaScript");
 Manager_connexion co = new Manager_connexion();
-co.Connexion(null, null, null, user);
+co.Connexion(user);
 assertEquals(user.getEmail(), "JUnit", "Email : " + user.getEmail());
 assertNotEquals(user.getMdp(), "JUnit", "Mot de passe : " + user.getMdp());
 }
@@ -120,7 +120,7 @@ assertNotEquals(user.getMdp(), "JUnit", "Mot de passe : " + user.getMdp());
 public void seConnecterAvecMauvaisChamps() throws Exception {
 user = new Model.user("JavaScript", "JavaScript");
 Manager_connexion co = new Manager_connexion();
-co.Connexion(null, null, null, user);
+co.Connexion(user);
 assertNotEquals(user.getEmail(), "JUnit", "Email : " + user.getEmail());
 assertNotEquals(user.getMdp(), "JUnit", "Mot de passe : " + user.getMdp());
 }
