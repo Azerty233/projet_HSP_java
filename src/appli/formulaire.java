@@ -14,6 +14,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 
 public class formulaire
 {
@@ -31,7 +32,7 @@ public class formulaire
 		txtNomMdicaments = new Text(shell, SWT.BORDER);
 		txtNomMdicaments.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
 		txtNomMdicaments.setText("Nom M\u00E9dicaments:");
-		txtNomMdicaments.setBounds(22, 97, 171, 37);
+		txtNomMdicaments.setBounds(22, 123, 171, 37);
 		
 		txtCommandeDeMdicaments = new Text(shell, SWT.BORDER);
 		txtCommandeDeMdicaments.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
@@ -44,7 +45,7 @@ public class formulaire
 		txtQuantits.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
 		txtQuantits.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		txtQuantits.setText("  Quantit\u00E9s:");
-		txtQuantits.setBounds(24, 156, 122, 31);
+		txtQuantits.setBounds(22, 179, 122, 31);
 		
 		Button btnValider = new Button(shell, SWT.NONE);
 		btnValider.addSelectionListener(new SelectionAdapter() {
@@ -57,11 +58,14 @@ public class formulaire
 		
 		text = new Text(shell, SWT.BORDER);
 		text.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
-		text.setBounds(265, 103, 80, 31);
+		text.setBounds(265, 129, 80, 31);
 		
 		text_1 = new Text(shell, SWT.BORDER);
 		text_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
-		text_1.setBounds(265, 156, 80, 31);
+		text_1.setBounds(265, 179, 80, 31);
+		
+		DateTime dateTime = new DateTime(shell, SWT.BORDER);
+		dateTime.setBounds(169, 71, 125, 33);
 	
 	
 	}
