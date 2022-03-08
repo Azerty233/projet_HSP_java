@@ -10,7 +10,7 @@ import java.sql.Statement;
 public class Database
 {
 
-	public Connection DbConnexion()
+	public static Connection DbConnexion()
 	{
 
 		String url = "jdbc:mysql://localhost/projet_java?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -65,10 +65,6 @@ public class Database
 
 	}
 
-	public static Connection getInstance() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 
