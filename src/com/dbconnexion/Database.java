@@ -65,6 +65,14 @@ public class Database
 
 	}
 
+	public static Connection getInstance() {
+		
+		if(DbConnexion() == null) {
+			new Database();
+		}
+		return DbConnexion();
+		
+	}
 
 
 

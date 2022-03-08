@@ -10,8 +10,8 @@ public class user extends Global {
 	
 	public user(String email, String mdp) {
 		
-		email = this.email;
-		mdp = this.mdp;
+		this.email = email;
+		this.mdp = mdp;
 		
 	}
 	
