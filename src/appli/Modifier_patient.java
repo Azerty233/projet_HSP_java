@@ -17,12 +17,11 @@ import org.eclipse.swt.widgets.Text;
 import com.dbconnexion.Database;
 
 import Manager.Global;
-
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Combo;
 
 
-public class ModifierPatient extends Global
+public class Modifier_patient extends Global
 {
 
 	protected Shell shelleleve;
@@ -30,6 +29,9 @@ public class ModifierPatient extends Global
 	private Text textPrenom;
 	private String nom;
 	private String prenom;
+	private String email;
+	private int classe;
+	private Text textEmail;
 
 
 	public void open() throws SQLException
@@ -76,7 +78,7 @@ public class ModifierPatient extends Global
 		textPrenom.setBounds(277, 170, 147, 31);
 
 		Button btnValider = new Button(shelleleve, SWT.NONE);
-		btnValider.setBounds(295, 223, 105, 35);
+		btnValider.setBounds(298, 275, 105, 35);
 		btnValider.setText("Modifier");
 
 		Button btnRetour = new Button(shelleleve, SWT.NONE);
@@ -88,10 +90,10 @@ public class ModifierPatient extends Global
 			public void widgetSelected(SelectionEvent e)
 			{
 				shelleleve.close();
-				Globpatient = null;
+				Globidentifiant = null;
 				try
 				{
-					Utilisateurs_Administratif window = new Utilisateurs_Administratif();
+					Menu_Administratif window = new Menu_Administratif();
 					window.open();
 				}
 				catch (Exception e1)
@@ -106,22 +108,20 @@ public class ModifierPatient extends Global
 
 		String requete = "Select * from patient";
 		ResultSet resultat = db.Request(cnx, requete);
-		ArrayList<Integer> classeList = new  ArrayList<Integer>();
-		while(resultat.next()) {
-			
-			comboClasse.add(resultat.getString("nom"));
-			classeList.add(resultat.getInt("id"));
-		}
-		requete = "Select nom, prenom from patient where id ='"+Globpatient+"'";
+
+		requete = "Select nom, prenom, email from patient where id ='"+Globidentifiant+"'";
 		resultat = db.Request(cnx, requete);
 		while(resultat.next())
 		{
 			nom = resultat.getString("nom");
 			prenom = resultat.getString("prenom");
+			email = resultat.getString("email");
 
 		}
 		textNom.setText(nom);
 		textPrenom.setText(prenom);
+		textEmail.setText(email);
+
 
 
 		Label lblErreur = new Label(shelleleve, SWT.NONE);
@@ -138,13 +138,36 @@ public class ModifierPatient extends Global
 		lblSucces.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
 		lblSucces.setBounds(227, 358, 253, 25);
 		lblSucces.setVisible(false);
+		
+		Label lblMenu = new Label(shelleleve, SWT.NONE);
+		lblMenu.setText("Ma Gestion");
+		lblMenu.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		lblMenu.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
+		lblMenu.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblMenu.setAlignment(SWT.CENTER);
+		lblMenu.setBounds(273, 10, 151, 34);
+		
+		Label lblModifierSonProfil = new Label(shelleleve, SWT.NONE);
+		lblModifierSonProfil.setText("Modifier son profil");
+		lblModifierSonProfil.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		lblModifierSonProfil.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblModifierSonProfil.setBounds(295, 50, 121, 25);
+		
+		textEmail = new Text(shelleleve, SWT.BORDER);
+		textEmail.setText((String) null);
+		textEmail.setBounds(277, 222, 147, 31);
+		
+		Label lblEmail = new Label(shelleleve, SWT.NONE);
+		lblEmail.setText("Pr\u00E9nom");
+		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblEmail.setBounds(165, 225, 81, 25);
 
 		btnValider.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Update patient set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"'";
+				String requete = "Update patient set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"' where id = '"+Globidentifiant+"'";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
 				lblSucces.setVisible(!message);

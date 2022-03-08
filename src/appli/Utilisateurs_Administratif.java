@@ -135,7 +135,7 @@ public class Utilisateurs_Administratif extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					ModifierPatient window = new ModifierPatient();
+					Modifier_patient window = new Modifier_patient();
 					window.open();
 				}
 				catch (Exception e1)
@@ -317,7 +317,7 @@ public class Utilisateurs_Administratif extends Global
 					shlListeUtilisateurs.close();
 					try
 					{
-						ModifierPatient window = new ModifierPatient();
+						Modifier_patient window = new Modifier_patient();
 						window.open();
 					}
 					catch (Exception e1)
