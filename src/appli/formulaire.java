@@ -52,8 +52,16 @@ public class formulaire
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnValider.setBounds(192, 258, 105, 35);
+		btnValider.setBounds(189, 260, 105, 35);
 		btnValider.setText("Valider");
+		
+		text = new Text(shell, SWT.BORDER);
+		text.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+		text.setBounds(265, 103, 80, 31);
+		
+		text_1 = new Text(shell, SWT.BORDER);
+		text_1.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+		text_1.setBounds(265, 156, 80, 31);
 	
 	
 	}
@@ -62,6 +70,8 @@ public class formulaire
 	private Text txtNomMdicaments;
 	private Text txtCommandeDeMdicaments;
 	private Text txtQuantits;
+	private Text text;
+	private Text text_1;
 
 	/**
 	* Launch the application.
