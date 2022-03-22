@@ -149,10 +149,18 @@ public class Manager_connexion extends Global
 	}
 
 
-	public void Connexion(user user) {
+	public void Connection(user user) {
+		
 		
 		
 	}
+
+
+	public void ConnexionJUnit(user user) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
 
