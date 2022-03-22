@@ -85,9 +85,10 @@ public void seConnecterSansMdp() throws Exception {
 public void seConnecterAvecRien() throws Exception {
 	user = new user(null, null);
 	ConnexionJUnit co = new ConnexionJUnit();
-	co.connexion(user);
+	user u = co.connexion(user);
 	assertNull(user.getEmail(), "Email vide");
 	assertNull(user.getMdp(), "Mot de passe vide");
+	assertNull(u,"utilisateur non trouve");
 	user = new user("", "");
 	co.connexion(user);
 	assertNotEquals(user.getEmail(), "admin@admin.fr", "Email :");

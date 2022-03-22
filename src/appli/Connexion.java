@@ -39,7 +39,7 @@ public class Connexion
 		btnJeMinscris.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnJeMinscris.setFont(SWTResourceManager.getFont("Rockwell", 9, SWT.BOLD));
 	
-		btnJeMinscris.setBounds(133, 234, 151, 35);
+		btnJeMinscris.setBounds(133, 260, 151, 35);
 		btnJeMinscris.setText("Je me connecte");
 	
 		Label MotdePasse = new Label(shell, SWT.NONE);
@@ -80,6 +80,26 @@ public class Connexion
 			txtApplication.setFont(SWTResourceManager.getFont("Segoe UI Historic", 7, SWT.NORMAL));
 			txtApplication.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 			txtApplication.setBounds(10, 0, 449, 35);
+			
+			Button btnMotDePasse = new Button(shell, SWT.NONE);
+			btnMotDePasse.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
+			btnMotDePasse.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					
+					try
+					{
+						mdpOublie window = new mdpOublie();
+						window.open();
+					}
+					catch (Exception e1)
+					{
+						e1.printStackTrace();
+					}
+				}
+			});
+			btnMotDePasse.setBounds(133, 224, 179, 19);
+			btnMotDePasse.setText("Mot de passe oubli\u00E9");
 	
 		btnJeMinscris.addSelectionListener(new SelectionAdapter()
 		{
