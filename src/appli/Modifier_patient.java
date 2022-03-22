@@ -29,9 +29,6 @@ public class Modifier_patient extends Global
 	private Text textPrenom;
 	private String nom;
 	private String prenom;
-	private String email;
-	private int classe;
-	private Text textEmail;
 
 
 	public void open() throws SQLException
@@ -78,7 +75,7 @@ public class Modifier_patient extends Global
 		textPrenom.setBounds(277, 170, 147, 31);
 
 		Button btnValider = new Button(shelleleve, SWT.NONE);
-		btnValider.setBounds(298, 275, 105, 35);
+		btnValider.setBounds(295, 223, 105, 35);
 		btnValider.setText("Modifier");
 
 		Button btnRetour = new Button(shelleleve, SWT.NONE);
@@ -90,10 +87,10 @@ public class Modifier_patient extends Global
 			public void widgetSelected(SelectionEvent e)
 			{
 				shelleleve.close();
-				Globidentifiant = null;
+				Globpatient = null;
 				try
 				{
-					Menu_Administratif window = new Menu_Administratif();
+					Menu_Admin window = new Menu_Admin();
 					window.open();
 				}
 				catch (Exception e1)
@@ -109,19 +106,16 @@ public class Modifier_patient extends Global
 		String requete = "Select * from patient";
 		ResultSet resultat = db.Request(cnx, requete);
 
-		requete = "Select nom, prenom, email from patient where id ='"+Globidentifiant+"'";
+		requete = "Select * from patient where id ='"+Globpatient+"'";
 		resultat = db.Request(cnx, requete);
 		while(resultat.next())
 		{
 			nom = resultat.getString("nom");
 			prenom = resultat.getString("prenom");
-			email = resultat.getString("email");
 
 		}
 		textNom.setText(nom);
 		textPrenom.setText(prenom);
-		textEmail.setText(email);
-
 
 
 		Label lblErreur = new Label(shelleleve, SWT.NONE);
@@ -152,22 +146,13 @@ public class Modifier_patient extends Global
 		lblModifierSonProfil.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		lblModifierSonProfil.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		lblModifierSonProfil.setBounds(295, 50, 121, 25);
-		
-		textEmail = new Text(shelleleve, SWT.BORDER);
-		textEmail.setText((String) null);
-		textEmail.setBounds(277, 222, 147, 31);
-		
-		Label lblEmail = new Label(shelleleve, SWT.NONE);
-		lblEmail.setText("Pr\u00E9nom");
-		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblEmail.setBounds(165, 225, 81, 25);
 
 		btnValider.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Update patient set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"' where id = '"+Globidentifiant+"'";
+				String requete = "Update patient set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"' where id = '"+Globpatient+"'";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
 				lblSucces.setVisible(!message);

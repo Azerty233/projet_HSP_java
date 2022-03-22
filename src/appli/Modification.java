@@ -79,7 +79,7 @@ public class Modification extends Global
 		Label lblTitre = new Label(shell, SWT.NONE);
 		lblTitre.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		lblTitre.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblTitre.setBounds(295, 65, 121, 25);
+		lblTitre.setBounds(277, 65, 192, 25);
 		lblTitre.setText("Modifier son profil");
 
 		textNom = new Text(shell, SWT.BORDER);
@@ -135,7 +135,7 @@ public class Modification extends Global
 		lblMenu.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
 		lblMenu.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		lblMenu.setAlignment(SWT.CENTER);
-		lblMenu.setBounds(273, 25, 151, 34);
+		lblMenu.setBounds(261, 25, 175, 34);
 
 		btnValider.addSelectionListener(new SelectionAdapter()
 		{

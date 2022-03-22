@@ -21,7 +21,6 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import com.dbconnexion.Database;
 
 import Manager.Global;
-
 import org.eclipse.swt.widgets.Combo;
 
 public class Admin_Planning extends Global
@@ -57,12 +56,13 @@ public class Admin_Planning extends Global
 	protected void createContents() throws SQLException
 	{
 		shell = new Shell();
-		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shell.setSize(1066, 551);
 		shell.setText("Planning");
 		shell.setLayout(new org.eclipse.swt.layout.FormLayout());
 
 		tableMardi = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
+		tableMardi.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		FormData fd_tableMardi = new FormData();
 		fd_tableMardi.bottom = new FormAttachment(100, -31);
 		tableMardi.setLayoutData(fd_tableMardi);
@@ -70,6 +70,7 @@ public class Admin_Planning extends Global
 		tableMardi.setLinesVisible(true);
 
 		tableMercredi = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
+		tableMercredi.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		fd_tableMardi.right = new FormAttachment(tableMercredi, -6);
 		FormData fd_tableMercredi = new FormData();
 		fd_tableMercredi.bottom = new FormAttachment(100, -31);
@@ -79,6 +80,7 @@ public class Admin_Planning extends Global
 		tableMercredi.setLinesVisible(true);
 
 		tableLundi = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
+		tableLundi.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		fd_tableMardi.left = new FormAttachment(tableLundi, 6);
 		FormData fd_tableLundi = new FormData();
 		fd_tableLundi.bottom = new FormAttachment(100, -31);
@@ -88,6 +90,7 @@ public class Admin_Planning extends Global
 		tableLundi.setLinesVisible(true);
 
 		tableJeudi = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
+		tableJeudi.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		fd_tableMercredi.right = new FormAttachment(100, -366);
 		FormData fd_tableJeudi = new FormData();
 		fd_tableJeudi.bottom = new FormAttachment(100, -31);
@@ -97,6 +100,7 @@ public class Admin_Planning extends Global
 		tableJeudi.setLinesVisible(true);
 
 		tableVendredi = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
+		tableVendredi.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		fd_tableJeudi.right = new FormAttachment(tableVendredi, -6);
 		FormData fd_tableVendredi = new FormData();
 		fd_tableVendredi.bottom = new FormAttachment(100, -31);
@@ -401,31 +405,33 @@ public class Admin_Planning extends Global
 		
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
-		
-		Combo comboProf = new Combo(shell, SWT.READ_ONLY);
-		comboProf.setBackground(SWTResourceManager.getColor(255, 255, 255));
-		FormData fd_comboProf = new FormData();
-		fd_comboProf.left = new FormAttachment(0, 28);
-		fd_comboProf.right = new FormAttachment(0, 216);
-		comboProf.setLayoutData(fd_comboProf);
 		ArrayList<Integer> profList = new  ArrayList<Integer>();
-		String requete = "Select * from utilisateur where role = 'professeur'";
+		String requete = "Select * from utilisateurs where role = 'ADMIN'";
 		ResultSet resultat = db.Request(cnx, requete);
-		while(resultat.next()) {
-			comboProf.add(resultat.getString("nom"));
-			profList.add(resultat.getInt("id"));
-		}
-		comboProf.select(0);
 		
-		Button btnOkProf = new Button(shell, SWT.NONE);
-		FormData fd_btnOkProf = new FormData();
-		fd_btnOkProf.top = new FormAttachment(0, 58);
-		fd_btnOkProf.bottom = new FormAttachment(lblLundi, -16);
-		fd_btnOkProf.right = new FormAttachment(comboProf, 105, SWT.RIGHT);
-		fd_btnOkProf.left = new FormAttachment(comboProf, 19);
-		btnOkProf.setLayoutData(fd_btnOkProf);
-		btnOkProf.setText("Selectionner");
-		btnOkProf.addSelectionListener(new SelectionAdapter()
+		Combo comboClasse = new Combo(shell, SWT.READ_ONLY);
+		comboClasse.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		FormData fd_comboClasse = new FormData();
+		fd_comboClasse.top = new FormAttachment(0, 52);
+		fd_comboClasse.left = new FormAttachment(0, 10);
+		comboClasse.setLayoutData(fd_comboClasse);
+		ArrayList<Integer> classeList = new  ArrayList<Integer>();
+		requete = "Select * from type_rdv where undeletable = 0";
+		resultat = db.Request(cnx, requete);
+		while(resultat.next()) {
+			comboClasse.add(resultat.getString("libelle"));
+			classeList.add(resultat.getInt("id"));
+		}
+		comboClasse.select(0);
+		
+		Button btnOkClasse = new Button(shell, SWT.NONE);
+		fd_comboClasse.right = new FormAttachment(100, -815);
+		FormData fd_btnOkClasse = new FormData();
+		fd_btnOkClasse.top = new FormAttachment(comboClasse, 1);
+		fd_btnOkClasse.left = new FormAttachment(comboClasse, 0, SWT.LEFT);
+		btnOkClasse.setLayoutData(fd_btnOkClasse);
+		btnOkClasse.setText("Selectionner");
+		btnOkClasse.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -434,14 +440,14 @@ public class Admin_Planning extends Global
 						heure.setText("");
 					}
 				}
-				String requete = "Select * from planning inner join classe on id_classe = classe.id where id_professeur = '"+profList.get(comboProf.getSelectionIndex())+"'";
+				String requete = "Select * from planning inner join utilisateurs on id_utilisateurs = utilisateurs.id where id_classe = '"+classeList.get(comboClasse.getSelectionIndex())+"'";
 				ResultSet resultat = db.Request(cnx, requete);
 				try {
 					while(resultat.next())
 					{
 						int jour = resultat.getInt("id_jour") - 1;
 						int heure = resultat.getInt("id_heure") - 1;
-						String classe = resultat.getString("libelle");
+						String classe = resultat.getString("nom");
 						planning.get(jour).get(heure).setText(classe);
 
 					}
@@ -451,19 +457,12 @@ public class Admin_Planning extends Global
 				}
 			}
 		});
-		ArrayList<Integer> classeList = new  ArrayList<Integer>();
-		requete = "Select * from classe where undeletable = 0";
-		resultat = db.Request(cnx, requete);
-		while(resultat.next()) {
-			comboClasse.add(resultat.getString("libelle"));
-			classeList.add(resultat.getInt("id"));
-		}
 		
 		Button btnAjouter = new Button(shell, SWT.NONE);
-		fd_comboProf.bottom = new FormAttachment(btnAjouter, -124);
 		FormData fd_btnAjouter = new FormData();
-		fd_btnAjouter.right = new FormAttachment(lblh, -30);
-		fd_btnAjouter.top = new FormAttachment(lblh_3, -5, SWT.TOP);
+		fd_btnAjouter.bottom = new FormAttachment(100);
+		fd_btnAjouter.right = new FormAttachment(lblh, 228);
+		fd_btnAjouter.left = new FormAttachment(tableLundi, 10, SWT.LEFT);
 		btnAjouter.setLayoutData(fd_btnAjouter);
 		btnAjouter.setText("Ajouter un \u00E9l\u00E9ment");
 		btnAjouter.addSelectionListener(new SelectionAdapter()
@@ -484,36 +483,12 @@ public class Admin_Planning extends Global
 		});
 		
 		Button btnSupprimer = new Button(shell, SWT.NONE);
-		fd_btnAjouter.left = new FormAttachment(btnSupprimer, 0, SWT.LEFT);
 		FormData fd_btnSupprimer = new FormData();
-		fd_btnSupprimer.right = new FormAttachment(lblh_4, -24);
-		fd_btnSupprimer.left = new FormAttachment(0, 10);
-		fd_btnSupprimer.bottom = new FormAttachment(lblh_9, 0, SWT.BOTTOM);
+		fd_btnSupprimer.top = new FormAttachment(btnAjouter, 0, SWT.TOP);
+		fd_btnSupprimer.right = new FormAttachment(tableMercredi, 0, SWT.RIGHT);
+		fd_btnSupprimer.left = new FormAttachment(0, 489);
 		btnSupprimer.setLayoutData(fd_btnSupprimer);
 		btnSupprimer.setText("Supprimer un \u00E9l\u00E9ment");
-		
-		Label lblMenu = new Label(shell, SWT.NONE);
-		lblMenu.setText("Ma Gestion");
-		lblMenu.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
-		lblMenu.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
-		lblMenu.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblMenu.setAlignment(SWT.CENTER);
-		FormData fd_lblMenu = new FormData();
-		fd_lblMenu.top = new FormAttachment(0);
-		fd_lblMenu.left = new FormAttachment(tableMardi, -78, SWT.LEFT);
-		fd_lblMenu.right = new FormAttachment(lblMercredi, 0, SWT.RIGHT);
-		lblMenu.setLayoutData(fd_lblMenu);
-		
-		Label lblPlanning = new Label(shell, SWT.NONE);
-		lblPlanning.setAlignment(SWT.CENTER);
-		lblPlanning.setText("Planning");
-		lblPlanning.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
-		lblPlanning.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		FormData fd_lblPlanning = new FormData();
-		fd_lblPlanning.top = new FormAttachment(lblMenu, 6);
-		fd_lblPlanning.right = new FormAttachment(tableMardi, 0, SWT.RIGHT);
-		fd_lblPlanning.left = new FormAttachment(0, 419);
-		lblPlanning.setLayoutData(fd_lblPlanning);
 		btnSupprimer.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
@@ -521,7 +496,7 @@ public class Admin_Planning extends Global
 			{
 				try
 				{
-					Admin_SupprPlanning window = new Admin_SupprPlanning();
+					Menu_Administratif window = new Menu_Administratif();
 					window.open();
 				}
 				catch (Exception e1)
