@@ -65,7 +65,7 @@ public class formulaire
 		text_1.setBounds(265, 179, 80, 31);
 		
 		DateTime dateTime = new DateTime(shell, SWT.BORDER);
-		dateTime.setBounds(169, 71, 125, 33);
+		dateTime.setBounds(167, 68, 125, 33);
 	
 	
 	}
