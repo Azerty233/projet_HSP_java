@@ -135,7 +135,7 @@ public class Utilisateurs extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					Modification window = new Modification();
+					Modifier_patient window = new Modifier_patient();
 					window.open();
 				}
 				catch (Exception e1)
