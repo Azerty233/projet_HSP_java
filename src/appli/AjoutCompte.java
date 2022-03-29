@@ -128,12 +128,16 @@ public class AjoutCompte extends Global
 		Combo combo = new Combo(Role, SWT.NONE);
 		combo.setItems(new String[] {"ADMIN", "GEST", "TRATIF"});
 		combo.setBounds(277, 340, 147, 20);
+		
+		textMdp = new Text(Role, SWT.BORDER);
+		textMdp.setBounds(277, 277, 147, 31);
 
 		btnValider.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
+				String hashedPwd = BCrypt.hashpw(textMdp, BCrypt.gensalt(10));
 				String requete = "INSERT into utilisateurs (nom, prenom, email, mdp, role) Values('"+textNom.getText()+"','"+textPrenom.getText()+"','"+textEmail.getText()+"','"+textMdp.getText()+"',"+combo.get(combo.getSelectionIndex())+")";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
