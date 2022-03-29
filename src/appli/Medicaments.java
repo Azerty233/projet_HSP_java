@@ -68,22 +68,22 @@ public class Medicaments extends Global
 		shlListeUtilisateurs = new Shell();
 		shlListeUtilisateurs.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		shlListeUtilisateurs.setSize(802, 599);
-		shlListeUtilisateurs.setText("Liste des utilisateurs");
+		shlListeUtilisateurs.setText("Liste des medicaments");
 
 		Composite composite = new Composite(shlListeUtilisateurs, SWT.BORDER);
 		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		composite.setBounds(271, 110, 446, 281);
 
 
-		Label textNom = new Label(composite, SWT.NONE);
-		textNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		textNom.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		textNom.setBounds(160, 26, 180, 35);
+		Label textLibelle = new Label(composite, SWT.NONE);
+		textLibelle.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		textLibelle.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		textLibelle.setBounds(160, 26, 180, 35);
 
-		Label textPrenom = new Label(composite, SWT.NONE);
-		textPrenom.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		textPrenom.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		textPrenom.setBounds(160, 72, 180, 35);
+		Label textNvToxicite = new Label(composite, SWT.NONE);
+		textNvToxicite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		textNvToxicite.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		textNvToxicite.setBounds(160, 72, 180, 35);
 
 		Label lblNom = new Label(composite, SWT.NONE);
 		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -100,10 +100,10 @@ public class Medicaments extends Global
 		lblEmail.setText("Stock");
 		lblEmail.setBounds(62, 129, 67, 35);
 		
-		Label textEmail = new Label(composite, SWT.NONE);
-		textEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		textEmail.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		textEmail.setBounds(160, 120, 180, 35);
+		Label textStock = new Label(composite, SWT.NONE);
+		textStock.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		textStock.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		textStock.setBounds(160, 120, 180, 35);
 
 		Label lblError = new Label(shlListeUtilisateurs, SWT.NONE);
 		lblError.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
@@ -131,12 +131,12 @@ public class Medicaments extends Global
 
 
 
-		Button btnModifUtilisateur = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnModifUtilisateur.setBounds(429, 397, 177, 35);
-		btnModifUtilisateur.setText("Modifier les produits");
-		btnModifUtilisateur.setVisible(true);
-		btnModifUtilisateur.setEnabled(false);
-		btnModifUtilisateur.addSelectionListener(new SelectionAdapter()
+		Button btnModifMedicaments = new Button(shlListeUtilisateurs, SWT.NONE);
+		btnModifMedicaments.setBounds(429, 397, 177, 35);
+		btnModifMedicaments.setText("Modifier les produits");
+		btnModifMedicaments.setVisible(true);
+		btnModifMedicaments.setEnabled(false);
+		btnModifMedicaments.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
@@ -144,7 +144,7 @@ public class Medicaments extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					Modification window = new Modification();
+					Modif_Medicaments window = new Modif_Medicaments();
 					window.open();
 				}
 				catch (Exception e1)
@@ -195,7 +195,7 @@ public class Medicaments extends Global
 						TableItem item = new TableItem(table, SWT.NONE , i);
 					    item.setText(0, libelle);
 					    item.setText(1, niveau_toxicite);
-					    item.setText(2, id);
+					    item.setText(2, stock);
 					    i++;
 					}
 				}
@@ -216,7 +216,7 @@ public class Medicaments extends Global
 			public void widgetSelected(SelectionEvent e)
 			{
 				Globidselection = null;
-		        btnModifUtilisateur.setEnabled(false);
+		        btnModifMedicaments.setEnabled(false);
 		        btnSupprimer.setEnabled(false);
 				table.removeAll();
 				String sql = "SELECT * FROM medicaments";
@@ -230,10 +230,12 @@ public class Medicaments extends Global
 						String id = Integer.toString(res.getInt("id"));
 						String libelle = res.getString("libelle");
 						String nvToxicite = res.getString("Niveau_toxicite");
+						String stock = res.getString("Stock");
+
 						TableItem item = new TableItem(table, SWT.NONE , i);
 					    item.setText(0, libelle);
 					    item.setText(1, nvToxicite);
-					    item.setText(2, id);
+					    item.setText(2, stock);
 					    i++;
 
 					}
@@ -253,10 +255,10 @@ public class Medicaments extends Global
 		        for (int i = 0; i < selection.length; i++)
 						{
 		        	Globidselection = selection[i].getText(2);
-			        textNom.setText(selection[i].getText(0));
-			        textPrenom.setText(selection[i].getText(1));
-			        textEmail.setText(selection[i].getText(2));
-			        btnModifUtilisateur.setEnabled(true);
+			        textLibelle.setText(selection[i].getText(0));
+			        textNvToxicite.setText(selection[i].getText(1));
+			        textStock.setText(selection[i].getText(2));
+			        btnModifMedicaments.setEnabled(true);
 			        btnSupprimer.setEnabled(true);
 		        }
 		      }
@@ -271,7 +273,7 @@ public class Medicaments extends Global
 				boolean message = db.Prepare(cnx, requete);
 
 				Globidselection = null;
-		        btnModifUtilisateur.setEnabled(false);
+		        btnModifMedicaments.setEnabled(false);
 		        btnSupprimer.setEnabled(false);
 				table.removeAll();
 				String sql = "SELECT * FROM medicaments ";
@@ -283,13 +285,13 @@ public class Medicaments extends Global
 					while(res.next())
 					{
 						String id = Integer.toString(res.getInt("id"));
-						String nom = res.getString("nom");
+						String libelle = res.getString("libelle");
 						String nvToxicite = res.getString("niveau toxicité");
 						String stock = res.getString("stock");
 						TableItem item = new TableItem(table, SWT.NONE , i);
-					    item.setText(0, nom);
+					    item.setText(0, libelle);
 					    item.setText(1, nvToxicite);
-					    item.setText(2, id);
+					    item.setText(2, stock);
 					    i++;
 					}
 				}
@@ -309,7 +311,7 @@ public class Medicaments extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					AjoutCompte window = new AjoutCompte();
+					AjoutMedicaments window = new AjoutMedicaments();
 					window.open();
 				}
 				catch (Exception e1)
@@ -322,7 +324,7 @@ public class Medicaments extends Global
 
 
 
-		btnModifUtilisateur.addSelectionListener(new SelectionAdapter()
+		btnModifMedicaments.addSelectionListener(new SelectionAdapter()
 			{
 				@Override
 				public void widgetSelected(SelectionEvent e)
@@ -330,7 +332,7 @@ public class Medicaments extends Global
 					shlListeUtilisateurs.close();
 					try
 					{
-						Modification window = new Modification();
+						Modif_Medicaments window = new Modif_Medicaments();
 						window.open();
 					}
 					catch (Exception e1)
