@@ -440,7 +440,7 @@ public class Admin_Planning extends Global
 						heure.setText("");
 					}
 				}
-				String requete = "Select * from planning inner join utilisateurs on id_utilisateurs = utilisateurs.id where id_classe = '"+classeList.get(comboClasse.getSelectionIndex())+"'";
+				String requete = "Select * from planning inner join utilisateurs on id_utilisateurs = utilisateurs.id where id_type = '"+classeList.get(comboClasse.getSelectionIndex())+"'";
 				ResultSet resultat = db.Request(cnx, requete);
 				try {
 					while(resultat.next())
@@ -473,30 +473,6 @@ public class Admin_Planning extends Global
 				try
 				{
 					Admin_AjouterPlanning window = new Admin_AjouterPlanning();
-					window.open();
-				}
-				catch (Exception e1)
-				{
-					e1.printStackTrace();
-				}
-			}
-		});
-		
-		Button btnSupprimer = new Button(shell, SWT.NONE);
-		FormData fd_btnSupprimer = new FormData();
-		fd_btnSupprimer.top = new FormAttachment(btnAjouter, 0, SWT.TOP);
-		fd_btnSupprimer.right = new FormAttachment(tableMercredi, 0, SWT.RIGHT);
-		fd_btnSupprimer.left = new FormAttachment(0, 489);
-		btnSupprimer.setLayoutData(fd_btnSupprimer);
-		btnSupprimer.setText("Supprimer un \u00E9l\u00E9ment");
-		btnSupprimer.addSelectionListener(new SelectionAdapter()
-		{
-			@Override
-			public void widgetSelected(SelectionEvent e)
-			{
-				try
-				{
-					Menu_Administratif window = new Menu_Administratif();
 					window.open();
 				}
 				catch (Exception e1)
