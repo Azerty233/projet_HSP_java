@@ -10,12 +10,12 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.dbconnexion.Database;
 
-import Model.user;
+import Model.envoieDeMail;
 
 public class ConnexionJUnit {
 
 	// Connection d'un utilisateur dans la BDD
-	public user connexion(user Utilisateur) {
+	public envoieDeMail connexion(envoieDeMail Utilisateur) {
 		try {
 			System.out.print(Utilisateur.getMdp());
 			Connection coBdd = Database.getInstance();

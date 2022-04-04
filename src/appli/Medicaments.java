@@ -189,7 +189,7 @@ public class Medicaments extends Global
 					while(res.next())
 					{
 						String id = Integer.toString(res.getInt("id"));
-						String libelle = res.getString("nom");
+						String libelle = res.getString("libelle");
 						String niveau_toxicite = res.getString("niveau toxicite");
 						String stock = res.getString("stock");
 						TableItem item = new TableItem(table, SWT.NONE , i);
@@ -354,7 +354,7 @@ public class Medicaments extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					Menu_Admin window = new Menu_Admin();
+					Menu_GEST window = new Menu_GEST();
 					window.open();
 				}
 				catch (Exception e1)
