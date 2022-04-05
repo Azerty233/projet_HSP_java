@@ -78,13 +78,13 @@ public class Admin_AjouterPlanning {
 
 		String requete = "Select * from type_rdv where undeletable = 0";
 		ResultSet resultat = db.Request(cnx, requete);
-		ArrayList<Integer> classeList = new  ArrayList<Integer>();
+		ArrayList<Integer> TypeList = new  ArrayList<Integer>();
 		try {
 			while(resultat.next())
 			{
 
 				comboType.add(resultat.getString("libelle"));
-				classeList.add(resultat.getInt("id"));
+				TypeList.add(resultat.getInt("id"));
 			}
 			comboType.select(0);
 		} catch (SQLException e2) {
@@ -106,12 +106,12 @@ public class Admin_AjouterPlanning {
 		comboMed.setBounds(16, 172, 211, 33);
 		requete = "Select * from utilisateurs where role = 'MED'";
 		resultat = db.Request(cnx, requete);
-		ArrayList<Integer> profList = new  ArrayList<Integer>();
+		ArrayList<Integer> UtilList = new  ArrayList<Integer>();
 		try {
 			while(resultat.next())
 			{
 				comboMed.add(resultat.getString("nom"));
-				profList.add(resultat.getInt("id"));
+				UtilList.add(resultat.getInt("id"));
 			}
 			comboMed.select(0);
 		} catch (SQLException e2) {
@@ -133,7 +133,7 @@ public class Admin_AjouterPlanning {
                     comboHeure.removeAll();
                     heureList.clear();
                     int jour = 1;
-                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_utilisateurs = "+profList.get(comboMed.getSelectionIndex())+" AND id_jour = "+jour+" or id_type = "+classeList.get(comboType.getSelectionIndex())+" AND id_jour = "+jour+")";
+                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_utilisateurs = "+UtilList.get(comboMed.getSelectionIndex())+" AND id_jour = "+jour+" or id_type = "+TypeList.get(comboType.getSelectionIndex())+" AND id_jour = "+jour+")";
             		ResultSet resultat = db.Request(cnx, requete);
             		try {
 						while(resultat.next())
@@ -164,7 +164,7 @@ public class Admin_AjouterPlanning {
                     comboHeure.removeAll();
                     heureList.clear();
                     int jour = 2;
-                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_utilisateurs = "+profList.get(comboMed.getSelectionIndex())+" AND id_jour = "+jour+" or id_type = "+classeList.get(comboType.getSelectionIndex())+" AND id_jour = "+jour+")";
+                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_utilisateurs = "+UtilList.get(comboMed.getSelectionIndex())+" AND id_jour = "+jour+" or id_type = "+TypeList.get(comboType.getSelectionIndex())+" AND id_jour = "+jour+")";
             		ResultSet resultat = db.Request(cnx, requete);
             		try {
 						while(resultat.next())
@@ -195,7 +195,7 @@ public class Admin_AjouterPlanning {
                     comboHeure.removeAll();
                     heureList.clear();
                     int jour = 3;
-                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_utilisateurs = "+profList.get(comboMed.getSelectionIndex())+" AND id_jour = "+jour+" or id_type = "+classeList.get(comboType.getSelectionIndex())+" AND id_jour = "+jour+")";
+                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_utilisateurs = "+UtilList.get(comboMed.getSelectionIndex())+" AND id_jour = "+jour+" or id_type = "+TypeList.get(comboType.getSelectionIndex())+" AND id_jour = "+jour+")";
             		ResultSet resultat = db.Request(cnx, requete);
             		try {
 						while(resultat.next())
@@ -226,7 +226,7 @@ public class Admin_AjouterPlanning {
                     comboHeure.removeAll();
                     heureList.clear();
                     int jour = 4;
-                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_utilisateurs = "+profList.get(comboMed.getSelectionIndex())+" AND id_jour = "+jour+" or id_type = "+classeList.get(comboType.getSelectionIndex())+" AND id_jour = "+jour+")";
+                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_utilisateurs = "+UtilList.get(comboMed.getSelectionIndex())+" AND id_jour = "+jour+" or id_type = "+TypeList.get(comboType.getSelectionIndex())+" AND id_jour = "+jour+")";
             		ResultSet resultat = db.Request(cnx, requete);
             		try {
 						while(resultat.next())
@@ -257,7 +257,7 @@ public class Admin_AjouterPlanning {
 							@Override
 							public void widgetSelected(SelectionEvent e)
 							{
-									classeList.clear();
+									TypeList.clear();
 									String requete = "INSERT into planning (id_jour, id_heure, id_type, id_utilisateurs) Values('')";
 									boolean message = db.Prepare(cnx, requete);
 				
@@ -266,7 +266,7 @@ public class Admin_AjouterPlanning {
 									try {
 										while(resultat.next()) {
 											comboType.add(resultat.getString("libelle"));
-											classeList.add(resultat.getInt("id"));
+											TypeList.add(resultat.getInt("id"));
 										}
 										lblAjoutSucces.setVisible(true);
 									} catch (SQLException e1) {
@@ -288,7 +288,7 @@ public class Admin_AjouterPlanning {
                     comboHeure.removeAll();
                     heureList.clear();
                     int jour = 5;
-                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_utilisateurs = "+profList.get(comboMed.getSelectionIndex())+" AND id_jour = "+jour+" or id_type = "+classeList.get(comboType.getSelectionIndex())+" AND id_jour = "+jour+")";
+                    String requete = "SELECT DISTINCT heure.id, libelle FROM planning inner join heure where heure.id not in (SELECT id_heure FROM planning where id_utilisateurs = "+UtilList.get(comboMed.getSelectionIndex())+" AND id_jour = "+jour+" or id_type = "+TypeList.get(comboType.getSelectionIndex())+" AND id_jour = "+jour+")";
             		ResultSet resultat = db.Request(cnx, requete);
             		try {
 						while(resultat.next())

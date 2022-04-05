@@ -405,33 +405,33 @@ public class Admin_Planning extends Global
 		
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
-		ArrayList<Integer> profList = new  ArrayList<Integer>();
+		ArrayList<Integer> UtilList = new  ArrayList<Integer>();
 		String requete = "Select * from utilisateurs where role = 'ADMIN'";
 		ResultSet resultat = db.Request(cnx, requete);
 		
-		Combo comboClasse = new Combo(shell, SWT.READ_ONLY);
-		comboClasse.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
-		FormData fd_comboClasse = new FormData();
-		fd_comboClasse.top = new FormAttachment(0, 52);
-		fd_comboClasse.left = new FormAttachment(0, 10);
-		comboClasse.setLayoutData(fd_comboClasse);
-		ArrayList<Integer> classeList = new  ArrayList<Integer>();
+		Combo comboType = new Combo(shell, SWT.READ_ONLY);
+		comboType.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		FormData fd_comboType = new FormData();
+		fd_comboType.top = new FormAttachment(0, 52);
+		fd_comboType.left = new FormAttachment(0, 10);
+		comboType.setLayoutData(fd_comboType);
+		ArrayList<Integer> TypeList = new  ArrayList<Integer>();
 		requete = "Select * from type_rdv where undeletable = 0";
 		resultat = db.Request(cnx, requete);
 		while(resultat.next()) {
-			comboClasse.add(resultat.getString("libelle"));
-			classeList.add(resultat.getInt("id"));
+			comboType.add(resultat.getString("libelle"));
+			TypeList.add(resultat.getInt("id"));
 		}
-		comboClasse.select(0);
+		comboType.select(0);
 		
-		Button btnOkClasse = new Button(shell, SWT.NONE);
-		fd_comboClasse.right = new FormAttachment(100, -815);
-		FormData fd_btnOkClasse = new FormData();
-		fd_btnOkClasse.top = new FormAttachment(comboClasse, 1);
-		fd_btnOkClasse.left = new FormAttachment(comboClasse, 0, SWT.LEFT);
-		btnOkClasse.setLayoutData(fd_btnOkClasse);
-		btnOkClasse.setText("Selectionner");
-		btnOkClasse.addSelectionListener(new SelectionAdapter()
+		Button btnOkType = new Button(shell, SWT.NONE);
+		fd_comboType.right = new FormAttachment(100, -815);
+		FormData fd_btnOkType = new FormData();
+		fd_btnOkType.top = new FormAttachment(comboType, 1);
+		fd_btnOkType.left = new FormAttachment(comboType, 0, SWT.LEFT);
+		btnOkType.setLayoutData(fd_btnOkType);
+		btnOkType.setText("Selectionner");
+		btnOkType.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -440,15 +440,15 @@ public class Admin_Planning extends Global
 						heure.setText("");
 					}
 				}
-				String requete = "Select * from planning inner join utilisateurs on id_utilisateurs = utilisateurs.id where id_type = '"+classeList.get(comboClasse.getSelectionIndex())+"'";
+				String requete = "Select * from planning inner join utilisateurs on id_utilisateurs = utilisateurs.id where id_type = '"+TypeList.get(comboType.getSelectionIndex())+"'";
 				ResultSet resultat = db.Request(cnx, requete);
 				try {
 					while(resultat.next())
 					{
 						int jour = resultat.getInt("id_jour") - 1;
 						int heure = resultat.getInt("id_heure") - 1;
-						String classe = resultat.getString("nom");
-						planning.get(jour).get(heure).setText(classe);
+						String type_rdv = resultat.getString("nom");
+						planning.get(jour).get(heure).setText(type_rdv);
 
 					}
 				} catch (SQLException e1) {
