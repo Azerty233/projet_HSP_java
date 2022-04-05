@@ -56,7 +56,7 @@ public class Modif_Medicaments extends Global
 	protected void createContents() throws SQLException
 	{
 		shell = new Shell();
-		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shell.setSize(765, 559);
 		shell.setText("Modifier son profil");
 
@@ -126,14 +126,6 @@ public class Modif_Medicaments extends Global
 		lblSucces.setForeground(SWTResourceManager.getColor(SWT.COLOR_GREEN));
 		lblSucces.setBounds(277, 403, 253, 25);
 		lblSucces.setVisible(false);
-		
-		Label lblMenu = new Label(shell, SWT.NONE);
-		lblMenu.setText("Ma Gestion");
-		lblMenu.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
-		lblMenu.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
-		lblMenu.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblMenu.setAlignment(SWT.CENTER);
-		lblMenu.setBounds(261, 25, 175, 34);
 
 		btnValider.addSelectionListener(new SelectionAdapter()
 		{

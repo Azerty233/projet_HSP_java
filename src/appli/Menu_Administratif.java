@@ -56,7 +56,7 @@ public class Menu_Administratif extends Global
 	protected void createContents()
 	{
 		shlMenuAdmin = new Shell();
-		shlMenuAdmin.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		shlMenuAdmin.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shlMenuAdmin.setSize(366, 401);
 
 		shlMenuAdmin.setText("Hopital de Paris | Espace Administrateur");

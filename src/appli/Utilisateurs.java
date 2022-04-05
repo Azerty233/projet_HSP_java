@@ -66,7 +66,7 @@ public class Utilisateurs extends Global
 	{
 
 		shlListeUtilisateurs = new Shell();
-		shlListeUtilisateurs.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		shlListeUtilisateurs.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shlListeUtilisateurs.setSize(802, 599);
 		shlListeUtilisateurs.setText("Liste des utilisateurs");
 
@@ -349,14 +349,6 @@ public class Utilisateurs extends Global
 				}
 			}
 		});
-		
-		Label lblMenu = new Label(shlListeUtilisateurs, SWT.NONE);
-		lblMenu.setText("Ma Gestion");
-		lblMenu.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
-		lblMenu.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
-		lblMenu.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblMenu.setAlignment(SWT.CENTER);
-		lblMenu.setBounds(302, 10, 151, 34);
 		
 		Label lblLesUtilisateurs = new Label(shlListeUtilisateurs, SWT.NONE);
 		lblLesUtilisateurs.setText("Les utilisateurs");

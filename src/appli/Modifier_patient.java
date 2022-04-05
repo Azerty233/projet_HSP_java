@@ -54,7 +54,7 @@ public class Modifier_patient extends Global
 	protected void createContents() throws SQLException
 	{
 		shelleleve = new Shell();
-		shelleleve.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		shelleleve.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shelleleve.setSize(765, 559);
 		shelleleve.setText("Modifier son profil");
 
