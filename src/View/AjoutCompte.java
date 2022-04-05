@@ -130,7 +130,7 @@ public class AjoutCompte extends Global
 		combo.setBounds(277, 340, 147, 20);
 		Database db2 = new Database();
 		Connection cnx2 = db2.DbConnexion();
-		String requete2 = "Select role from utilisateurs";
+		String requete2 = "Select * from utilisateurs";
 		ResultSet resultat2 = db2.Request(cnx2, requete2);
 		ArrayList<Integer> PatientList = new  ArrayList<Integer>();
 		while(resultat2.next())
