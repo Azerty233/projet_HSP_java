@@ -59,7 +59,7 @@ public class AjoutHospitalisation extends Global
 	protected void createContents() throws SQLException
 	{
 		Role = new Shell();
-		Role.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		Role.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		Role.setSize(765, 559);
 		Role.setText("Hospitalisation du patient");
 
