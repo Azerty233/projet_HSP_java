@@ -54,6 +54,8 @@ public class Chambre extends JFrame {
 	JButton badd,bresv;
 	private JTextField textField;
 	private JButton btnNewButton;
+	
+	
 	public Chambre (){
 		
 		
