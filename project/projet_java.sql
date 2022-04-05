@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 05 avr. 2022 à 09:03
+-- Généré le : mar. 05 avr. 2022 à 16:20
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -51,6 +51,58 @@ CREATE TABLE IF NOT EXISTS `gestionnaire` (
   KEY `CHAMBRE` (`id_chambre`),
   KEY `MEDICAMENT` (`id_medicament`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `heure`
+--
+
+DROP TABLE IF EXISTS `heure`;
+CREATE TABLE IF NOT EXISTS `heure` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `heure`
+--
+
+INSERT INTO `heure` (`id`, `libelle`) VALUES
+(1, '8h'),
+(2, '9h'),
+(3, '10h'),
+(4, '11h'),
+(5, '12h'),
+(6, '14h'),
+(7, '15h'),
+(8, '16h'),
+(9, '17h');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `jour`
+--
+
+DROP TABLE IF EXISTS `jour`;
+CREATE TABLE IF NOT EXISTS `jour` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `jour`
+--
+
+INSERT INTO `jour` (`id`, `libelle`) VALUES
+(1, 'Lundi'),
+(2, 'Mardi'),
+(3, 'Mercredi'),
+(4, 'Jeudi'),
+(5, 'Vendredi');
 
 -- --------------------------------------------------------
 
@@ -104,6 +156,35 @@ INSERT INTO `patient` (`id`, `nom`, `prenom`, `email`, `adresse_postale`, `numer
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `planning`
+--
+
+DROP TABLE IF EXISTS `planning`;
+CREATE TABLE IF NOT EXISTS `planning` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_jour` int(11) NOT NULL,
+  `id_heure` int(11) NOT NULL,
+  `id_type` int(11) NOT NULL,
+  `id_utilisateurs` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_heure` (`id_heure`),
+  KEY `id_jour` (`id_jour`),
+  KEY `id_utilisateurs` (`id_utilisateurs`),
+  KEY `id_type` (`id_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `planning`
+--
+
+INSERT INTO `planning` (`id`, `id_jour`, `id_heure`, `id_type`, `id_utilisateurs`) VALUES
+(1, 1, 1, 2, 2),
+(2, 1, 8, 2, 2),
+(3, 3, 5, 2, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `rdv`
 --
 
@@ -137,6 +218,7 @@ DROP TABLE IF EXISTS `type_rdv`;
 CREATE TABLE IF NOT EXISTS `type_rdv` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(20) COLLATE utf8_bin NOT NULL,
+  `undeletable` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -144,9 +226,9 @@ CREATE TABLE IF NOT EXISTS `type_rdv` (
 -- Déchargement des données de la table `type_rdv`
 --
 
-INSERT INTO `type_rdv` (`id`, `libelle`) VALUES
-(1, 'Generaliste'),
-(2, 'Dermatologue');
+INSERT INTO `type_rdv` (`id`, `libelle`, `undeletable`) VALUES
+(1, 'Generaliste', 0),
+(2, 'Dermatologue', 0);
 
 -- --------------------------------------------------------
 
@@ -179,6 +261,15 @@ INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `email`, `mdp`, `role`) VALUE
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `planning`
+--
+ALTER TABLE `planning`
+  ADD CONSTRAINT `id_heure` FOREIGN KEY (`id_heure`) REFERENCES `heure` (`id`),
+  ADD CONSTRAINT `id_jour` FOREIGN KEY (`id_jour`) REFERENCES `jour` (`id`),
+  ADD CONSTRAINT `id_type` FOREIGN KEY (`id_type`) REFERENCES `type_rdv` (`id`),
+  ADD CONSTRAINT `id_utilisateurs` FOREIGN KEY (`id_utilisateurs`) REFERENCES `utilisateurs` (`id`);
 
 --
 -- Contraintes pour la table `rdv`
