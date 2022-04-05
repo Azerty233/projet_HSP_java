@@ -1,4 +1,4 @@
-package appli;
+package View;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,13 +23,16 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.eclipse.swt.widgets.Composite;
 
-public class AjoutMedicaments extends Global
+public class AjoutCompte extends Global
 {
 
 	protected Shell Role;
-	private Text textLibelle;
-	private Text textNv_toxicite;
-	private Text textStock;
+	private Text textNom;
+	private Text textPrenom;
+	private String nom;
+	private String prenom;
+	private Text textEmail;
+	private Text textMdp;
 
 
 
@@ -63,25 +66,25 @@ public class AjoutMedicaments extends Global
 		Label lblNom = new Label(Role, SWT.NONE);
 		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		lblNom.setBounds(165, 121, 81, 25);
-		lblNom.setText("libelle");
+		lblNom.setText("Nom");
 
 		Label lblPrnom = new Label(Role, SWT.NONE);
 		lblPrnom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblPrnom.setBounds(165, 173, 106, 25);
-		lblPrnom.setText("niveau_toxicit\u00E9");
+		lblPrnom.setBounds(165, 173, 81, 25);
+		lblPrnom.setText("Pr\u00E9nom");
 
-		textLibelle = new Text(Role, SWT.BORDER);
-		textLibelle.setBounds(277, 121, 147, 31);
+		textNom = new Text(Role, SWT.BORDER);
+		textNom.setBounds(277, 121, 147, 31);
 
-		textNv_toxicite = new Text(Role, SWT.BORDER);
-		textNv_toxicite.setBounds(277, 176, 147, 31);
+		textPrenom = new Text(Role, SWT.BORDER);
+		textPrenom.setBounds(277, 176, 147, 31);
 
 		Button btnValider = new Button(Role, SWT.NONE);
-		btnValider.setBounds(294, 284, 105, 35);
+		btnValider.setBounds(295, 383, 105, 35);
 		btnValider.setText("Valider");
 
 		Button btnRetour = new Button(Role, SWT.NONE);
-		btnRetour.setBounds(10, 448, 105, 35);
+		btnRetour.setBounds(10, 479, 105, 35);
 		btnRetour.setText("Retour");
 
 		Label lblErreur = new Label(Role, SWT.NONE);
@@ -98,23 +101,44 @@ public class AjoutMedicaments extends Global
 		lblSucces.setBounds(234, 455, 253, 25);
 		lblSucces.setVisible(false);
 
+		Label lblRole = new Label(Role, SWT.NONE);
+		lblRole.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblRole.setBounds(165, 340, 81, 25);
+		lblRole.setText("Role");
+
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
 		
 		Label lblEmail = new Label(Role, SWT.NONE);
-		lblEmail.setText("stock");
+		lblEmail.setText("Email");
 		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		lblEmail.setBounds(165, 226, 81, 25);
 		
-		textStock = new Text(Role, SWT.BORDER);
-		textStock.setBounds(277, 229, 147, 31);
+		textEmail = new Text(Role, SWT.BORDER);
+		textEmail.setBounds(277, 229, 147, 31);
+		
+		Label lblMdp = new Label(Role, SWT.NONE);
+		lblMdp.setText("Mot de passe");
+		lblMdp.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblMdp.setBounds(165, 277, 81, 25);
+		
+		textMdp = new Text(Role, SWT.BORDER);
+		textMdp.setBounds(277, 280, 147, 31);
+		
+		Combo combo = new Combo(Role, SWT.NONE);
+		combo.setItems(new String[] {"ADMIN", "GEST", "TRATIF"});
+		combo.setBounds(277, 340, 147, 20);
+		
+		textMdp = new Text(Role, SWT.BORDER);
+		textMdp.setBounds(277, 277, 147, 31);
 
 		btnValider.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "INSERT into medicaments (libelle, niveau_toxicite, stock) Values('"+textLibelle.getText()+"','"+textNv_toxicite.getText()+"','"+textStock.getText()+"')";
+				String hashedPwd = BCrypt.hashpw(textMdp, BCrypt.gensalt(10));
+				String requete = "INSERT into utilisateurs (nom, prenom, email, mdp, role) Values('"+textNom.getText()+"','"+textPrenom.getText()+"','"+textEmail.getText()+"','"+textMdp.getText()+"',"+combo.get(combo.getSelectionIndex())+")";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
 				lblSucces.setVisible(!message);
@@ -129,7 +153,7 @@ public class AjoutMedicaments extends Global
 				Role.close();
 				try
 				{
-					Medicaments window = new Medicaments();
+					Menu_Admin window = new Menu_Admin();
 					window.open();
 				}
 				catch (Exception e1)

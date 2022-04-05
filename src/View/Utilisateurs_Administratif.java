@@ -1,4 +1,4 @@
-package appli;
+package View;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,7 +27,7 @@ import Manager.Global;
 
 import org.eclipse.swt.widgets.Combo;
 
-public class Medicaments extends Global
+public class Utilisateurs_Administratif extends Global
 {
 
 	protected Shell shlListeUtilisateurs;
@@ -68,61 +68,52 @@ public class Medicaments extends Global
 		shlListeUtilisateurs = new Shell();
 		shlListeUtilisateurs.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shlListeUtilisateurs.setSize(802, 599);
-		shlListeUtilisateurs.setText("Liste des medicaments");
+		shlListeUtilisateurs.setText("Liste des utilisateurs");
 
 		Composite composite = new Composite(shlListeUtilisateurs, SWT.BORDER);
-		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		composite.setBounds(271, 110, 446, 281);
+		composite.setBounds(357, 167, 361, 266);
 
 
-		Label textLibelle = new Label(composite, SWT.NONE);
-		textLibelle.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		textLibelle.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		textLibelle.setBounds(160, 26, 180, 35);
+		Label textNom = new Label(composite, SWT.NONE);
+		textNom.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		textNom.setBounds(160, 29, 180, 35);
 
-		Label textNvToxicite = new Label(composite, SWT.NONE);
-		textNvToxicite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		textNvToxicite.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		textNvToxicite.setBounds(160, 72, 180, 35);
+		Label textPrenom = new Label(composite, SWT.NONE);
+		textPrenom.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		textPrenom.setBounds(160, 77, 180, 35);
 
 		Label lblNom = new Label(composite, SWT.NONE);
-		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		lblNom.setText("Nom");
 		lblNom.setBounds(62, 29, 67, 35);
 
 		Label lblPrenom = new Label(composite, SWT.NONE);
-		lblPrenom.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblPrenom.setText("Lvl toxicit\u00E9");
-		lblPrenom.setBounds(62, 77, 85, 35);
-		
-		Label lblEmail = new Label(composite, SWT.NONE);
-		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblEmail.setText("Stock");
-		lblEmail.setBounds(62, 129, 67, 35);
-		
-		Label textStock = new Label(composite, SWT.NONE);
-		textStock.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		textStock.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		textStock.setBounds(160, 120, 180, 35);
+		lblPrenom.setText("Prenom");
+		lblPrenom.setBounds(62, 77, 67, 35);
 
 		Label lblError = new Label(shlListeUtilisateurs, SWT.NONE);
 		lblError.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		lblError.setBounds(20, 529, 385, 25);
-		lblError.setText("Veuillez selectionner un utilisateur en faisant un double clic ");
+		lblError.setBounds(285, 494, 385, 25);
+		lblError.setText("Veuillez selectionner un \u00E9l\u00E8ve en double cliquant");
 		lblError.setVisible(false);
 
+		Label listeUtilisateur = new Label(shlListeUtilisateurs, SWT.NONE);
+		listeUtilisateur.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		listeUtilisateur.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.BOLD));
+		listeUtilisateur.setBounds(40, 127, 191, 29);
+		listeUtilisateur.setText("Liste des patients");
+
 		table = new Table(shlListeUtilisateurs, SWT.BORDER | SWT.FULL_SELECTION);
-		table.setBounds(20, 175, 219, 216);
+		table.setBounds(20, 162, 218, 283);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
-		TableColumn libelleNomUtil = new TableColumn(table, SWT.NONE);
-		libelleNomUtil.setWidth(100);
-		libelleNomUtil.setText("Nom");
+		TableColumn libelleNomEleve = new TableColumn(table, SWT.NONE);
+		libelleNomEleve.setWidth(100);
+		libelleNomEleve.setText("Nom");
 
-		TableColumn libellePrenomUtil = new TableColumn(table, SWT.NONE);
-		libellePrenomUtil.setWidth(100);
-		libellePrenomUtil.setText("Stock");
+		TableColumn libellePrenomEleve = new TableColumn(table, SWT.NONE);
+		libellePrenomEleve.setWidth(100);
+		libellePrenomEleve.setText("Pr\u00E9nom");
 
 		TableColumn tblclmnId = new TableColumn(table, SWT.NONE);
 		tblclmnId.setResizable(false);
@@ -131,12 +122,12 @@ public class Medicaments extends Global
 
 
 
-		Button btnModifMedicaments = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnModifMedicaments.setBounds(429, 397, 177, 35);
-		btnModifMedicaments.setText("Modifier les produits");
-		btnModifMedicaments.setVisible(true);
-		btnModifMedicaments.setEnabled(false);
-		btnModifMedicaments.addSelectionListener(new SelectionAdapter()
+		Button btnModifUtilisateur = new Button(shlListeUtilisateurs, SWT.NONE);
+		btnModifUtilisateur.setBounds(357, 126, 175, 35);
+		btnModifUtilisateur.setText("Modifier un utilisateur");
+		btnModifUtilisateur.setVisible(true);
+		btnModifUtilisateur.setEnabled(false);
+		btnModifUtilisateur.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
@@ -144,7 +135,7 @@ public class Medicaments extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					Modif_Medicaments window = new Modif_Medicaments();
+					Modifier_patient window = new Modifier_patient();
 					window.open();
 				}
 				catch (Exception e1)
@@ -157,30 +148,47 @@ public class Medicaments extends Global
 
 
 		Button btnValider = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnValider.setBounds(20, 147, 219, 25);
-		btnValider.setText("Afficher les medicaments");
+		btnValider.setBounds(20, 86, 211, 35);
+		btnValider.setText("Afficher les patients");
 
 		Button btnAjouterUtilisateur = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnAjouterUtilisateur.setBounds(256, 397, 167, 35);
-		btnAjouterUtilisateur.setText("Ajouter un produits");
+		btnAjouterUtilisateur.setBounds(543, 126, 175, 35);
+		btnAjouterUtilisateur.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shlListeUtilisateurs.close();
+				try
+				{
+					AjoutDossier window = new AjoutDossier();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnAjouterUtilisateur.setText("Ajouter un dossier patient");
 		
 		Button btnSupprimer = new Button(shlListeUtilisateurs, SWT.NONE);
 		btnSupprimer.setText("Supprimer");
-		btnSupprimer.setBounds(617, 397, 105, 35);
+		btnSupprimer.setBounds(615, 439, 105, 35);
 
 		btnSupprimer.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Delete from medicaments where id ='"+Globidselection+"'";
+				String requete = "Delete from patient where id ='"+Globidselection+"'";
 				boolean message = db.Prepare(cnx, requete);
 				
 				Globidselection = Globidselection;
 			
 		        btnSupprimer.setEnabled(false);
 				table.removeAll();
-				String sql = "SELECT * FROM medicaments where id ";
+				String sql = "SELECT * FROM patient where id ";
 				ResultSet res = db.Request(cnx, sql);
 
 				try
@@ -189,13 +197,12 @@ public class Medicaments extends Global
 					while(res.next())
 					{
 						String id = Integer.toString(res.getInt("id"));
-						String libelle = res.getString("libelle");
-						String niveau_toxicite = res.getString("niveau toxicite");
-						String stock = res.getString("stock");
+						String nom = res.getString("nom");
+						String prenom = res.getString("prenom");
 						TableItem item = new TableItem(table, SWT.NONE , i);
-					    item.setText(0, libelle);
-					    item.setText(1, niveau_toxicite);
-					    item.setText(2, stock);
+					    item.setText(0, nom);
+					    item.setText(1, prenom);
+					    item.setText(2, id);
 					    i++;
 					}
 				}
@@ -216,10 +223,10 @@ public class Medicaments extends Global
 			public void widgetSelected(SelectionEvent e)
 			{
 				Globidselection = null;
-		        btnModifMedicaments.setEnabled(false);
+		        btnModifUtilisateur.setEnabled(false);
 		        btnSupprimer.setEnabled(false);
 				table.removeAll();
-				String sql = "SELECT * FROM medicaments";
+				String sql = "SELECT * FROM patient";
 				ResultSet res = db.Request(cnx, sql);
 
 				try
@@ -228,14 +235,12 @@ public class Medicaments extends Global
 					while(res.next())
 					{
 						String id = Integer.toString(res.getInt("id"));
-						String libelle = res.getString("libelle");
-						String nvToxicite = res.getString("Niveau_toxicite");
-						String stock = res.getString("Stock");
-
+						String nom = res.getString("nom");
+						String prenom = res.getString("prenom");
 						TableItem item = new TableItem(table, SWT.NONE , i);
-					    item.setText(0, libelle);
-					    item.setText(1, nvToxicite);
-					    item.setText(2, stock);
+					    item.setText(0, nom);
+					    item.setText(1, prenom);
+					    item.setText(2, id);
 					    i++;
 
 					}
@@ -255,10 +260,9 @@ public class Medicaments extends Global
 		        for (int i = 0; i < selection.length; i++)
 						{
 		        	Globidselection = selection[i].getText(2);
-			        textLibelle.setText(selection[i].getText(0));
-			        textNvToxicite.setText(selection[i].getText(1));
-			        textStock.setText(selection[i].getText(2));
-			        btnModifMedicaments.setEnabled(true);
+			        textNom.setText(selection[i].getText(0));
+			        textPrenom.setText(selection[i].getText(1));
+			        btnModifUtilisateur.setEnabled(true);
 			        btnSupprimer.setEnabled(true);
 		        }
 		      }
@@ -269,14 +273,14 @@ public class Medicaments extends Global
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Delete from medicaments where id ='"+Globidselection+"'";
+				String requete = "Delete from patient where id ='"+Globidselection+"'";
 				boolean message = db.Prepare(cnx, requete);
 
 				Globidselection = null;
-		        btnModifMedicaments.setEnabled(false);
+		        btnModifUtilisateur.setEnabled(false);
 		        btnSupprimer.setEnabled(false);
 				table.removeAll();
-				String sql = "SELECT * FROM medicaments ";
+				String sql = "SELECT * FROM patient ";
 				ResultSet res = db.Request(cnx, sql);
 
 				try
@@ -285,13 +289,12 @@ public class Medicaments extends Global
 					while(res.next())
 					{
 						String id = Integer.toString(res.getInt("id"));
-						String libelle = res.getString("libelle");
-						String nvToxicite = res.getString("niveau toxicité");
-						String stock = res.getString("stock");
+						String nom = res.getString("nom");
+						String prenom = res.getString("prenom");
 						TableItem item = new TableItem(table, SWT.NONE , i);
-					    item.setText(0, libelle);
-					    item.setText(1, nvToxicite);
-					    item.setText(2, stock);
+					    item.setText(0, nom);
+					    item.setText(1, prenom);
+					    item.setText(2, id);
 					    i++;
 					}
 				}
@@ -303,28 +306,10 @@ public class Medicaments extends Global
 			}
 		});
 
-		btnAjouterUtilisateur.addSelectionListener(new SelectionAdapter()
-		{
-			@Override
-			public void widgetSelected(SelectionEvent e)
-			{
-				shlListeUtilisateurs.close();
-				try
-				{
-					AjoutMedicaments window = new AjoutMedicaments();
-					window.open();
-				}
-				catch (Exception e1)
-				{
-					e1.printStackTrace();
-				}
-			}
-		});
 
 
 
-
-		btnModifMedicaments.addSelectionListener(new SelectionAdapter()
+		btnModifUtilisateur.addSelectionListener(new SelectionAdapter()
 			{
 				@Override
 				public void widgetSelected(SelectionEvent e)
@@ -332,7 +317,7 @@ public class Medicaments extends Global
 					shlListeUtilisateurs.close();
 					try
 					{
-						Modif_Medicaments window = new Modif_Medicaments();
+						Modifier_patient window = new Modifier_patient();
 						window.open();
 					}
 					catch (Exception e1)
@@ -344,8 +329,31 @@ public class Medicaments extends Global
 		
 
 		Button btnRetour = new Button(shlListeUtilisateurs, SWT.NONE);
-		btnRetour.setBounds(20, 508, 105, 35);
+		btnRetour.setBounds(10, 519, 105, 35);
 		btnRetour.setText("Retour");
+		
+		Button btnHospitaliserLePatient = new Button(shlListeUtilisateurs, SWT.NONE);
+		btnHospitaliserLePatient.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.BOLD));
+		btnHospitaliserLePatient.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		btnHospitaliserLePatient.setText("Hospitaliser le patient");
+		btnHospitaliserLePatient.setBounds(357, 439, 186, 35);
+		btnHospitaliserLePatient.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shlListeUtilisateurs.close();
+				try
+				{
+					AjoutHospitalisation window = new AjoutHospitalisation();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnRetour.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
@@ -354,7 +362,7 @@ public class Medicaments extends Global
 				shlListeUtilisateurs.close();
 				try
 				{
-					Menu_GEST window = new Menu_GEST();
+					Menu_Administratif window = new Menu_Administratif();
 					window.open();
 				}
 				catch (Exception e1)
@@ -362,14 +370,7 @@ public class Medicaments extends Global
 					e1.printStackTrace();
 				}
 			}
-
 		});
-		
-		Label lblListeDesProduits = new Label(shlListeUtilisateurs, SWT.NONE);
-		lblListeDesProduits.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		lblListeDesProduits.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.BOLD));
-		lblListeDesProduits.setBounds(20, 110, 208, 31);
-		lblListeDesProduits.setText("Liste des produits");
 
 	}
 }

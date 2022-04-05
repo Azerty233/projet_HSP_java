@@ -1,4 +1,4 @@
-package appli;
+package View;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -35,7 +35,7 @@ public class comboBoxMedicaments extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    private void initComponents() {
+    protected void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -106,7 +106,7 @@ public class comboBoxMedicaments extends javax.swing.JFrame {
 				try
 				{
 					Chambre window = new Chambre();
-					window.run();
+					window.setVisible(true);
 				}
 				catch (Exception e1)
 				{
@@ -188,10 +188,24 @@ public class comboBoxMedicaments extends javax.swing.JFrame {
             jComboBox1.setSelectedItem(nameTxt.getText());
             //CLEAR TXT
             nameTxt.setText("");
+            
+            shlMenuAdmin.close();
+			try
+			{
+				menu_Infermiere window = new menu_Infermiere();
+				window.open();
+			}
+			catch (Exception e1)
+			{
+				e1.printStackTrace();
+			}
+            
         }else
         {
             JOptionPane.showMessageDialog(null, "Erreur");
         }
+        
+        
     }
 
     private void retrieveBtnActionPerformed(java.awt.event.ActionEvent evt) {

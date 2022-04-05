@@ -19,6 +19,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import com.dbconnexion.Database;
 import Model.envoieDeMail;
+import View.ConnexionJUnit;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

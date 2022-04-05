@@ -1,4 +1,4 @@
-package appli;
+package View;
 
 public class OublieMdp {
 

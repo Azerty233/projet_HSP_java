@@ -1,4 +1,4 @@
-package appli;
+package View;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,13 +22,13 @@ import Manager.Global;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Composite;
 
-public class menu_Infermiere extends Global
+public class Menu_Admin extends Global
 {
 
 	protected Shell shlMenuAdmin;
 
 	/**
-	* Launch the application.kjb kuj 
+	* Launch the application.
 	* @param args
 	*/
 	/**
@@ -56,7 +56,7 @@ public class menu_Infermiere extends Global
 	protected void createContents()
 	{
 		shlMenuAdmin = new Shell();
-		shlMenuAdmin.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		shlMenuAdmin.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shlMenuAdmin.setSize(366, 401);
 
 		shlMenuAdmin.setText("Hopital de Paris | Espace Administrateur");
@@ -81,19 +81,15 @@ public class menu_Infermiere extends Global
 				}
 			}
 		});
-		btnDconnexion.setBounds(115, 271, 116, 35);
+		btnDconnexion.setBounds(207, 308, 116, 35);
 		btnDconnexion.setText("D\u00E9connexion");
 		
-		Button btnDconnexion_1_4 = new Button(shlMenuAdmin, SWT.NONE);
-		btnDconnexion_1_4.setText("Affecter un patient \u00E0 une chambre");
-		btnDconnexion_1_4.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		btnDconnexion_1_4.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		btnDconnexion_1_4.setBounds(51, 103, 250, 56);
-		
-		Button btnNewButton = new Button(shlMenuAdmin, SWT.NONE);
-		btnNewButton.setBounds(51, 195, 250, 30);
-		btnNewButton.setText("Demande de r\u00E9aprovisionnement ");
-		btnDconnexion_1_4.addSelectionListener(new SelectionAdapter()
+		Button btnDconnexion_1 = new Button(shlMenuAdmin, SWT.NONE);
+		btnDconnexion_1.setText("Utilisateurs");
+		btnDconnexion_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		btnDconnexion_1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		btnDconnexion_1.setBounds(32, 55, 291, 35);
+		btnDconnexion_1.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
@@ -101,8 +97,34 @@ public class menu_Infermiere extends Global
 				shlMenuAdmin.close();
 				try
 				{
-					Chambre window = new Chambre();
-					window.setVisible(true);
+					Utilisateurs window = new Utilisateurs();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		Button btnMonCompte = new Button(shlMenuAdmin, SWT.NONE);
+		btnMonCompte.setText("Mon compte");
+		btnMonCompte.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		btnMonCompte.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btnMonCompte.setBounds(32, 308, 116, 35);
+		
+		
+		
+		btnMonCompte.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shlMenuAdmin.close();
+				try
+				{
+					Modification window = new Modification();
+					window.open();
 				}
 				catch (Exception e1)
 				{

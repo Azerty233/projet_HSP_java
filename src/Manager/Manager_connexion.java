@@ -23,11 +23,11 @@ import org.eclipse.swt.widgets.Shell;
 import com.dbconnexion.*;
 
 import Model.user;
-import appli.Chambre;
-import appli.Menu_Admin;
-import appli.Menu_Administratif;
-import appli.Menu_GEST;
-import appli.menu_Infermiere;
+import View.Chambre;
+import View.Menu_Admin;
+import View.Menu_Administratif;
+import View.Menu_GEST;
+import View.menu_Infermiere;
 import Model.user;
 
 

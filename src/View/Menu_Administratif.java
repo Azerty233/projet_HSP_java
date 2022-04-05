@@ -1,4 +1,4 @@
-package appli;
+package View;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,7 +22,7 @@ import Manager.Global;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Composite;
 
-public class Menu_Admin extends Global
+public class Menu_Administratif extends Global
 {
 
 	protected Shell shlMenuAdmin;
@@ -85,10 +85,10 @@ public class Menu_Admin extends Global
 		btnDconnexion.setText("D\u00E9connexion");
 		
 		Button btnDconnexion_1 = new Button(shlMenuAdmin, SWT.NONE);
-		btnDconnexion_1.setText("Utilisateurs");
+		btnDconnexion_1.setText("Patients");
 		btnDconnexion_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnDconnexion_1.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		btnDconnexion_1.setBounds(32, 55, 291, 35);
+		btnDconnexion_1.setBounds(32, 23, 291, 35);
 		btnDconnexion_1.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
@@ -97,7 +97,30 @@ public class Menu_Admin extends Global
 				shlMenuAdmin.close();
 				try
 				{
-					Utilisateurs window = new Utilisateurs();
+					Utilisateurs_Administratif window = new Utilisateurs_Administratif();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		Button btnRDV = new Button(shlMenuAdmin, SWT.NONE);
+		btnRDV.setText("Rendez-vous");
+		btnRDV.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		btnRDV.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		btnRDV.setBounds(32, 73, 291, 35);
+		btnRDV.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				shlMenuAdmin.close();
+				try
+				{
+					Admin_Planning window = new Admin_Planning();
 					window.open();
 				}
 				catch (Exception e1)
@@ -112,8 +135,6 @@ public class Menu_Admin extends Global
 		btnMonCompte.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnMonCompte.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		btnMonCompte.setBounds(32, 308, 116, 35);
-		
-		
 		
 		btnMonCompte.addSelectionListener(new SelectionAdapter()
 		{

@@ -1,4 +1,4 @@
-package appli;
+package View;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.dbconnexion.Database;
@@ -183,6 +184,22 @@ public class Chambre extends JFrame {
 	}
 	public void run() {
 		frame.setVisible(true);
+		
+	}
+
+	public void open() {
+		
+		Display display = Display.getDefault();
+		createContents();
+		shell.open();
+		shell.layout();
+		while (!shell.isDisposed())
+		{
+			if (!display.readAndDispatch())
+			{
+				display.sleep();
+			}
+		}
 		
 	}
 	

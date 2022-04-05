@@ -1,4 +1,4 @@
-package appli;
+package View;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,19 +20,23 @@ import com.dbconnexion.Database;
 import Manager.Global;
 
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.eclipse.swt.widgets.Composite;
 
-public class AjoutCompte extends Global
+public class AjoutDossier extends Global
 {
 
 	protected Shell Role;
+	private String patient;
+	private String numero_secu;
+	private String mutuelle;
+	private String adresse_postale;
+	private Text textAdresse;
+	private Text textMutuelle;
+	private Text textSecu;
+	private Text textPatient;
 	private Text textNom;
-	private Text textPrenom;
-	private String nom;
-	private String prenom;
-	private Text textEmail;
-	private Text textMdp;
+	private Text text_Prenom;
+	private Text text_Email;
 
 
 
@@ -61,26 +65,15 @@ public class AjoutCompte extends Global
 		Role = new Shell();
 		Role.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		Role.setSize(765, 559);
-		Role.setText("Ajouter un utilisateur");
+		Role.setText("Ajouter un dossier Patient");
 
 		Label lblNom = new Label(Role, SWT.NONE);
 		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblNom.setBounds(165, 121, 81, 25);
+		lblNom.setBounds(165, 34, 81, 25);
 		lblNom.setText("Nom");
 
-		Label lblPrnom = new Label(Role, SWT.NONE);
-		lblPrnom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblPrnom.setBounds(165, 173, 81, 25);
-		lblPrnom.setText("Pr\u00E9nom");
-
-		textNom = new Text(Role, SWT.BORDER);
-		textNom.setBounds(277, 121, 147, 31);
-
-		textPrenom = new Text(Role, SWT.BORDER);
-		textPrenom.setBounds(277, 176, 147, 31);
-
 		Button btnValider = new Button(Role, SWT.NONE);
-		btnValider.setBounds(295, 383, 105, 35);
+		btnValider.setBounds(328, 310, 105, 35);
 		btnValider.setText("Valider");
 
 		Button btnRetour = new Button(Role, SWT.NONE);
@@ -103,42 +96,58 @@ public class AjoutCompte extends Global
 
 		Label lblRole = new Label(Role, SWT.NONE);
 		lblRole.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblRole.setBounds(165, 340, 81, 25);
-		lblRole.setText("Role");
-
+		lblRole.setBounds(165, 212, 157, 25);
+		lblRole.setText("Num\u00E9ro de s\u00E9curit\u00E9 sociale");
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
+		String requete = "Select * from utilisateurs";
+		
+		Label lblAdd = new Label(Role, SWT.NONE);
+		lblAdd.setText("Adresse postale");
+		lblAdd.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblAdd.setBounds(165, 168, 94, 25);
+		
+		textAdresse = new Text(Role, SWT.BORDER);
+		textAdresse.setBounds(328, 166, 253, 27);
+		
+		
+		
+		textSecu = new Text(Role, SWT.BORDER);
+		textSecu.setBounds(328, 210, 202, 27);
+		
+		Label lblMutuelle = new Label(Role, SWT.NONE);
+		lblMutuelle.setText("Mutuelle");
+		lblMutuelle.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblMutuelle.setBounds(165, 259, 157, 25);
+		
+		textMutuelle = new Text(Role, SWT.BORDER);
+		textMutuelle.setBounds(328, 256, 202, 27);
+		
+		Label lblPrenom = new Label(Role, SWT.NONE);
+		lblPrenom.setText("Prenom");
+		lblPrenom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblPrenom.setBounds(165, 77, 81, 25);
 		
 		Label lblEmail = new Label(Role, SWT.NONE);
 		lblEmail.setText("Email");
 		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblEmail.setBounds(165, 226, 81, 25);
+		lblEmail.setBounds(165, 119, 81, 25);
 		
-		textEmail = new Text(Role, SWT.BORDER);
-		textEmail.setBounds(277, 229, 147, 31);
+		textNom = new Text(Role, SWT.BORDER);
+		textNom.setBounds(328, 34, 253, 27);
 		
-		Label lblMdp = new Label(Role, SWT.NONE);
-		lblMdp.setText("Mot de passe");
-		lblMdp.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblMdp.setBounds(165, 277, 81, 25);
+		text_Prenom = new Text(Role, SWT.BORDER);
+		text_Prenom.setBounds(328, 75, 253, 27);
 		
-		textMdp = new Text(Role, SWT.BORDER);
-		textMdp.setBounds(277, 280, 147, 31);
-		
-		Combo combo = new Combo(Role, SWT.NONE);
-		combo.setItems(new String[] {"ADMIN", "GEST", "TRATIF"});
-		combo.setBounds(277, 340, 147, 20);
-		
-		textMdp = new Text(Role, SWT.BORDER);
-		textMdp.setBounds(277, 277, 147, 31);
+		text_Email = new Text(Role, SWT.BORDER);
+		text_Email.setBounds(328, 117, 253, 27);
 
 		btnValider.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String hashedPwd = BCrypt.hashpw(textMdp, BCrypt.gensalt(10));
-				String requete = "INSERT into utilisateurs (nom, prenom, email, mdp, role) Values('"+textNom.getText()+"','"+textPrenom.getText()+"','"+textEmail.getText()+"','"+textMdp.getText()+"',"+combo.get(combo.getSelectionIndex())+")";
+				String requete = "INSERT into patient (nom, prenom, email, adresse_postale, numero_secu, mutuelle) Values('"+textNom.getText()+"','"+text_Prenom.getText()+"','"+text_Email.getText()+"','"+textAdresse.getText()+"','"+textSecu.getText()+"','"+textMutuelle.getText()+"')";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
 				lblSucces.setVisible(!message);
@@ -153,7 +162,7 @@ public class AjoutCompte extends Global
 				Role.close();
 				try
 				{
-					Menu_Admin window = new Menu_Admin();
+					Utilisateurs_Administratif window = new Utilisateurs_Administratif();
 					window.open();
 				}
 				catch (Exception e1)

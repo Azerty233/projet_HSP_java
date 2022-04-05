@@ -1,4 +1,4 @@
-package appli;
+package View;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,16 +19,16 @@ import Manager.Global;
 
 import org.eclipse.wb.swt.SWTResourceManager;
 
-public class Modif_Medicaments extends Global
+public class Modification extends Global
 {
 
 	protected Shell shell;
-	private Text textLibelle;
-	private Text textNv_toxicite;
-	private Text textStock;
-	private String libelle;
-	private String nv_toxicite;
-	private String stock;
+	private Text textNom;
+	private Text textPrenom;
+	private Text textEmail;
+	private String nom;
+	private String prenom;
+	private String email;
 
 
 
@@ -60,36 +60,36 @@ public class Modif_Medicaments extends Global
 		shell.setSize(765, 559);
 		shell.setText("Modifier son profil");
 
-		Label lblLibelle = new Label(shell, SWT.NONE);
-		lblLibelle.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblLibelle.setBounds(165, 121, 81, 25);
-		lblLibelle.setText("Libelle");
+		Label lblNom = new Label(shell, SWT.NONE);
+		lblNom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblNom.setBounds(165, 121, 81, 25);
+		lblNom.setText("Nom");
 
-		Label lblNv_toxicite = new Label(shell, SWT.NONE);
-		lblNv_toxicite.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblNv_toxicite.setBounds(165, 179, 106, 25);
-		lblNv_toxicite.setText("Niveau toxicit\u00E9");
+		Label lblPrnom = new Label(shell, SWT.NONE);
+		lblPrnom.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblPrnom.setBounds(165, 173, 81, 25);
+		lblPrnom.setText("Pr\u00E9nom");
 
-		Label lblStock = new Label(shell, SWT.NONE);
-		lblStock.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
-		lblStock.setBounds(165, 234, 81, 25);
-		lblStock.setText("Stock");
+		Label lblEmail = new Label(shell, SWT.NONE);
+		lblEmail.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		lblEmail.setBounds(165, 231, 81, 25);
+		lblEmail.setText("Email");
 
 
 		Label lblTitre = new Label(shell, SWT.NONE);
 		lblTitre.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		lblTitre.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 		lblTitre.setBounds(277, 65, 192, 25);
-		lblTitre.setText("Modifier le produit");
+		lblTitre.setText("Modifier son profil");
 
-		textLibelle = new Text(shell, SWT.BORDER);
-		textLibelle.setBounds(277, 121, 147, 31);
+		textNom = new Text(shell, SWT.BORDER);
+		textNom.setBounds(277, 121, 147, 31);
 
-		textNv_toxicite = new Text(shell, SWT.BORDER);
-		textNv_toxicite.setBounds(277, 176, 147, 31);
+		textPrenom = new Text(shell, SWT.BORDER);
+		textPrenom.setBounds(277, 176, 147, 31);
 
-		textStock = new Text(shell, SWT.BORDER);
-		textStock.setBounds(277, 231, 147, 31);
+		textEmail = new Text(shell, SWT.BORDER);
+		textEmail.setBounds(277, 231, 147, 31);
 
 
 		Button btnValider = new Button(shell, SWT.NONE);
@@ -102,15 +102,17 @@ public class Modif_Medicaments extends Global
 
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
-		String requete = "Select libelle, niveau_toxicite, stock from medicaments where id = '"+Globidentifiant+"'";
-		System.out.println(Globidentifiant);
+		String requete = "Select nom, prenom, email from utilisateurs where id = '"+Globidentifiant+"'";
 		ResultSet resultat = db.Request(cnx, requete);
 		while(resultat.next())
 		{
-			libelle = resultat.getString("libelle");
-			nv_toxicite = resultat.getString("niveau_toxicite");
-			stock = resultat.getString("stock");
+			nom = resultat.getString("nom");
+			prenom = resultat.getString("prenom");
+			email = resultat.getString("email");
 		}
+		textNom.setText(nom);
+		textPrenom.setText(prenom);
+		textEmail.setText(email);
 
 		Label lblErreur = new Label(shell, SWT.NONE);
 		lblErreur.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
@@ -132,19 +134,19 @@ public class Modif_Medicaments extends Global
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String requete = "Update medicaments set libelle ='"+textLibelle.getText()+"', niveau_toxicite ='"+textNv_toxicite.getText()+"', stock ='"+textStock.getText()+"' where id = '"+Globidentifiant+"'";
+				String requete = "Update utilisateurs set nom ='"+textNom.getText()+"', prenom ='"+textPrenom.getText()+"', email ='"+textEmail.getText()+"' where id = '"+Globidentifiant+"'";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
 				lblSucces.setVisible(!message);
-				requete = "Select libelle, niveau_toxicite, stock from medicaments where id = '"+Globidentifiant+"'";
+				requete = "Select nom, prenom, email from utilisateurs where id = '"+Globidentifiant+"'";
 				ResultSet resultat = db.Request(cnx, requete);
 				try
 				{
 					while(resultat.next())
 					{
-						libelle = resultat.getString("libelle");
-						nv_toxicite = resultat.getString("nv_toxicite");
-						stock = resultat.getString("stock");
+						nom = resultat.getString("nom");
+						prenom = resultat.getString("prenom");
+						email = resultat.getString("email");
 					}
 				}
 				catch (SQLException e1)
@@ -152,9 +154,9 @@ public class Modif_Medicaments extends Global
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				textLibelle.setText(libelle);
-				textNv_toxicite.setText(nv_toxicite);
-				textStock.setText(stock);
+				textNom.setText(nom);
+				textPrenom.setText(prenom);
+				textEmail.setText(email);
 			}
 		});
 
@@ -166,8 +168,8 @@ public class Modif_Medicaments extends Global
 				shell.close();
 				try
 				{
-					Globnom = libelle;
-					Menu_GEST window = new Menu_GEST();
+					Globnom = nom;
+					Menu_Admin window = new Menu_Admin();
 					window.open();
 				}
 				catch (Exception e1)
