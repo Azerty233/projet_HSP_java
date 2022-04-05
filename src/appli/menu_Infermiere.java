@@ -56,7 +56,7 @@ public class menu_Infermiere extends Global
 	protected void createContents()
 	{
 		shlMenuAdmin = new Shell();
-		shlMenuAdmin.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		shlMenuAdmin.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		shlMenuAdmin.setSize(366, 401);
 
 		shlMenuAdmin.setText("Hopital de Paris | Espace Administrateur");
@@ -85,10 +85,14 @@ public class menu_Infermiere extends Global
 		btnDconnexion.setText("D\u00E9connexion");
 		
 		Button btnDconnexion_1_4 = new Button(shlMenuAdmin, SWT.NONE);
-		btnDconnexion_1_4.setText("Afficher les medicaments");
+		btnDconnexion_1_4.setText("Affecter un patient \u00E0 une chambre");
 		btnDconnexion_1_4.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
 		btnDconnexion_1_4.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		btnDconnexion_1_4.setBounds(66, 175, 209, 69);
+		btnDconnexion_1_4.setBounds(51, 103, 250, 56);
+		
+		Button btnNewButton = new Button(shlMenuAdmin, SWT.NONE);
+		btnNewButton.setBounds(51, 195, 250, 30);
+		btnNewButton.setText("Demande de r\u00E9aprovisionnement ");
 		btnDconnexion_1_4.addSelectionListener(new SelectionAdapter()
 		{
 			@Override

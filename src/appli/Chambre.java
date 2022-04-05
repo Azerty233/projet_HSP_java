@@ -56,7 +56,7 @@ public class Chambre extends JFrame {
 	public Chambre (){
 		
 		
-		this.setTitle("chcode_appli");
+		this.setTitle("Chambre");
 		this.setSize(553,500);
 		this.setLocationRelativeTo(null);
 		JPanel pn=new JPanel();
@@ -95,14 +95,16 @@ public class Chambre extends JFrame {
 
 				String a=tfnumporte.getText(),b=tfprix.getText(), c=textField.getText();
 
-				String sql="insert into chambree(numporte,nom,traitement) values('"+a+"','"+b+"','"+c+"')";
+				String sql="insert into chambre(numporte,nom,traitement) values('"+a+"','"+b+"','"+c+"')";
 				try{
 					st=cn.DbConnexion().createStatement();
 					st.executeUpdate(sql);
 					JOptionPane.showMessageDialog(null,"Ajout réussi !");
 					dispose();
-					Chambre ch=new Chambre();
+					comboBoxMedicaments ch=new comboBoxMedicaments();
 					ch.setVisible(true);
+					
+					
 				}
 				catch(SQLException ex){
 					JOptionPane.showMessageDialog(null,"Impossible d'ajouter !",null,JOptionPane.ERROR_MESSAGE);  
@@ -152,7 +154,7 @@ public class Chambre extends JFrame {
 
 
 		//String sql="select * from vente where datediff(datev,now())=0";
-		String sql="select numporte,nom,traitement from chambree";
+		String sql="select numporte,nom,traitement from chambre";
 
 		cn=new Database();
 		try{

@@ -8,6 +8,9 @@ import Manager.Manager_connexion;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import org.eclipse.swt.widgets.Shell;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -15,6 +18,10 @@ import java.awt.event.ActionEvent;
 public class comboBoxMedicaments extends javax.swing.JFrame {
 
   String id="";
+  
+  
+	protected Shell shlMenuAdmin;
+
 
     public comboBoxMedicaments() {
         initComponents();
@@ -95,6 +102,16 @@ public class comboBoxMedicaments extends javax.swing.JFrame {
         btnNewButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
+        		shlMenuAdmin.close();
+				try
+				{
+					Chambre window = new Chambre();
+					window.run();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
         		
         	}
         });
@@ -185,22 +202,6 @@ public class comboBoxMedicaments extends javax.swing.JFrame {
         jComboBox1.setModel(new DefaultComboBoxModel());
     }
 
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-//                 try {
-//                    // select Look and Feel
-//                    UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-//            // start application
-//
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                }
-                new comboBoxMedicaments().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify
     private javax.swing.JButton addBtn;
