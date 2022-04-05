@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Combo;
 import com.dbconnexion.Database;
 
 import Manager.Global;
+
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Composite;
 
@@ -80,20 +81,24 @@ public class menu_Infermiere extends Global
 				}
 			}
 		});
-		btnDconnexion.setBounds(121, 216, 116, 35);
+		btnDconnexion.setBounds(115, 271, 116, 35);
 		btnDconnexion.setText("D\u00E9connexion");
 		
-		Button btnChambre_1_2 = new Button(shlMenuAdmin, SWT.NONE);
-		btnChambre_1_2.addSelectionListener(new SelectionAdapter() {
+		Button btnDconnexion_1_4 = new Button(shlMenuAdmin, SWT.NONE);
+		btnDconnexion_1_4.setText("Afficher les medicaments");
+		btnDconnexion_1_4.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		btnDconnexion_1_4.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		btnDconnexion_1_4.setBounds(66, 175, 209, 69);
+		btnDconnexion_1_4.addSelectionListener(new SelectionAdapter()
+		{
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
 				shlMenuAdmin.close();
 				try
 				{
-					Chambre chambre = new Chambre();
-					chambre.run();
-				
+					Chambre window = new Chambre();
+					window.setVisible(true);
 				}
 				catch (Exception e1)
 				{
@@ -101,25 +106,6 @@ public class menu_Infermiere extends Global
 				}
 			}
 		});
-		btnChambre_1_2.setText("Affectation des chambres");
-		btnChambre_1_2.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		btnChambre_1_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		btnChambre_1_2.setBounds(32, 37, 291, 35);
-		
-		Button btnDMmedicaments_1_3 = new Button(shlMenuAdmin, SWT.NONE);
-		btnDMmedicaments_1_3.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				
-				
-				
-			}
-		});
-		btnDMmedicaments_1_3.setText("Demande pour des medicaments");
-		btnDMmedicaments_1_3.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		btnDMmedicaments_1_3.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		btnDMmedicaments_1_3.setBounds(32, 120, 291, 35);
 		
 	}
-
 }

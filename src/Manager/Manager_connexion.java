@@ -33,72 +33,11 @@ import Model.user;
 
 public class Manager_connexion extends Global
 {
-	private Database coBdd;
-	private String table = "stock";
-
-
-
-
-	public boolean mdpOublie(String email, Shell shell) throws SQLException
-	{
-
-		Database db = new Database();
-		Connection cnx = db.DbConnexion();
-		String requete = "Select * from utilisateurs where email = ''"+email+"'";
-		String role = "role";
-		ResultSet resultat = db.Request(cnx, requete);
-		while(resultat.next())
-		{
-			Globemail = resultat.getString("email");
-			Globnom = resultat.getString("nom");
-			if(resultat.getString(role).equals("ADMIN"))
-			{
-				Globadmin = true;
-				try
-				{ //Connexion en tant qu'Administrateur
-					shell.close();
-					Menu_Admin window_Admin = new Menu_Admin();
-					window_Admin.open();
-					return false;
-
-				}
-				catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-			else {
-				Globemail = resultat.getString("email");
-				Globnom = resultat.getString("nom");
-				if(resultat.getString(role).equals("GEST"))
-				{
-					Globadmin = true;
-					try
-					{ //Connexion en tant qu'Administrateur
-						shell.close();
-						Menu_GEST window_GEST = new Menu_GEST();
-						window_GEST.open();
-						return false;
-
-					}
-					catch (Exception e)
-					{
-						e.printStackTrace();
-					}
-				}
-
-			}
-
-
-		}
-		return true;
-
-	}
-
 
 	public boolean Connexion(String email, String mdp, Shell shell) throws SQLException
 	{
 
+		
 		Database db = new Database();
 		Connection cnx = db.DbConnexion();
 		String requete = "Select * from utilisateurs where email = '"+email+"' and mdp = '"+mdp+"'";
@@ -147,8 +86,8 @@ public class Manager_connexion extends Global
 				try
 				{ //Connexion en tant qu'Administrateur
 					shell.close();
-					Chambre window_inf = new Chambre();
-					window_inf.setVisible(true);
+					menu_Infermiere window_inf = new menu_Infermiere();
+					window_inf.open();
 					return false;
 
 				}
@@ -207,7 +146,6 @@ public class Manager_connexion extends Global
 
 		});
 
-		System.out.println(session);
 
 		Message message = prepareMessage(session, emailSender, recipient, mdp);
 
@@ -215,6 +153,62 @@ public class Manager_connexion extends Global
 
 
 	}
+	
+	 public boolean mdpOublie(String email, Shell shell) throws SQLException
+		{
+
+			Database db = new Database();
+			Connection cnx = db.DbConnexion();
+			String requete = "Select * from utilisateurs where email = ''"+email+"'";
+			String role = "role";
+			ResultSet resultat = db.Request(cnx, requete);
+			while(resultat.next())
+			{
+				Globemail = resultat.getString("email");
+				Globnom = resultat.getString("nom");
+				if(resultat.getString(role).equals("ADMIN"))
+				{
+					Globadmin = true;
+					try
+					{ //Connexion en tant qu'Administrateur
+						shell.close();
+						Menu_Admin window_Admin = new Menu_Admin();
+						window_Admin.open();
+						return false;
+
+					}
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+				}
+				else {
+					Globemail = resultat.getString("email");
+					Globnom = resultat.getString("nom");
+					if(resultat.getString(role).equals("GEST"))
+					{
+						Globadmin = true;
+						try
+						{ //Connexion en tant qu'Administrateur
+							shell.close();
+							Menu_GEST window_GEST = new Menu_GEST();
+							window_GEST.open();
+							return false;
+
+						}
+						catch (Exception e)
+						{
+							e.printStackTrace();
+						}
+					}
+
+				}
+
+
+			}
+			return true;
+
+		}
 
 
 	private static Message prepareMessage(Session session, String email, String recipient, String mdp) {
@@ -306,37 +300,6 @@ public class Manager_connexion extends Global
 
 	}
 
-	public Manager_connexion(user stock) throws SQLException {
-
-		String conString = "jdbc:mysql://localhost/projet_java?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-		String username = "root";
-		String password = "";
-
-		String sql;	
-		
-		PreparedStatement s;
-
-		
-		Connection con = DriverManager.getConnection(conString, username, password);
-
-			sql = "UPDATE `"+stock+"` SET `stock`= stock-1 WHERE id=?";
-			
-			s = ((Statement) coBdd).getConnection().prepareStatement(sql);
-			s.setInt(1, stock.getIdStock());
-
-
-			//Statement s=con.prepareStatement(sql);
-			//((PreparedStatement) s).setInt(1, stock.getIdStock());
-			
-
-			s.executeUpdate(sql, 0);
-
-		ResultSet rs = s.getGeneratedKeys();
-		if(rs.next())
-		{
-			int last_inserted_id = rs.getInt(1);
-			stock.setIdStock(last_inserted_id);
-		}
-	}
+	
 }
 

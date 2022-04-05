@@ -22,6 +22,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import org.eclipse.swt.widgets.Shell;
+
 import com.dbconnexion.Database;
 
 import Manager.Manager_connexion;
@@ -29,11 +31,16 @@ import Manager.Manager_connexion;
 import javax.swing.JComboBox;
 
 
+
 /*Application réalisée du 01 au 05 Juillet 2020 à N'djaména au Tchad par
  *  TARGOTO CHRISTIAN
  *  Contact: 23560316682 / ct@chrislink.net / ctargoto@gmail.com / 23592957308 */
 
 public class Chambre extends JFrame {
+	
+	protected Shell shlMenuAdmin;
+
+	
 	Database cn=new Database();
 	Statement st;
 	ResultSet rst;
@@ -45,6 +52,7 @@ public class Chambre extends JFrame {
 	JTextField tfnumporte,tfprix, jcomboBox;
 	JButton badd,bresv;
 	private JTextField textField;
+	private JButton btnNewButton;
 	public Chambre (){
 		
 		
@@ -121,6 +129,26 @@ public class Chambre extends JFrame {
 		textField = new JTextField();
 		textField.setBounds(190, 125, 100, 40);
 		pn.add(textField);
+		
+		btnNewButton = new JButton("Retour");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				shlMenuAdmin.close();
+				try
+				{
+					menu_Infermiere window = new menu_Infermiere();
+					window.open();
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton.setBounds(404, 50, 85, 21);
+		pn.add(btnNewButton);
 
 
 		//String sql="select * from vente where datediff(datev,now())=0";

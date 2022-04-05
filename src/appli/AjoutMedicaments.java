@@ -129,7 +129,7 @@ public class AjoutMedicaments extends Global
 				Role.close();
 				try
 				{
-					Menu_GEST window = new Menu_GEST();
+					Medicaments window = new Medicaments();
 					window.open();
 				}
 				catch (Exception e1)
