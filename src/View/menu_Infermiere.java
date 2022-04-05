@@ -28,13 +28,13 @@ public class menu_Infermiere extends Global
 	protected Shell shlMenuAdmin;
 
 	/**
-	* Launch the application.kjb kuj 
-	* @param args
-	*/
+	 * Launch the application.kjb kuj 
+	 * @param args
+	 */
 	/**
-	* Ouvrir la fenetre.
-	* @wbp.parser.entryPoint
-	*/
+	 * Ouvrir la fenetre.
+	 * @wbp.parser.entryPoint
+	 */
 	public void open()
 	{
 		Display display = Display.getDefault();
@@ -51,8 +51,8 @@ public class menu_Infermiere extends Global
 	}
 
 	/**
-	* fondation du contenu de la fenetre.
-	*/
+	 * fondation du contenu de la fenetre.
+	 */
 	protected void createContents()
 	{
 		shlMenuAdmin = new Shell();
@@ -69,7 +69,7 @@ public class menu_Infermiere extends Global
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				shlMenuAdmin.close();
+				shlMenuAdmin.open();
 				try
 				{
 					Connexion window = new Connexion();
@@ -83,21 +83,12 @@ public class menu_Infermiere extends Global
 		});
 		btnDconnexion.setBounds(115, 271, 116, 35);
 		btnDconnexion.setText("D\u00E9connexion");
-		
-		Button btnDconnexion_1_4 = new Button(shlMenuAdmin, SWT.NONE);
-		btnDconnexion_1_4.setText("Affecter un patient \u00E0 une chambre");
-		btnDconnexion_1_4.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
-		btnDconnexion_1_4.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
-		btnDconnexion_1_4.setBounds(51, 103, 250, 56);
-		
-		Button btnNewButton = new Button(shlMenuAdmin, SWT.NONE);
-		btnNewButton.setBounds(51, 195, 250, 30);
-		btnNewButton.setText("Demande de r\u00E9aprovisionnement ");
-		btnDconnexion_1_4.addSelectionListener(new SelectionAdapter()
-		{
+
+		Button btnChambre = new Button(shlMenuAdmin, SWT.NONE);
+		btnChambre.addSelectionListener(new SelectionAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e)
-			{
+			public void widgetSelected(SelectionEvent e) {
+
 				shlMenuAdmin.close();
 				try
 				{
@@ -108,8 +99,32 @@ public class menu_Infermiere extends Global
 				{
 					e1.printStackTrace();
 				}
+
 			}
 		});
-		
+		btnChambre.setBounds(63, 114, 223, 48);
+		btnChambre.setText("Affecter des patients/chambres");
+
+		Button btnDemande = new Button(shlMenuAdmin, SWT.NONE);
+		btnDemande.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				shlMenuAdmin.close();
+				try
+				{
+					demandeStock window = new demandeStock();
+					window.setVisible(true);
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		btnDemande.setBounds(63, 181, 223, 48);
+		btnDemande.setText("Demande de medicaments");
+
 	}
 }

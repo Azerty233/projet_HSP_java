@@ -154,6 +154,34 @@ public class Manager_connexion extends Global
 
 	}
 	
+	public static void sendDemande(String object, String corps) throws Exception {
+		Properties prop = new Properties();
+
+		prop.put("mail.smtp.auth","true");
+		prop.put("mail.smtp.starttls.enable","true");
+		prop.put("mail.smtp.host","smtp.gmail.com");
+		prop.put("mail.smtp.port","587");
+
+		String emailSender = "ibrayoman02@gmail.com";
+		String mdpSender = "ylpleqvqfevximzy";
+
+		Session session = Session.getInstance(prop, new Authenticator() {
+			@Override
+
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(emailSender, mdpSender);
+			}
+
+		});
+
+
+		Message message = prepareCommande(session, emailSender, "ibrayoman02@gmail.com", object, corps);
+
+		Transport.send(message);
+
+
+	}
+	
 	 public boolean mdpOublie(String email, Shell shell) throws SQLException
 		{
 
@@ -218,6 +246,22 @@ public class Manager_connexion extends Global
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
 			message.setSubject("HSP");
 			message.setText("Voici votre nouveau mdp provisiore:" + mdp);
+			return message;
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	private static Message prepareCommande(Session session, String email, String recipient, String object, String corps) {
+		try {
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(email));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
+			message.setSubject(object);
+			message.setText(corps);
 			return message;
 
 		}catch (Exception e) {

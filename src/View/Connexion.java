@@ -112,7 +112,6 @@ public class Connexion
 					Manager_connexion connexion = new Manager_connexion();
 					boolean message = connexion.Connexion(textEmail.getText(), textMotdePasse.getText(), shell);
 	
-					lblErreur.setVisible(message);
 	
 				}
 				catch (SQLException e1)
