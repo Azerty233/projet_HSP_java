@@ -66,7 +66,7 @@ public class Medicaments extends Global
 	{
 
 		shlListeUtilisateurs = new Shell();
-		shlListeUtilisateurs.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		shlListeUtilisateurs.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shlListeUtilisateurs.setSize(802, 599);
 		shlListeUtilisateurs.setText("Liste des medicaments");
 
