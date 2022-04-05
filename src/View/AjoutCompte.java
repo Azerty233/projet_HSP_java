@@ -126,8 +126,20 @@ public class AjoutCompte extends Global
 		textMdp.setBounds(277, 280, 147, 31);
 		
 		Combo combo = new Combo(Role, SWT.NONE);
-		combo.setItems(new String[] {"ADMIN", "GEST", "TRATIF"});
+		combo.setItems(new String[] {});
 		combo.setBounds(277, 340, 147, 20);
+		Database db2 = new Database();
+		Connection cnx2 = db2.DbConnexion();
+		String requete2 = "Select role from utilisateurs";
+		ResultSet resultat2 = db2.Request(cnx2, requete2);
+		ArrayList<Integer> PatientList = new  ArrayList<Integer>();
+		while(resultat2.next())
+		{
+
+			combo.add(resultat2.getString("nom"));
+			PatientList.add(resultat2.getInt("id"));
+		}
+		
 		
 		textMdp = new Text(Role, SWT.BORDER);
 		textMdp.setBounds(277, 277, 147, 31);
@@ -137,8 +149,7 @@ public class AjoutCompte extends Global
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				String hashedPwd = BCrypt.hashpw(textMdp, BCrypt.gensalt(10));
-				String requete = "INSERT into utilisateurs (nom, prenom, email, mdp, role) Values('"+textNom.getText()+"','"+textPrenom.getText()+"','"+textEmail.getText()+"','"+textMdp.getText()+"',"+combo.get(combo.getSelectionIndex())+")";
+				String requete = "INSERT into utilisateurs (nom, prenom, email, mdp, role) Values('"+textNom.getText()+"','"+textPrenom.getText()+"','"+textEmail.getText()+"','"+textMdp.getText()+"',"+PatientList.get(combo.getSelectionIndex())+"')";
 				boolean message = db.Prepare(cnx, requete);
 				lblErreur.setVisible(message);
 				lblSucces.setVisible(!message);
