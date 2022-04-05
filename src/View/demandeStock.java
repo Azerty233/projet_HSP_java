@@ -1,19 +1,20 @@
 package View;
 
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import org.eclipse.swt.SWT;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JTextField;
 
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import Manager.Manager_connexion;
 
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class demandeStock extends JFrame{
 
@@ -28,6 +29,25 @@ public class demandeStock extends JFrame{
 	 * Launch the application.
 	 */
 	
+	public void open()
+	{
+		Display display = Display.getDefault();
+		createContents();
+		shlMenuAdmin.open();
+		shlMenuAdmin.layout();
+		while (!shlMenuAdmin.isDisposed())
+		{
+			if (!display.readAndDispatch())
+			{
+				display.sleep();
+			}
+		}
+	}
+
+	private void createContents() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	/**
 	 * Create the application.

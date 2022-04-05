@@ -104,12 +104,15 @@ public class menu_Infermiere extends Global
 		});
 		btnChambre.setBounds(63, 114, 223, 48);
 		btnChambre.setText("Affecter des patients/chambres");
-
+		
+		
 		Button btnDemande = new Button(shlMenuAdmin, SWT.NONE);
+		btnDemande.setText("Demander un m\u00E9dicament");
+		btnDemande.setBounds(63, 177, 223, 48);
 		btnDemande.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				
+
 				shlMenuAdmin.close();
 				try
 				{
@@ -120,11 +123,11 @@ public class menu_Infermiere extends Global
 				{
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
-		btnDemande.setBounds(63, 181, 223, 48);
-		btnDemande.setText("Demande de medicaments");
+
+
 
 	}
 }
