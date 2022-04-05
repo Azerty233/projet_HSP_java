@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 05 avr. 2022 à 08:39
--- Version du serveur :  5.7.26
--- Version de PHP :  7.2.18
+-- Généré le : mar. 05 avr. 2022 à 09:03
+-- Version du serveur :  5.7.31
+-- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `projet_java`
+-- Base de données : `projet_java`
 --
 
 -- --------------------------------------------------------
@@ -172,9 +171,9 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 
 INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `email`, `mdp`, `role`) VALUES
 (1, 'monsieur', 'Administrateur', 'admin@admin.fr', '1234', 'ADMIN'),
-(2, 'LIGNANI', 'QUENTIN', 'med@med.fr', '1234', 'ADMIN'),
-(4, 'monsieur', 'gestionnaire', 'gest@gest.fr', '1234', 'INF'),
-(5, 'az', 'az', 'ibrayoman02@gmail.com', '8rs0xeGAbgGU', 'GEST'),
+(2, 'LIGNANI', 'QUENTIN', 'med@med.fr', '1234', 'MED'),
+(4, 'monsieur', 'gestionnaire', 'gest@gest.fr', '1234', 'GEST'),
+(5, 'Administratif', 'Damon', 'administratif@administratif.fr', '1234', 'TRATIF'),
 (6, 'madame', 'infermiere', 'infermiere@infermiere.fr', '1234', 'INF');
 
 --
