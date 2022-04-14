@@ -50,9 +50,9 @@ public class Chambre extends JFrame {
 
 	JScrollPane scrl1;
 	JLabel lbtitre,lbnumporte,lbprix;
-	JTextField tfnumporte,tfprix, jcomboBox;
+	JTextField tfnumporte,tfNom, jcomboBox;
 	JButton badd,bresv;
-	private JTextField textField;
+	private JTextField textTraitement;
 	private JButton btnNewButton;
 	
 	
@@ -86,9 +86,9 @@ public class Chambre extends JFrame {
 		lbprix.setFont(new Font("Arial",Font.BOLD,16));
 		pn.add(lbprix);
 		//textfield prix par jour
-		tfprix=new JTextField();
-		tfprix.setBounds(190,90,100,25);
-		pn.add(tfprix);
+		tfNom=new JTextField();
+		tfNom.setBounds(190,90,100,25);
+		pn.add(tfNom);
 
 		//bouton ajout chambre
 		badd=new JButton("Ajouter");
@@ -96,7 +96,7 @@ public class Chambre extends JFrame {
 		badd.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 
-				String a=tfnumporte.getText(),b=tfprix.getText(), c=textField.getText();
+				String a=tfnumporte.getText(),b=tfNom.getText(), c=textTraitement.getText();
 
 				String sql="insert into chambre(numporte,nom,traitement) values('"+a+"','"+b+"','"+c+"')";
 				try{
@@ -106,7 +106,6 @@ public class Chambre extends JFrame {
 					dispose();
 					comboBoxMedicaments ch=new comboBoxMedicaments();
 					ch.setVisible(true);
-					
 					
 				}
 				catch(SQLException ex){
@@ -131,9 +130,9 @@ public class Chambre extends JFrame {
 		lblTraitement.setBounds(40, 125, 140, 25);
 		pn.add(lblTraitement);
 
-		textField = new JTextField();
-		textField.setBounds(190, 125, 100, 40);
-		pn.add(textField);
+		textTraitement = new JTextField();
+		textTraitement.setBounds(190, 125, 100, 40);
+		pn.add(textTraitement);
 		
 		btnNewButton = new JButton("Retour");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -156,7 +155,6 @@ public class Chambre extends JFrame {
 		pn.add(btnNewButton);
 
 
-		//String sql="select * from vente where datediff(datev,now())=0";
 		String sql="select numporte,nom,traitement from chambre";
 
 		cn=new Database();
